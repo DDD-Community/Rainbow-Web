@@ -1,7 +1,8 @@
 name: Deploy # Workflow 이름
 on: # Event 감지
   push:
-    branches: [ main, chore/github-action-test#3 ]
+    branches: 
+      - chore/github-action-test#3
 env:
   S3_BUCKET_NAME: ddd-rainbow-bucket
   CODE_DEPLOY_APPLICATION_NAME: github-action
