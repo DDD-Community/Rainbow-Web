@@ -4,6 +4,7 @@ on: # Event 감지
     branches: 
       - chore/github-action-test#3
 env:
+  CI: false
   S3_BUCKET_NAME: ddd-rainbow-bucket
   CODE_DEPLOY_APPLICATION_NAME: github-action
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: github-action-group
@@ -34,7 +35,7 @@ jobs: # Job 설정
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 cp --region ap-northeast-2 **./build-fe.zip** s3://**S3버킷이름/S3에서-업로드하고자-하는-폴더**/**build-fe.zip**
+          aws s3 cp --region ap-northeast-2 **./build-fe.zip** s3://${{ env.S3_BUCKET_NAME }}/rainbow/**build-fe.zip**
       - name: Deploy # Deploy to EC2
         run: |
           aws deploy create-deployment \
