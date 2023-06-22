@@ -1,3 +1,5 @@
+"use client";
+
 import { KAKAO_URL } from "@/src/constant/api.constant";
 import Image from "next/image";
 
