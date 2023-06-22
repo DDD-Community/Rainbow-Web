@@ -10,10 +10,11 @@ export const API = {
   }
 };
 
-export interface JsonWebTokenType {
-  accessToken: string;
+export interface SessionType {
+  sessionKey: string;
+  sessionString: string;
 }
 
 export interface LoginDataType extends Response {
-  data: JsonWebTokenType;
+  sessionKey: SessionType;
 }
