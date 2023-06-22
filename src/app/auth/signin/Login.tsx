@@ -1,8 +1,9 @@
+import { KAKAO_URL } from "@/src/constant/api.constant";
 import Image from "next/image";
 
 function Login() {
   const loginHandler = () => {
-    console.log("카카오 로그인");
+    window.location.replace(KAKAO_URL);
   };
 
   return (
