@@ -1,9 +1,10 @@
 import React from "react";
+import SignIn from "./auth/signin/page";
 
 function Home() {
   return (
     <main>
-      <h1>메인입니다.</h1>
+      <SignIn />
     </main>
   );
 }
