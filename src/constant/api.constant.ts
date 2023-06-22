@@ -9,3 +9,11 @@ export const API = {
     GET_ID: "/auth/get"
   }
 };
+
+export interface JsonWebTokenType {
+  accessToken: string;
+}
+
+export interface LoginDataType extends Response {
+  data: JsonWebTokenType;
+}
