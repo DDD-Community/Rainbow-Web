@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /home/ubuntu/rainbow-deploy
+    overwrite: yes
+permissions:
+  - object: /home/ubuntu/rainbow-deploy
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
