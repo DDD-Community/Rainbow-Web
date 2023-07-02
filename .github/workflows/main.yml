@@ -2,7 +2,7 @@ name: Deploy # Workflow 이름
 on: # Event 감지
   push:
     branches: 
-      - main
+      - chore/aws-배포-테스트
 env:
   CI: false
   S3_BUCKET_NAME: ddd-rainbow-bucket
