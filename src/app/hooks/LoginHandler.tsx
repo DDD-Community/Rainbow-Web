@@ -11,15 +11,18 @@ export const fetchAuth = (code: string): Promise<LoginResponseType> =>
 export function LoginHandler(code: string) {
   fetchAuth(code)
     .then((response: LoginResponseType) => {
+      console.log(response);
       if (response.data) {
-        console.log("로그인이 완료 되었습니다.");
-        console.log(response);
-        console.log(document.cookie);
-      } else {
-        console.log("세션key가 만료 되었습니다.");
+        window.location.replace("/auth/onboarding/sub");
       }
+      // const JWT = response.data.data.accessToken;
+      // if (JWT) localStorage.setItem("EXIT_LOGIN_TOKEN", JWT);
+      // console.log("로그인 성공");
+
+      // window.location.replace("/");
     })
     .catch(() => {
-      console.log("로그인 중 오류가 생겼습니다.");
+      console.log("로그인에 실패하였습니다.");
+      // window.location.replace("/login");
     });
 }

@@ -9,7 +9,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <>
       <h1>카카오 로그인</h1>
       <button type="button" onClick={loginHandler}>
         <Image
@@ -20,7 +20,7 @@ function Login() {
           priority
         />
       </button>
-    </div>
+    </>
   );
 }
 

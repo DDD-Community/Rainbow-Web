@@ -1,6 +1,11 @@
 export const CLIENT_ID = "b3ee341ecd11261443a552fa9fbe2d58";
 export const REDIRECT_URI = "http://localhost:3000/auth/kakao";
 export const KAKAO_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+export const TOKEN = {
+  ACCESS: "authorization",
+  REFRESH: "x-refresh-token"
+};
 export const API = {
   AUTH: {
     LOGIN: "/auth/kakao",
@@ -10,11 +15,10 @@ export const API = {
   }
 };
 
-export interface SessionType {
-  sessionKey: string;
-  sessionString: string;
+export interface JsonWebTokenType {
+  data: string;
 }
 
 export interface LoginDataType extends Response {
-  sessionKey: SessionType;
+  data: JsonWebTokenType;
 }
