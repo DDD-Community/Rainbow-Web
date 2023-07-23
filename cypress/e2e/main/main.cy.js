@@ -1,6 +1,6 @@
 describe("example to-do app", () => {
   beforeEach(() => {
-    cy.visit("http://3.36.103.36/");
+    cy.visit("http://www.buybye.kr/");
   });
 
   it("should contain an element with h2.text-2xl class", () => {
