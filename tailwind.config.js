@@ -38,6 +38,8 @@ module.exports = {
         10: "10px"
       },
       colors: {
+        dimmed: "rgba(0, 0, 0, 0.24)",
+
         "gray-700": "#27262E",
         "gray-600": "#5E6066",
         "gray-500": "#8C9097",
