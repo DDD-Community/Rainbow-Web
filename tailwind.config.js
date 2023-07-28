@@ -9,7 +9,21 @@ module.exports = {
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))"
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+
+        "hand-heart": "url('../assets/images/icons/category/handHeart.svg')",
+        book: "url('../assets/images/icons/category/book.svg')",
+        bus: "url('../assets/images/icons/category/bus.svg')",
+        medical: "url('../assets/images/icons/category/medical.svg')",
+        food: "url('../assets/images/icons/category/food.svg')",
+        health: "url('../assets/images/icons/category/health.svg')",
+        drink: "url('../assets/images/icons/category/drink.svg')",
+        clothes: "url('../assets/images/icons/category/clothes.svg')",
+        home: "url('../assets/images/icons/category/home.svg')",
+        phone: "url('../assets/images/icons/category/phone.svg')",
+        "daily-necessity": "url('../assets/images/icons/category/dailyNecessity.svg')",
+        ticket: "url('../assets/images/icons/category/ticket.svg')",
+        others: "url('../assets/images/icons/category/others.svg')"
       },
       width: {
         343: "343px"
@@ -19,6 +33,9 @@ module.exports = {
       },
       maxWidth: {
         375: "375px"
+      },
+      borderRadius: {
+        10: "10px"
       },
       colors: {
         "gray-700": "#27262E",
@@ -33,7 +50,21 @@ module.exports = {
         "primary-hover": "#F04F1E",
         "primary-disabled": "#FFDACE",
         "primary-bg": "#FFECE8",
-        "primary-bg-disabled": "#FFF7F5"
+        "primary-bg-disabled": "#FFF7F5",
+
+        "category-yellow": "#FFEB3A",
+        "category-mint": "#A1F9E4",
+        "category-navy": "#9AB6FF",
+        "category-light-red": "#FF8585",
+        "category-orange": "#FFA858",
+        "category-light-orange": "#FF774E",
+        "category-brown": "#E5AA99",
+        "category-light-pink": "#FFAAFC",
+        "category-aero-blue": "#AFFFC6",
+        "category-light-green": "#66D8A1",
+        "category-sky": "#7CD0FF",
+        "category-light-purple": "#D2AFFF",
+        "category-light-gray": "#C5C5C5"
       }
     }
   },
