@@ -1,6 +1,7 @@
 import React from "react";
 import "./globals.css";
 import "assets/styles/font.css";
+import "assets/styles/checkbox.css";
 import { Inter } from "next/font/google";
 import DefaultContainer from "components/defaultContainer";
 import ReactQueryProvider from "../queries/ReactQueryProvider";
