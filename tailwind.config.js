@@ -65,6 +65,19 @@ module.exports = {
         "category-sky": "#7CD0FF",
         "category-light-purple": "#D2AFFF",
         "category-light-gray": "#C5C5C5"
+      },
+      dropShadow: {
+        "shadow-bottom-s": "0px 1px 4px rgba(42, 39, 65, 0.08)",
+        "shadow-bottom-m": "0px 2px 10px rgba(42, 39, 65, 0.1",
+        "shadow-bottom-l": "0px 4px 8px 3px rgba(42, 39, 65, 0.1)",
+        "shadow-bottom-xl": "0px 8px 16px 2px rgba(42, 39, 65, 0.18)",
+        "shadow-bottom-2xl": "0px 10px 18px 4px rgba(42, 39, 65, 0.22)",
+
+        "shadow-top-s": "0px -1px 4px rgba(42, 39, 65, 0.08)",
+        "shadow-top-m": "0px -2px 10px rgba(42, 39, 65, 0.1)",
+        "shadow-top-l": "0px -4px 8px 3px rgba(42, 39, 65, 0.1)",
+        "shadow-top-xl": "0px -8px 16px 2px rgba(42, 39, 65, 0.18)",
+        "shadow-top-2xl": "0px -10px 18px 4px rgba(42, 39, 65, 0.22)"
       }
     }
   },
