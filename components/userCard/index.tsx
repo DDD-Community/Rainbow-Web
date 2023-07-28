@@ -1,6 +1,5 @@
 import Image from "next/image";
-import IconPlus from "assets/images/icons/plus.svg";
-import IconChecked from "assets/images/icons/checked.svg";
+import { IconPlusSmall, IconCheckedSmall } from "assets/images/icons";
 
 const TEXT_USER_STATE = "새로 가입한 또래친구";
 
@@ -27,9 +26,7 @@ function UserCard({
       } pl-[16px] pr-[22px]`}
     >
       {/* user image */}
-      <div
-        className="shrink-0 flex justify-center w-10 h-10 rounded-[50%] border-black/[0.03] bg-gray-300"
-      >
+      <div className="shrink-0 flex justify-center w-10 h-10 rounded-[50%] border-black/[0.03] bg-gray-300">
         <Image src={userImage} alt="" />
       </div>
 
@@ -41,7 +38,7 @@ function UserCard({
 
       {/* plus icon */}
       <Image
-        src={isChecked ? IconChecked : IconPlus}
+        src={isChecked ? IconCheckedSmall : IconPlusSmall}
         className="cursor-pointer"
         alt={`${isChecked ? "checked" : "plus"} icon`}
       />

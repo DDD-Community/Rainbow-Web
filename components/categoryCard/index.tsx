@@ -1,5 +1,5 @@
 import Image from "next/image";
-import IconPlus from "assets/images/icons/plus.svg";
+import { IconPlusSmall } from "assets/images/icons";
 import {
   IconHandHeart,
   IconBook,
@@ -66,7 +66,7 @@ function CategoryCard({
       </div>
 
       {/* plus icon */}
-      <Image src={IconPlus} className="cursor-pointer" alt="plus icon" />
+      <Image src={IconPlusSmall} className="cursor-pointer" alt="plus icon" />
     </div>
   );
 }
