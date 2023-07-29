@@ -40,7 +40,7 @@ function Checkbox({
         htmlFor={id || labelText}
         className={`m-14-500 ${
           size === "m" && isChecked === true ? "text-gray-700" : "text-gray-600"
-        }`}
+        } cursor-pointer`}
       >
         {labelText}
       </label>
@@ -52,9 +52,9 @@ export default Checkbox;
 const convertCheckboxColor = (size: SizeTypes, isChecked: boolean) => {
   if (isChecked === false) {
     return "bg-gray-300";
-  } if (size === "s") {
+  }
+  if (size === "s") {
     return "bg-gray-600";
-  } 
-    return "bg-primary-default";
-  
+  }
+  return "bg-primary-default";
 };
