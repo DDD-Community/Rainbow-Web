@@ -1,0 +1,38 @@
+.Toastify__toast{
+    padding: 12px 16px;
+    
+    border-radius: 10px;
+    box-shadow: none;
+}
+.Toastify__toast-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: auto;
+    max-width: 343px;
+    margin-bottom: 90px;
+}
+.primary-toast{
+    background-color: #FF5B29;
+    color: #fff;
+}
+.alert-toast{
+    background-color: #000;
+    color: #fff;
+}
+.secondary-toast{
+    background-color: #FFF;
+    color: #FF5B29;
+}
+.Toastify__toast-body{
+    flex: none;
+    padding: 0;
+}
+.Toastify__toast-body > div:last-child{
+    max-width: 283px;
+}
+.Toastify__toast-icon{
+    width: auto;
+}
