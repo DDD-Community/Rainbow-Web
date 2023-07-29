@@ -15,10 +15,12 @@ export const API = {
   }
 };
 
-export interface JsonWebTokenType {
+export interface JsonWebKey {
   data: string;
+  email: string;
 }
 
 export interface LoginDataType extends Response {
-  data: JsonWebTokenType;
+  data: JsonWebKey;
+  // jwt: JsonWebTokenType;
 }
