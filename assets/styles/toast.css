@@ -26,12 +26,20 @@
     background-color: #FFF;
     color: #FF5B29;
 }
+.infomation-toast{
+    background-color: #FFF;
+    color: #5E6066
+}
 .Toastify__toast-body{
     flex: none;
     padding: 0;
 }
 .Toastify__toast-body > div:last-child{
     max-width: 283px;
+    
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 140%;
 }
 .Toastify__toast-icon{
     width: auto;
