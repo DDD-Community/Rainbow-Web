@@ -11,16 +11,13 @@ interface TagProps {
 }
 
 export function PrimaryTag({ children }: TagProps) {
-  return <span className={`${DEFAULT_COMMON_CLASS  }bg-primary-default text-white`}>{children}</span>;
+  return <span className={`${DEFAULT_COMMON_CLASS}bg-primary-default text-white`}>{children}</span>;
 }
 
 export function SecondaryTag({ children }: TagProps) {
   return (
     <span
-      className={
-        `${DEFAULT_COMMON_CLASS 
-        }bg-primary-bg-disabled border border-primary-bg text-primary-default`
-      }
+      className={`${DEFAULT_COMMON_CLASS}bg-primary-bg-disabled border border-primary-bg text-primary-default`}
     >
       {children}
     </span>
@@ -29,7 +26,7 @@ export function SecondaryTag({ children }: TagProps) {
 
 export function SubTag({ children }: TagProps) {
   return (
-    <span className={`${DEFAULT_COMMON_CLASS  }bg-gray-50 border border-gray-200 text-gray-600`}>
+    <span className={`${DEFAULT_COMMON_CLASS}bg-gray-50 border border-gray-200 text-gray-600`}>
       {children}
     </span>
   );
