@@ -28,7 +28,7 @@ export function LoginHandler(code: string) {
       console.log(response.data);
       if (response.data.data.email) {
         console.log(response.data.data.email);
-        window.location.replace("/auth/onboarding");
+        window.location.replace("/member/onboarding");
       }
       // const JWT = response.data.data.accessToken;
       // if (JWT) localStorage.setItem("EXIT_LOGIN_TOKEN", JWT);

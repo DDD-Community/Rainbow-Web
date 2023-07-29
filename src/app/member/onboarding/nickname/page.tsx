@@ -18,7 +18,7 @@ export default function Nickname() {
     setNickname(e.target.value);
   };
   const handleClickNextButton = () => {
-    window.location.replace("/auth/onboarding/gender");
+    window.location.replace("/member/onboarding/gender");
     setProps({ ...props, nickname });
   };
 

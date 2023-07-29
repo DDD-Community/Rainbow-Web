@@ -18,7 +18,7 @@ export default function Birth() {
     setBirthDate(e.target.value);
   };
   const handleClickNextButton = () => {
-    window.location.replace("/auth/onboarding/salary");
+    window.location.replace("/member/onboarding/salary");
     setProps({ ...props, birthDate });
   };
 

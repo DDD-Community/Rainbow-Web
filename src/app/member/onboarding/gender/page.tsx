@@ -18,7 +18,7 @@ export default function Gender() {
     setGender(e.target.value);
   };
   const handleClickNextButton = () => {
-    window.location.replace("/auth/onboarding/birth");
+    window.location.replace("/member/onboarding/birth");
     setProps({ ...props, gender });
   };
 

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Checking() {
   const handleClickNextButton = () => {
-    window.location.replace("/auth/onboarding/contract");
+    window.location.replace("/member/onboarding/contract");
   };
 
   return (

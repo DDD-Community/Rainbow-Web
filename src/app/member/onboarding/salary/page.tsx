@@ -35,7 +35,7 @@ export default function Salary() {
     setSalaryEnd(salaryBoundary["1500이하"][1]);
   };
   const handleClickNextButton = () => {
-    window.location.replace("/auth/onboarding/checking");
+    window.location.replace("/member/onboarding/checking");
     setProps({ ...props, salaryStart, salaryEnd });
   };
 

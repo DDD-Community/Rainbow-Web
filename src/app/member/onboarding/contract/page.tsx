@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Contract() {
   const handleClickNextButton = () => {
-    window.location.replace("/auth/onboarding/following");
+    window.location.replace("/member/onboarding/following");
   };
   return (
     <div>

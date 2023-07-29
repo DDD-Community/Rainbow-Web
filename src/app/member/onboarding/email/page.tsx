@@ -20,7 +20,7 @@ export default function Email() {
     setEmail(e.target.value);
   };
   const handleClickNextButton = () => {
-    window.location.replace("/auth/onboarding/nickname");
+    window.location.replace("/member/onboarding/nickname");
     setProps({ ...props, email });
   };
 
