@@ -1,14 +1,17 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { LoginHandler } from "../../hooks/LoginHandler";
+import { LoginHandler } from "../login/LoginHandler";
 
-function Kakao() {
+function Login() {
   const code: string = new URL(window.location.href).searchParams.get("code")!;
+  // const [email, setEmail] = useState("");
+  // const [props, setProps] = useRecoilState<Props>(propsState);
+
   useEffect(() => {
     LoginHandler(code);
   }, []);
 
   return <div />;
 }
-export default Kakao;
+export default Login;
