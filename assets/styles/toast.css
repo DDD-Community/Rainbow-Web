@@ -15,7 +15,7 @@
     margin-bottom: 90px;
 }
 .primary-toast{
-    background-color: #FF5B29;
+    background-color: var(--primary-default);
     color: #fff;
 }
 .alert-toast{
@@ -24,11 +24,11 @@
 }
 .secondary-toast{
     background-color: #FFF;
-    color: #FF5B29;
+    color: var(--primary-default);
 }
 .infomation-toast{
     background-color: #FFF;
-    color: #5E6066
+    color: var(--gray-600);
 }
 .Toastify__toast-body{
     flex: none;
