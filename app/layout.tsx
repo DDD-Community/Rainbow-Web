@@ -6,11 +6,7 @@ import { Inter } from "next/font/google";
 import DefaultContainer from "components/defaultContainer";
 import ReactQueryProvider from "../queries/ReactQueryProvider";
 
-import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-import "assets/styles/font.css";
-import "assets/styles/checkbox.css";
-import "assets/styles/toast.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
