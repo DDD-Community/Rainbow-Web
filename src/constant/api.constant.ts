@@ -18,6 +18,7 @@ export const API = {
 export interface JsonWebKey {
   data: string;
   email: string;
+  message: string;
 }
 
 export interface LoginDataType extends Response {

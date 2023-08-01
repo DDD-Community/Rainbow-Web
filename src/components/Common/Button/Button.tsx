@@ -1,5 +1,6 @@
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
 import { twMerge } from "@/src/types/utils/tailwind.util";
+import { themes } from "@/src/styles/theme";
 
 type ButtonColor = "primary" | "secondary";
 type ButtonSize = "small" | "medium" | "large" | "xLarge";
@@ -13,7 +14,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const colors: Record<ButtonColor, string> = {
-  primary: "bg-black text-white",
+  primary: themes.color.PRIMARY.hover,
   secondary: "bg-grey-200 text-grey-700"
 };
 

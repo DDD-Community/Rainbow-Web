@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Onboarding() {
   const handleClickNextButton = () => {
-    window.location.replace("/auth/onboarding/email");
+    window.location.replace("/member/onboarding/email");
   };
   return (
     <div>
