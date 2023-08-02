@@ -6,6 +6,49 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  --dimmed: rgba(0, 0, 0, 0.24);
+
+  --gray-700: #27262e;
+  --gray-600: #5e6066;
+  --gray-500: #8c9097;
+  --gray-400: #bec3cc;
+  --gray-300: #d5d9e0;
+  --gray-200: #e9eaf0;
+  --gray-100: #f3f5f9;
+  --gray-50: #f8f9fc;
+
+  --primary-default: #ff5b29;
+  --primary-hover: #f04f1e;
+  --primary-disabled: #ffdace;
+  --primary-bg: #ffece8;
+  --primary-bg-disabled: #fff7f5;
+
+  --category-yellow: #ffeb3a;
+  --category-mint: #a1f9e4;
+  --category-navy: #9ab6ff;
+  --category-light-red: #ff8585;
+  --category-orange: #ffa858;
+  --category-light-orange: #ff774e;
+  --category-brown: #e5aa99;
+  --category-light-pink: #ffaafc;
+  --category-aero-blue: #afffc6;
+  --category-light-green: #66d8a1;
+  --category-sky: #7cd0ff;
+  --category-light-purple: #d2afff;
+  --category-light-gray: #C5C5C;
+
+  --shadow-bottom-s: 0px 1px 4px rgba(42, 39, 65, 0.08);
+  --shadow-bottom-m: 0px 2px 10px rgba(42, 39, 65, 0.1);
+  --shadow-bottom-l: 0px 4px 8px 3px rgba(42, 39, 65, 0.1);
+  --shadow-bottom-xl: 0px 8px 16px 2px rgba(42, 39, 65, 0.18);
+  --shadow-bottom-2xl: 0px 10px 18px 4px rgba(42, 39, 65, 0.22);
+
+  --shadow-top-s: 0px -1px 4px rgba(42, 39, 65, 0.08);
+  --shadow-top-m: 0px -2px 10px rgba(42, 39, 65, 0.1);
+  --shadow-top-l: 0px -4px 8px 3px rgba(42, 39, 65, 0.1);
+  --shadow-top-xl: 0px -8px 16px 2px rgba(42, 39, 65, 0.18);
+  --shadow-top-2xl: 0px -10px 18px 4px rgba(42, 39, 65, 0.22);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,5 +61,9 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: white;
 }
+
+@import "react-toastify/dist/ReactToastify.css";
+@import "assets/styles/font.css";
+@import "assets/styles/checkbox.css";
+@import "assets/styles/toast.css";

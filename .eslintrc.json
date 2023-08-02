@@ -4,7 +4,7 @@
     "es2021": true,
     "browser": true
   },
-  "extends": ["next/core-web-vitals", "plugin:react/recommended", "airbnb", "prettier"],
+  "extends": ["next/core-web-vitals", "plugin:react/recommended", "plugin:cypress/recommended", "airbnb", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
@@ -27,6 +27,7 @@
     "react/jsx-filename-extension": [
       1,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ]
+    ],
+    "@typescript-eslint/no-unused-vars": ["error"]
   }
 }
