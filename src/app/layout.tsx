@@ -4,7 +4,7 @@ import React from "react";
 
 import { ToastContainer } from "react-toastify";
 import { Inter } from "next/font/google";
-import DefaultContainer from "components/defaultContainer";
+import DefaultContainer from "@/src/components/defaultContainer";
 import { RecoilRoot } from "recoil";
 import "../styles/globals.css";
 import ReactQueryProvider from "@/queries/ReactQueryProvider";

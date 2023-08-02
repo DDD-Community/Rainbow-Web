@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { contractAgreedState } from "@/src/recoil/user.atoms";
-import FormSubmitComponent from "@/src/hooks/FormSubmitComponent";
+import FormSubmitComponent from "@/hooks/FormSubmitComponent";
 
 export default function Contract() {
   const [contractAgreed, setContractAgreed] = useRecoilState(contractAgreedState);

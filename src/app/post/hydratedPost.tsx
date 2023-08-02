@@ -1,7 +1,7 @@
 import { dehydrate, Hydrate } from "@tanstack/react-query";
-import getQueryClient from "../../queries/getQueryClient";
-import { getPosts } from "../../api/posts/getPosts";
-import Posts from "./posts";
+import { getPosts } from "@/src/api/posts/getPosts";
+import getQueryClient from "@/queries/getQueryClient";
+import Posts from "./post";
 
 export default async function HydratedPosts() {
   const queryClient = getQueryClient();

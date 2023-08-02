@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 // api
-import { getPosts } from "api/posts/getPosts";
+import { getPosts } from "@/src/api/posts/getPosts";
 import * as queryKeys from "queries/queryKeys";
 
 export default function Posts() {
