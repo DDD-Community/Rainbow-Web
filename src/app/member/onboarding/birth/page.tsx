@@ -1,37 +1,28 @@
-import React, { useState } from "react";
-import { useRecoilState } from "recoil";
-import { propsState } from "../../selector";
+"use client";
 
-interface Props {
-  email: string;
-  nickname: string;
-  birthDate: string;
-  salaryStart: number;
-  salaryEnd: number;
-  gender: string;
-}
+import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { birthdayState } from "@/src/recoil/user.atoms";
 
 export default function Birth() {
-  const [birthDate, setBirthDate] = useState("");
-  const [props, setProps] = useRecoilState<Props>(propsState);
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBirthDate(e.target.value);
-  };
-  const handleClickNextButton = () => {
+  const [birth, setBirth] = useState("");
+  const setBirthRecoil = useSetRecoilState(birthdayState);
+
+  const handleNext = () => {
+    setBirthRecoil(birth);
     window.location.replace("/member/onboarding/salary");
-    setProps({ ...props, birthDate });
   };
 
-  const canActiveNextButton = Boolean(!birthDate);
+  const canActiveNextButton = Boolean(!birth);
 
   return (
     <div>
       <h2>님의 생일을 입력해주세요</h2>
       <div>
-        <input name="birth" placeholder="생년월일" value={birthDate} onChange={handleInputChange} />
+        <input type="text" value={birth} onChange={e => setBirth(e.target.value)} />
       </div>
       <div>
-        <button type="button" disabled={canActiveNextButton} onClick={handleClickNextButton}>
+        <button type="button" disabled={canActiveNextButton} onClick={handleNext}>
           확인
         </button>
       </div>

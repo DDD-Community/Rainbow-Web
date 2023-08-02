@@ -6,14 +6,6 @@ export const TOKEN = {
   ACCESS: "authorization",
   REFRESH: "x-refresh-token"
 };
-export const API = {
-  AUTH: {
-    LOGIN: "/auth/kakao",
-    LOGOUT: "/auth/logout",
-    SIGN_IN: "/auth/kakao/signin",
-    GET_ID: "/auth/get"
-  }
-};
 
 export interface JsonWebKey {
   data: string;
