@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IconPlusSmall, IconCheckedSmall } from "assets/images/icons";
+import { IconPlusSmall, IconCheckedSmall } from "@/public/assets/images/icons";
 
 const TEXT_USER_STATE = "새로 가입한 또래친구";
 

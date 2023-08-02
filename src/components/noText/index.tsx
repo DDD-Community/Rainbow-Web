@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { IconNoText } from "assets/images/emotion";
+import { IconNoText } from "@/public/assets/images/emotion";
 
 const NO_TEXT_DESCRIPTION = "또래 친구가 올린 지출 내역이 아직 없어요";
 

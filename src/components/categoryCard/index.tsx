@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IconPlusSmall } from "assets/images/icons";
+import { IconPlusSmall } from "@/public/assets/images/icons";
 import {
   IconHandHeart,
   IconBook,
@@ -14,7 +14,7 @@ import {
   IconDailyNecessity,
   IconTicket,
   IconOthers
-} from "assets/images/icons/category";
+} from "@/public/assets/images/icons/category";
 
 const TEXT_PUBLIC_SCOPE_OPEN = "전체 공개";
 const TEXT_PUBLIC_SCOPE_CLOSE = "비공개";
