@@ -62,12 +62,8 @@ export function FeedCard({
       {images.length !== 0 && (
         <div className="flex gap-2.5 my-2.5">
           {images.map(imageSrc => (
-            <div className="rounded-[10px] w-[142px] h-[150px] overflow-hidden">
-              <Image
-                src={imageSrc}
-                className="w-full h-full object-cover"
-                alt="user uploaded image"
-              />
+            <div className="rounded-[10px] w-full h-[150px] overflow-hidden">
+              <Image src={imageSrc} className="h-full object-cover" alt="user uploaded image" />
             </div>
           ))}
         </div>
@@ -77,10 +73,10 @@ export function FeedCard({
       {emotionTypes.length !== 0 && (
         <div className="flex flex-wrap gap-2 px-3 py-2.5 border rounded-lg bg-[#F8F9FC]">
           {emotionTypes.map(emotionType => (
-              <div className="w-[30px] h-[30px]">
-                <Image src={convertEmotionIcon(emotionType)} alt={`emotion ${emotionType} icon`} />
-              </div>
-            ))}
+            <div className="w-[30px] h-[30px]">
+              <Image src={convertEmotionIcon(emotionType)} alt={`emotion ${emotionType} icon`} />
+            </div>
+          ))}
         </div>
       )}
     </div>
