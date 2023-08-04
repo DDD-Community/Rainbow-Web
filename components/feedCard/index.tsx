@@ -61,7 +61,7 @@ export function FeedCard({
       {/* images */}
       {images.length !== 0 && (
         <div className="flex gap-2.5 my-2.5">
-          {images.map(imageSrc => (
+          {images.slice(0, 2).map(imageSrc => (
             <div className="rounded-[10px] w-full h-[150px] overflow-hidden">
               <Image src={imageSrc} className="h-full object-cover" alt="user uploaded image" />
             </div>
