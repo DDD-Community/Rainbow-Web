@@ -4,6 +4,8 @@ import React from "react";
 import Image from "next/image";
 import { IconSearch } from "assets/images/icons";
 
+const DEFAULT_PLACEHOLDER_TEXT = "닉네임으로 친구 찾기";
+
 interface SearchBarProps {
   value: string;
   placeholder?: string;
@@ -11,7 +13,7 @@ interface SearchBarProps {
 }
 
 function SearchBar({
-  placeholder = "닉네임으로 친구 찾기",
+  placeholder = DEFAULT_PLACEHOLDER_TEXT,
   value = "",
   onChange = () => {}
 }: SearchBarProps) {
