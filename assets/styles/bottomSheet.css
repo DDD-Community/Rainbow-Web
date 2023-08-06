@@ -1,0 +1,9 @@
+/* header area */
+[data-rsbs-header="true"] {
+    box-shadow: none;
+}
+/* haeder slider button */
+[data-rsbs-header]:before {
+    height: 5px;
+    background-color: var(--gray-400);
+}
