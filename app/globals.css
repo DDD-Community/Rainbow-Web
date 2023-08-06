@@ -66,6 +66,8 @@ body {
 }
 
 @import "react-toastify/dist/ReactToastify.css";
+@import 'react-spring-bottom-sheet/dist/style.css';
 @import "assets/styles/font.css";
 @import "assets/styles/checkbox.css";
 @import "assets/styles/toast.css";
+@import "assets/styles/bottomSheet.css";
