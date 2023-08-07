@@ -9,6 +9,7 @@ import {
   birthdayState,
   salaryState
 } from "@/src/recoil/user.atoms";
+import { Button } from "@/src/components/Common/Button";
 
 export default function Checking() {
   const email = useRecoilValue(emailState);
@@ -38,9 +39,9 @@ export default function Checking() {
       <p>성별: {gender}</p>
       <p>생일: {birthday}</p>
       <p>연봉: {salary}</p>
-      <button type="button" onClick={handleNext}>
+      <Button color="default" size="small" onClick={handleNext}>
         확인
-      </button>
+      </Button>
       {submitted && <p>폼이 성공적으로 제출되었습니다!</p>}
     </div>
   );

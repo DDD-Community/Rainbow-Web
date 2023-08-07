@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { birthdayState } from "@/src/recoil/user.atoms";
+import { PrimaryButton } from "@/src/components/Common/Button";
+import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 
 export default function Birth() {
   const [birth, setBirth] = useState("");
@@ -16,15 +18,22 @@ export default function Birth() {
   const canActiveNextButton = Boolean(!birth);
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <h2>님의 생일을 입력해주세요</h2>
       <div>
         <input type="text" value={birth} onChange={e => setBirth(e.target.value)} />
       </div>
       <div>
-        <button type="button" disabled={canActiveNextButton} onClick={handleNext}>
-          확인
-        </button>
+        <ButtonField>
+          <PrimaryButton
+            color="default"
+            size="small"
+            disabled={canActiveNextButton}
+            onClick={handleNext}
+          >
+            확인
+          </PrimaryButton>
+        </ButtonField>
       </div>
     </div>
   );

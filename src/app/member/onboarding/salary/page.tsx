@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { salaryState } from "@/src/recoil/user.atoms";
 import { useSetRecoilState } from "recoil";
+import { PrimaryButton } from "@/src/components/Common/Button";
+import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 
 interface PropsType {
   nickname: string;
@@ -24,9 +26,16 @@ export default function Salary(nickname: PropsType) {
     <div>
       <h2>{text}</h2>
       <input type="text" value={salary} onChange={e => setSalary(e.target.value)} />
-      <button type="button" disabled={canActiveNextButton} onClick={handleNext}>
-        확인
-      </button>
+      <ButtonField>
+        <PrimaryButton
+          color="default"
+          size="small"
+          disabled={canActiveNextButton}
+          onClick={handleNext}
+        >
+          확인
+        </PrimaryButton>
+      </ButtonField>
     </div>
   );
 }

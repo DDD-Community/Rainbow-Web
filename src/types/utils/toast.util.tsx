@@ -4,7 +4,7 @@ import {
   IconWhiteChecked,
   IconPrimaryChecked,
   IconExclamationMark
-} from "assets/images/icons/toast";
+} from "@/public/assets/images/icons/toast";
 
 const DEFAULT_COMMON_TOAST_OPTIONS = {
   autoClose: 3000,

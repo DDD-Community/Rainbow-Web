@@ -5,38 +5,36 @@ import { PropsWithChildren } from "react";
 import { tw } from "@/src/types/utils/tailwind.util";
 
 type TextInputBorderProps = {
-  infoMessage?: string;
-  placeholder?: string;
+  errorMessage?: string;
   className?: string;
+  disabled?: boolean;
 };
 
 export function TextInputBorder({
-  infoMessage,
-  placeholder,
+  errorMessage,
+  disabled,
   children,
   className
 }: PropsWithChildren<TextInputBorderProps>) {
-  const infoCss = infoMessage && "border-[1px]";
+  const errorCss =
+    errorMessage && "border-[1px] border-primary-default focus-within:border-primary-default";
+  const disabledCss = disabled && "cursor-not-allowed";
   return (
     <>
       <div
         className={tw(
-          "flex flex-col items-center",
-          "mt-2pxr w-full rounded-[6px] border-[0.5px] border-solid px-12pxr py-14pxr text-b1",
-          "focus-within:border-[1px] ",
-          infoCss,
+          "flex items-center",
+          "md-2pxr w-full rounded-[6px] border-[0.5px] border-solid text-r-16-400",
+          "focus-within:border-primary-default",
+          errorCss,
+          disabledCss,
 
           className
         )}
       >
         {children}
       </div>
-      {infoMessage && (
-        <div className="mt-8pxr flex justify-between">
-          {infoMessage && <p className="text-detail">{infoMessage}</p>}
-          {placeholder && <p className="text-detail">{placeholder}</p>}
-        </div>
-      )}
+      {errorMessage && <p className="text-primary-default">{errorMessage}</p>}
     </>
   );
 }
