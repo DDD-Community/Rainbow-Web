@@ -10,11 +10,10 @@ import {
   IconThinking,
   IconEmotionPlus
 } from "@/assets/images/emotion";
+import { EmojiTypes } from "@/types";
 
 const DEFAULT_FEED_CARD_TAG = "나이 또래 친구";
 
-// 반응 이모티콘 타입
-type EmotionTypes = "angry" | "happy" | "sad" | "surprised" | "thinking";
 /**
  * Feed Card
  */
@@ -23,7 +22,7 @@ export interface FeedCardProps {
   price: number;
   content: string;
   images?: string[];
-  emotionTypes?: EmotionTypes[];
+  emojiList?: EmojiTypes[];
 }
 // 유저 정보가 포함 된 Feed Card
 export interface UserFeedCardProps extends FeedCardProps {
@@ -36,7 +35,7 @@ export function FeedCard({
   price = 0,
   content = "",
   images = [],
-  emotionTypes = []
+  emojiList = []
 }: FeedCardProps) {
   return (
     <div className="px-1">
@@ -48,7 +47,7 @@ export function FeedCard({
             price
           )}원`}</div>
           {/* 피드가 없을 때 플러스 아이콘 표출 */}
-          {emotionTypes.length === 0 && (
+          {emojiList.length === 0 && (
             <div className="w-6 h-6">
               <Image src={IconEmotionPlus} className="cursor-pointer" alt="emotion plus icon" />
             </div>
@@ -70,11 +69,11 @@ export function FeedCard({
       )}
 
       {/* feed emotion */}
-      {emotionTypes.length !== 0 && (
+      {emojiList.length !== 0 && (
         <div className="flex flex-wrap gap-2 px-3 py-2.5 border rounded-lg bg-[#F8F9FC]">
-          {emotionTypes.map(emotionType => (
+          {emojiList.map(emojiType => (
             <div className="w-[30px] h-[30px]">
-              <Image src={convertEmotionIcon(emotionType)} alt={`emotion ${emotionType} icon`} />
+              <Image src={convertEmotionIcon(emojiType)} alt={`emotion ${emojiType} icon`} />
             </div>
           ))}
         </div>
@@ -91,7 +90,7 @@ export function UserFeedCard({
   price = 0,
   content = "",
   images = [],
-  emotionTypes = []
+  emojiList = []
 }: UserFeedCardProps) {
   return (
     <article className="grid grid-cols-[36px_auto] grid-rows-[40px_auto] w-full h-auto gap-1 gap-y-2">
@@ -117,13 +116,13 @@ export function UserFeedCard({
         price={price}
         content={content}
         images={images}
-        emotionTypes={emotionTypes}
+        emojiList={emojiList}
       />
     </article>
   );
 }
 
-const convertEmotionIcon = (emotionType: EmotionTypes) => {
+const convertEmotionIcon = (emotionType: EmojiTypes) => {
   switch (emotionType) {
     case "angry":
       return IconAngry;
