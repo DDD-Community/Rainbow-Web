@@ -6,7 +6,7 @@ import {
   IconAngry,
   IconHappy,
   IconSad,
-  IconSuprised,
+  IconSurprised,
   IconThinking,
   IconEmotionPlus
 } from "@/assets/images/emotion";
@@ -14,7 +14,7 @@ import {
 const DEFAULT_FEED_CARD_TAG = "나이 또래 친구";
 
 // 반응 이모티콘 타입
-type EmotionTypes = "angry" | "happy" | "sad" | "suprised" | "thinking";
+type EmotionTypes = "angry" | "happy" | "sad" | "surprised" | "thinking";
 /**
  * Feed Card
  */
@@ -131,8 +131,8 @@ const convertEmotionIcon = (emotionType: EmotionTypes) => {
       return IconHappy;
     case "sad":
       return IconSad;
-    case "suprised":
-      return IconSuprised;
+    case "surprised":
+      return IconSurprised;
     case "thinking":
       return IconThinking;
     default:
