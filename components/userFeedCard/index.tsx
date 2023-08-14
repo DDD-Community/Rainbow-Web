@@ -53,7 +53,9 @@ function UserFeedContainer({ children }: { children?: ReactNode }) {
   );
 }
 
-const UserFeedHeader = ({ children }: { children?: ReactNode }) => ({ children });
+function UserFeedHeader({ children }: { children?: ReactNode }) {
+  return <>{children}</>
+}
 function UserFeedProfile() {
   return (
     <div className="flex items-center shrink-0">
