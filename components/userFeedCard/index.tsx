@@ -54,7 +54,7 @@ function UserFeedContainer({ children }: { children?: ReactNode }) {
 }
 
 function UserFeedHeader({ children }: { children?: ReactNode }) {
-  return <>{children}</>
+  return <>{children}</>;
 }
 function UserFeedProfile() {
   return (
