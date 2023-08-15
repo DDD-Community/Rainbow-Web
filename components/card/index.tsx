@@ -17,7 +17,7 @@ export interface CardHeaderProps {
 }
 export function CardHeader({ title = "", price = 0, onClick }: CardHeaderProps) {
   return (
-    <div className="flex justify-between items-center w-full mb-2">
+    <div className="flex justify-between items-center w-full">
       <h3 className="m-13-500 text-gray-700">{title}</h3>
       <div className="flex gap-2">
         <div className="flex items-center px-2.5 rounded-md border border-[#AAAAAA] text-[#5E6066] r-12-500">{`${addCommasToNumber(
@@ -40,7 +40,11 @@ export interface CardContentProps {
   content: string;
 }
 export function CardContent({ content = "" }: CardContentProps) {
-  return <p className="text-[#5E6066] m-12-400">{content}</p>;
+  return (
+    <div className="mt-2">
+      <p className="text-[#5E6066] m-12-400">{content}</p>
+    </div>
+  );
 }
 
 export interface CardThumbnailProps {
