@@ -24,7 +24,7 @@ export function Button({ size, disabled, className, children, ...props }: Button
       disabled={disabled}
       className={twMerge(
         buttonSize,
-        "rounded-[30px]",
+        "flex-center items-center ring-1 ring-gray-50 rounded-[30px] h-[32px]",
         "text-gray-600 border-gray-500 bg-gray-white",
         className
       )}

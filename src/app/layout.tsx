@@ -4,10 +4,10 @@ import React from "react";
 
 import { ToastContainer } from "react-toastify";
 import { Inter } from "next/font/google";
-import DefaultContainer from "@/src/components/DefaultContainer";
 import { RecoilRoot } from "recoil";
 import "../styles/globals.css";
 import ReactQueryProvider from "@/src/queries/ReactQueryProvider";
+import DefaultContainer from "../components/defaultContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 

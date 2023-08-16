@@ -13,7 +13,7 @@ export type RoundedButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const colors: Record<ButtonColor, string> = {
-  hover: "text-gray-600 bg-gray-500",
+  hover: "text-gray-600 bg-gray-200",
   default: "text-gray-600 bg-gray-50 ",
   disabled: "text-gray-300 bg-gray-100"
 };
@@ -41,7 +41,7 @@ export function RoundedButton({
       className={twMerge(
         buttonColor,
         buttonSize,
-        "inline-flex flex-col items-center h-[32px] border-1px border-gray-500",
+        "flex-center items-center h-[32px] ring-1 ring-gray-300",
         "disabled:bg-gray-100 disabled:text-gray-300",
         className
       )}
