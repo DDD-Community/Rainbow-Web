@@ -2,8 +2,14 @@
 
 import React from "react";
 import Image from "next/image";
-import BottomSheet, { BottomSheetProps } from "@/components/bottomSheet";
-import { IconAngry, IconHappy, IconSad, IconSurprised, IconThinking } from "assets/images/emotion";
+import BottomSheet, { BottomSheetProps } from "@/src/components/bottomSheet";
+import {
+  IconAngry,
+  IconHappy,
+  IconSad,
+  IconSurprised,
+  IconThinking
+} from "@/public/assets/images/emotion";
 import { EmojiTypes } from "types";
 
 const emojiIcons: { [key in EmojiTypes]: string } = {

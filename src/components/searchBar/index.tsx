@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { IconSearch } from "assets/images/icons";
+import { IconSearch } from "@/public/assets/images/icons";
 
 const DEFAULT_PLACEHOLDER_TEXT = "닉네임으로 친구 찾기";
 

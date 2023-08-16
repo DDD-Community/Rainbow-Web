@@ -1,15 +1,15 @@
 import Image from "next/image";
-import { addCommasToNumber } from "utils/utils";
-import { PrimaryTag } from "components/tag";
-import { IconPlus } from "@/assets/images/icons";
 import {
   IconAngry,
   IconHappy,
   IconSad,
-  IconSuprised,
+  IconSurprised,
   IconThinking,
   IconEmotionPlus
-} from "@/assets/images/emotion";
+} from "@/public/assets/images/emotion";
+import { addCommasToNumber } from "@/src/types/utils/utils";
+import { IconPlus } from "@/public/assets/images/icons";
+import { PrimaryTag } from "../tag";
 
 const DEFAULT_FEED_CARD_TAG = "나이 또래 친구";
 
@@ -132,7 +132,7 @@ const convertEmotionIcon = (emotionType: EmotionTypes) => {
     case "sad":
       return IconSad;
     case "suprised":
-      return IconSuprised;
+      return IconSurprised;
     case "thinking":
       return IconThinking;
     default:
