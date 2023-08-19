@@ -96,7 +96,7 @@ function Calendar() {
           </h1>
           <p>한국 시간: {koreaDateTime}</p>
         </div>
-        <div className="mt-5 grid grid-cols-7 gap-2">
+        <div className="mt-5 grid grid-cols-7 gap-2 m-12-500">
           {daysOfWeek.map(day => (
             <div key={day} className="text-center p-2">
               {day}
@@ -111,7 +111,7 @@ function Calendar() {
               <button
                 type="button"
                 key={`day-${index}`}
-                className={`text-center p-2 ${
+                className={`flex-center m-12-500 p-2  ${
                   dayNumber > 0 && dayNumber <= daysInMonth
                     ? "bg-gray-200 cursor-pointer rounded-md w-8 h-8"
                     : ""
