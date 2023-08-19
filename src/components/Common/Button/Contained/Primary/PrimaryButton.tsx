@@ -41,7 +41,7 @@ export function PrimaryButton({
       className={twMerge(
         buttonColor,
         buttonSize,
-        "flex-center items-center h-[46px]",
+        "flex-center items-center h-[46px] sb-16-600",
         "hover:bg-primary-hover hover:text-white",
         "active:bg-primary-default active:text-white",
         "disabled:bg-primary-disabled disabled:text-white",

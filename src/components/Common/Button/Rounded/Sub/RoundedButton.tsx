@@ -41,7 +41,7 @@ export function RoundedButton({
       className={twMerge(
         buttonColor,
         buttonSize,
-        "flex-center items-center h-[32px] ring-1 ring-gray-300",
+        "flex-center items-center h-[32px] ring-1 ring-gray-300 m-12-600",
         "disabled:bg-gray-100 disabled:text-gray-300",
         className
       )}

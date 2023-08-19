@@ -27,7 +27,7 @@ export function Select({ options, onChange }: SelectProps) {
   };
 
   return (
-    <div className="absolute w-[331px] text-right ">
+    <div className="absolute w-[331px] text-right m-16-500">
       <div>
         <button
           type="button"

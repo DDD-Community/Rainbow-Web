@@ -41,7 +41,7 @@ export function SubButton({
       className={twMerge(
         buttonColor,
         buttonSize,
-        "flex-center items-center h-[28px] ring-1",
+        "flex-center items-center h-[28px] ring-1 m-11-500",
         "disabled:bg-gray-50 disabled:border-gray-300 disabled:text-gray-300",
         className
       )}
