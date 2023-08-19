@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { twMerge } from "@/src/types/utils/tailwind.util";
 
 interface Option {
   value: string;
@@ -27,7 +28,7 @@ export function Select({ options, onChange }: SelectProps) {
   };
 
   return (
-    <div className="absolute w-[331px] text-right ">
+    <div className={twMerge("relative inline-block w-[331px] text-right ")}>
       <div>
         <button
           type="button"
