@@ -6,7 +6,7 @@ import {
   IconAngry,
   IconHappy,
   IconSad,
-  IconSuprised,
+  IconSurprised,
   IconThinking,
   IconEmotionPlus
 } from "@/assets/images/emotion";
@@ -132,7 +132,7 @@ const convertEmotionIcon = (emotionType: EmotionTypes) => {
     case "sad":
       return IconSad;
     case "suprised":
-      return IconSuprised;
+      return IconSurprised;
     case "thinking":
       return IconThinking;
     default:
