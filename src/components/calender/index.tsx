@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+
 "use client";
 
 import { useState, useRef } from "react";
@@ -124,7 +126,6 @@ function Calendar() {
                       onClick={() => {
                         handleDateClick(dayNumber);
                       }}
-                      aria-label={`${currentYear}년 ${currentMonth + 1}월 ${dayNumber}일`}
                     />
                     <div className="flex-center sb-10-600 text-gray-800">
                       {dayNumber > 0 && dayNumber <= daysInMonth ? dayNumber : ""}
