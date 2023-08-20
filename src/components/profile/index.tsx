@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
-import PlusIcon from "assets/images/icons/plus";
-import CheckIcon from "assets/images/icons/check";
+import CheckIcon from "@/public/assets/images/icons/check";
+import PlusIcon from "@/public/assets/images/icons/plus";
 
 export type BottomIconTypes = "plus" | "check" | "none";
 

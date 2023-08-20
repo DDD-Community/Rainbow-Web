@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { SubTag, SecondaryTag } from "components/tag";
+import { SubTag, SecondaryTag } from "../tag";
 import { FeedCard, FeedCardProps } from "./feedCard";
 
 const SPENDING_BUDDY_TAG_TEXT = "지출 또래 친구";

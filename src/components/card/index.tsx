@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { addCommasToNumber } from "utils/utils";
 import { EmojiTypes } from "@/types";
 import {
   IconAngry,
@@ -8,7 +7,8 @@ import {
   IconSurprised,
   IconThinking,
   IconEmotionPlus
-} from "@/assets/images/emotion";
+} from "@/public/assets/images/emotion";
+import { addCommasToNumber } from "@/src/types/utils/utils";
 
 export interface CardHeaderProps {
   title: string;

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import EmojiBottomSheet from "components/emojiBottomSheet";
-import { DividerHorizon } from "components/divider";
-import { UserFeedCard } from "@/components/userFeedCard";
-import SearchBar from "@/components/searchBar";
+import EmojiBottomSheet from "@/src/components/emojiBottomSheet";
+import { UserFeedCard } from "@/src/components/userFeedCard";
+import SearchBar from "@/src/components/searchBar";
+import { DividerHorizon } from "@/src/components/Common/Divider";
 
 export default function FeedPage() {
   const [searchWord, setSearchWord] = useState("");
