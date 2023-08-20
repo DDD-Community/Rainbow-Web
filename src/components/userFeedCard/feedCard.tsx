@@ -6,7 +6,7 @@ import {
   CardHeaderProps,
   CardContentProps,
   CardEmojiBoardProps
-} from "components/card";
+} from "@/src/components/card";
 
 export interface FeedCardProps extends CardHeaderProps, CardContentProps, CardEmojiBoardProps {
   imageSrcArray: string[];

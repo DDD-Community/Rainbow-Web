@@ -1,3 +1,4 @@
+import Profile, { BottomIconTypes } from "components/profile";
 import {
   EmojiProfileRed,
   EmojiProfileYellow,
@@ -6,7 +7,6 @@ import {
   EmojiProfilePurple
 } from "assets/images/profile/emoji";
 
-import Profile, { BottomIconTypes } from "components/profile";
 
 type EmojiProfileTypes = "red" | "yellow" | "green" | "blue" | "purple";
 

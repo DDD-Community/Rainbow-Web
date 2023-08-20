@@ -1,3 +1,4 @@
+import Profile, { BottomIconTypes } from "components/profile";
 import {
   ManProfileChris,
   WomanProfileNorah,
@@ -6,7 +7,6 @@ import {
   ManProfileAlvin
 } from "assets/images/profile/person";
 
-import Profile, { BottomIconTypes } from "components/profile";
 
 type PersonProfileTypes = "chris" | "norah" | "jessi" | "esther" | "alvin";
 
