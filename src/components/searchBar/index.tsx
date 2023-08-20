@@ -18,7 +18,7 @@ function SearchBar({
   onChange = () => {}
 }: SearchBarProps) {
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <div className="absolute top-2.5 left-3 w-[18px] h-[18px]">
         <Image src={IconSearch} alt="search icon" />
       </div>

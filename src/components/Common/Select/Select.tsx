@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from "react";
 import { twMerge } from "@/src/types/utils/tailwind.util";
 

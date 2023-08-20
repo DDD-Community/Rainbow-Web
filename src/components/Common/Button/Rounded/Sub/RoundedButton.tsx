@@ -19,8 +19,8 @@ const colors: Record<ButtonColor, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  large: "w-[80px] rounded-[30px]",
-  small: "h-[62px] rounded-[30px]"
+  large: "w-[80px]",
+  small: "h-[62px]"
 };
 
 export function RoundedButton({
@@ -41,7 +41,8 @@ export function RoundedButton({
       className={twMerge(
         buttonColor,
         buttonSize,
-        "flex-center items-center h-[32px] ring-1 ring-gray-300",
+        "flex-center items-center p-1 h-[32px] ring-1 ring-gray-500 rounded-[30px]",
+        "m-12-500",
         "disabled:bg-gray-100 disabled:text-gray-300",
         className
       )}

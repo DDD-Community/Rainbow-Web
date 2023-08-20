@@ -19,8 +19,8 @@ const colors: Record<ButtonColor, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  large: "w-[104px] rounded-[8px]",
-  small: "w-[82px] rounded-[8px]"
+  large: "w-[104px]",
+  small: "w-[82px]"
 };
 
 export function PrimaryButton({
@@ -41,7 +41,7 @@ export function PrimaryButton({
       className={twMerge(
         buttonColor,
         buttonSize,
-        "flex-center items-center h-[46px]",
+        "flex-center items-center h-[46px] rounded-[8px] sb-16-600 p-1",
         "hover:bg-primary-hover hover:text-white",
         "active:bg-primary-default active:text-white",
         "disabled:bg-primary-disabled disabled:text-white",
