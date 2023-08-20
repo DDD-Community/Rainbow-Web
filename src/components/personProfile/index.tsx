@@ -4,7 +4,7 @@ import {
   WomanProfileJessi,
   WomanProfileEsther,
   ManProfileAlvin
-} from "assets/images/profile/person";
+} from "@/public/assets/images/profile/person";
 import Profile, { BottomIconTypes } from "../profile";
 
 type PersonProfileTypes = "chris" | "norah" | "jessi" | "esther" | "alvin";

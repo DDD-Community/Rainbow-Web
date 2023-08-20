@@ -4,7 +4,7 @@ import {
   EmojiProfileGreen,
   EmojiProfileBlue,
   EmojiProfilePurple
-} from "assets/images/profile/emoji";
+} from "@/public/assets/images/profile/emoji";
 import Profile, { BottomIconTypes } from "../profile";
 
 type EmojiProfileTypes = "red" | "yellow" | "green" | "blue" | "purple";
