@@ -7,7 +7,6 @@ import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { Select } from "@/src/components/Common/Select";
 import { authInstance } from "@/src/api/auth/client";
-import { TextInput } from "@/src/components/Common/Input";
 
 interface PropsType {
   nickname: string;
@@ -57,13 +56,10 @@ export default function Salary(nickname: PropsType) {
   const text = `쉿! ${nickname}님의 연봉은 저희만 볼게요`;
 
   return (
-    <div>
-      <h2>{text}</h2>
-      <TextInput>
-        <TextInput.Border>
-          <Select options={options} onChange={handleSelectChange} />
-        </TextInput.Border>
-      </TextInput>
+    <div className="flex flex-col justify-between">
+      <div className="text-center sb-25-600">{text}</div>
+
+      <Select options={options} onChange={handleSelectChange} />
 
       <ButtonField>
         <PrimaryButton

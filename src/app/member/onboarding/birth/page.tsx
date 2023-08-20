@@ -5,10 +5,15 @@ import { useSetRecoilState } from "recoil";
 import { birthdayState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
+import { TextInput } from "@/src/components/Common/Input";
 
 export default function Birth() {
-  const [birth, setBirth] = useState("");
+  const [year, setYear] = useState("");
+  const [month, setMonth] = useState("");
+  const [date, setDate] = useState("");
   const setBirthRecoil = useSetRecoilState(birthdayState);
+
+  const birth = year + month + date;
 
   const handleNext = () => {
     setBirthRecoil(birth);
@@ -20,8 +25,22 @@ export default function Birth() {
   return (
     <div className="flex flex-col items-center">
       <h2>님의 생일을 입력해주세요</h2>
-      <div>
-        <input type="text" value={birth} onChange={e => setBirth(e.target.value)} />
+      <div className="flex justifycontent">
+        <TextInput>
+          <TextInput.Border>
+            <TextInput.Content value={year} onChange={e => setYear(e.target.value)} />년
+          </TextInput.Border>
+        </TextInput>
+        <TextInput>
+          <TextInput.Border>
+            <TextInput.Content value={month} onChange={e => setMonth(e.target.value)} />월
+          </TextInput.Border>
+        </TextInput>
+        <TextInput>
+          <TextInput.Border>
+            <TextInput.Content value={date} onChange={e => setDate(e.target.value)} />일
+          </TextInput.Border>
+        </TextInput>
       </div>
       <div>
         <ButtonField>

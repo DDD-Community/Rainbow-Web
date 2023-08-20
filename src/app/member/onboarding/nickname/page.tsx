@@ -5,6 +5,7 @@ import { useSetRecoilState } from "recoil";
 import { nicknameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
+import { TextInput } from "@/src/components/Common/Input";
 
 export default function Nickname() {
   const [nickname, setNickname] = useState("");
@@ -20,7 +21,11 @@ export default function Nickname() {
   return (
     <div className="flex flex-col items-center">
       <h2>본인을 확인할 수 있는 닉네임을 입력해주세요</h2>
-      <input type="text" value={nickname} onChange={e => setNickname(e.target.value)} />
+      <TextInput>
+        <TextInput.Border>
+          <TextInput.Content value={nickname} onChange={e => setNickname(e.target.value)} />
+        </TextInput.Border>
+      </TextInput>
       <ButtonField>
         <PrimaryButton
           color="default"

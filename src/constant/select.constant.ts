@@ -1,8 +1,8 @@
 export const EMAIL = [
   {
-    value: "0",
+    value: "naver.com",
     name: "naver.com"
   },
-  { value: "1", name: "daum.net" },
-  { value: "2", name: "google.com" }
+  { value: "daum.net", name: "daum.net" },
+  { value: "google.com", name: "google.com" }
 ];

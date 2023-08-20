@@ -5,6 +5,7 @@ import { useSetRecoilState } from "recoil";
 import { genderState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
+import { TextInput } from "@/src/components/Common/Input";
 
 export default function Gender() {
   const [gender, setGender] = useState("");
@@ -20,7 +21,11 @@ export default function Gender() {
   return (
     <div>
       <h2>님의 성별을 입력해주세요</h2>
-      <input type="text" value={gender} onChange={e => setGender(e.target.value)} />
+      <TextInput>
+        <TextInput.Border>
+          <TextInput.Content value={gender} onChange={e => setGender(e.target.value)} />
+        </TextInput.Border>
+      </TextInput>
       <ButtonField>
         <PrimaryButton
           color="default"

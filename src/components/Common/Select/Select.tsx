@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { twMerge } from "@/src/types/utils/tailwind.util";
 
 interface Option {
@@ -16,6 +14,7 @@ interface SelectProps {
 export function Select({ options, onChange }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string | undefined>(options[0]?.value);
+  const selectRef = useRef<HTMLDivElement | null>(null);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -27,8 +26,21 @@ export function Select({ options, onChange }: SelectProps) {
     setIsOpen(false);
   };
 
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", handleOutsideClick);
+    return () => {
+      window.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <div className={twMerge("relative inline-block w-[331px] text-right ")}>
+    <div className={twMerge("relative inline-block w-[331px] text-right ")} ref={selectRef}>
       <div>
         <button
           type="button"
