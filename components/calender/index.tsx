@@ -96,7 +96,7 @@ function Calendar() {
           </h1>
           <p>한국 시간: {koreaDateTime}</p>
         </div>
-        <div className="mt-5 grid grid-cols-7 gap-2 m-12-500">
+        <div className="mt-5 grid grid-cols-7 gap-4 m-12-500">
           {daysOfWeek.map(day => (
             <div key={day} className="text-center p-2">
               {day}
@@ -108,22 +108,30 @@ function Calendar() {
           {Array.from({ length: daysInMonth }, (_, index) => {
             const dayNumber = index + 1;
             return (
-              <button
-                type="button"
+              <div
                 key={`day-${index}`}
-                className={`flex-center m-12-500 p-2  ${
+                className={`flex-center p-1 ${
                   dayNumber > 0 && dayNumber <= daysInMonth
-                    ? "bg-gray-200 cursor-pointer rounded-md w-8 h-8"
+                    ? "bg-gray-200 cursor-pointer rounded-lg ring-1 ring-gray-300 w-8 h-8"
                     : ""
                 }`}
-                onClick={() => {
-                  if (dayNumber > 0 && dayNumber <= daysInMonth) {
-                    handleDateClick(dayNumber);
-                  }
-                }}
               >
-                {dayNumber > 0 && dayNumber <= daysInMonth ? dayNumber : ""}
-              </button>
+                {dayNumber > 0 && dayNumber <= daysInMonth && (
+                  <>
+                    <button
+                      type="button"
+                      className="w-full h-full"
+                      onClick={() => {
+                        handleDateClick(dayNumber);
+                      }}
+                      aria-label={`${currentYear}년 ${currentMonth + 1}월 ${dayNumber}일`}
+                    />
+                    <div className="flex-center sb-10-600 text-gray-800">
+                      {dayNumber > 0 && dayNumber <= daysInMonth ? dayNumber : ""}
+                    </div>
+                  </>
+                )}
+              </div>
             );
           })}
         </div>
