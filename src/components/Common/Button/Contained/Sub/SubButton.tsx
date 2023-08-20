@@ -19,8 +19,8 @@ const colors: Record<ButtonColor, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  large: "w-[75px] rounded-[6px]",
-  small: "h-[57px] rounded-[6px]"
+  large: "w-[75px]",
+  small: "w-[57px]"
 };
 
 export function SubButton({
@@ -41,7 +41,7 @@ export function SubButton({
       className={twMerge(
         buttonColor,
         buttonSize,
-        "flex-center items-center h-[28px] ring-1 m-11-500",
+        "flex-center items-center h-[28px] rounded-[6px] ring-1 m-12-500 p-1",
         "disabled:bg-gray-50 disabled:border-gray-300 disabled:text-gray-300",
         className
       )}

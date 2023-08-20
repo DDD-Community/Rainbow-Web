@@ -23,8 +23,8 @@ export function TextInputBorder({
     <>
       <div
         className={tw(
-          "flex items-center",
-          "md-2pxr w-full rounded-[6px] border-[0.5px] border-solid text-r-16-400",
+          "flex items-center gap-6",
+          "w-full rounded-[6px] border-[1px] r-16-400",
           "focus-within:border-primary-default",
           errorCss,
           disabledCss,

@@ -21,7 +21,11 @@ export const TextInputContent = forwardRef<HTMLInputElement, TextInputProps>(
         ref={ref}
         type={type}
         name={name}
-        className={tw("w-full focus:outline-none rounded-[6px]", disabledCss, inputClassName)}
+        className={tw(
+          "w-full focus:outline-none rounded-[6px] r-16-400",
+          disabledCss,
+          inputClassName
+        )}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

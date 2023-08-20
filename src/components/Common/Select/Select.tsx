@@ -27,7 +27,7 @@ export function Select({ options, onChange }: SelectProps) {
   };
 
   return (
-    <div className="absolute w-[331px] text-right m-16-500">
+    <div className="flex-col w-[331px] text-right m-16-500">
       <div>
         <button
           type="button"
@@ -38,7 +38,7 @@ export function Select({ options, onChange }: SelectProps) {
         </button>
       </div>
       {isOpen && (
-        <div className="mt-2 w-full rounded-md bg-white ring-1 ring-gray-300">
+        <div className="w-full rounded-md bg-white ring-1 ring-gray-300 ">
           <ul className="py-1">
             {options.map(option => (
               <button
