@@ -24,7 +24,7 @@ export function FeedCard({
     <div className="w-full px-1">
       <CardHeader title={title} price={price} onClick={onClickPlusButton} />
 
-      <CardContent content={content} />
+      {content.length !== 0 && <CardContent content={content} />}
 
       {imageSrcArray.length !== 0 && <FeedThumbnails imagesUrl={imageSrcArray} />}
 
