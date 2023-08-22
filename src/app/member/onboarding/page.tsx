@@ -10,8 +10,8 @@ export default function Onboarding() {
   };
   return (
     <div>
-      <div className="sb-25-600 text-gray-700 flex flex-col items-center">
-        <span>지출 관리의 시작</span>
+      <div className="flex flex-col items-center">
+        <div className="text sb-25-600">지출 관리의 시작</div>
         <span>👋바이바이와 함께 해요</span>
         <span> 비슷한 또래 친구들과 함께 지출을 줄여보세요</span>
       </div>

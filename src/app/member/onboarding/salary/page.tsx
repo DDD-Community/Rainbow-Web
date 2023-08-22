@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
+import { twMerge } from "tailwind-merge";
 import { salaryState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
@@ -41,7 +42,6 @@ export default function Salary(nickname: PropsType) {
       }));
 
       setOptions(newOptions);
-      console.log(newOptions);
     });
   }, []);
 
@@ -56,10 +56,9 @@ export default function Salary(nickname: PropsType) {
   const text = `쉿! ${nickname}님의 연봉은 저희만 볼게요`;
 
   return (
-    <div className="flex flex-col justify-between">
+    <div className={twMerge("flex flex-col justify-between")}>
       <div className="text-center sb-25-600">{text}</div>
-
-      <Select options={options} onChange={handleSelectChange} />
+      <Select options={options} text="만원" onChange={handleSelectChange} />
 
       <ButtonField>
         <PrimaryButton

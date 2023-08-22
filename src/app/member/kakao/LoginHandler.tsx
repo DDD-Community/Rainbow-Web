@@ -25,9 +25,9 @@ export const fetchAuth = (code: string): Promise<LoginResponseType> =>
 export function LoginHandler(code: string) {
   fetchAuth(code)
     .then((response: LoginResponseType) => {
-      console.log(response.data);
+      // console.log(response.data);
       if (response.data.data.email) {
-        console.log(response.data.data.email);
+        // console.log(response.data.data.email);
         window.location.replace("/member/onboarding");
       }
       // const JWT = response.data.data.accessToken;
@@ -37,7 +37,7 @@ export function LoginHandler(code: string) {
       // window.location.replace("/");
     })
     .catch(() => {
-      console.log("로그인에 실패하였습니다.");
+      // console.log("로그인에 실패하였습니다.");
       // window.location.replace("/login");
     });
 }

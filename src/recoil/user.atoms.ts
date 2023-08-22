@@ -20,8 +20,8 @@ export const genderState = atom<string>({
   default: ""
 });
 
-export const birthdayState = atom<string>({
-  key: "birthdayState",
+export const birthDateState = atom<string>({
+  key: "birthDateState",
   default: ""
 });
 

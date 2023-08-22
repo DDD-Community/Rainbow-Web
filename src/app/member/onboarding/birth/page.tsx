@@ -2,45 +2,54 @@
 
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { birthdayState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
+import { birthDateState } from "@/src/recoil/user.atoms";
 
 export default function Birth() {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [date, setDate] = useState("");
-  const setBirthRecoil = useSetRecoilState(birthdayState);
+  const setBirthRecoil = useSetRecoilState(birthDateState);
 
-  const birth = year + month + date;
+  const birthDate = `${year}-${month}-${date}`;
 
   const handleNext = () => {
-    setBirthRecoil(birth);
+    setBirthRecoil(birthDate);
     window.location.replace("/member/onboarding/salary");
   };
 
-  const canActiveNextButton = Boolean(!birth);
+  const getInputValue = (label: string) => {
+    if (label === "년") return year;
+    if (label === "월") return month;
+    if (label === "일") return date;
+    return "";
+  };
+
+  const setInputValue = (label: string, value: string) => {
+    if (label === "년") setYear(value);
+    else if (label === "월") setMonth(value);
+    else if (label === "일") setDate(value);
+  };
+
+  const canActiveNextButton = Boolean(!year || !month || !date);
 
   return (
     <div className="flex flex-col items-center">
       <h2>님의 생일을 입력해주세요</h2>
-      <div className="flex justifycontent">
-        <TextInput>
-          <TextInput.Border>
-            <TextInput.Content value={year} onChange={e => setYear(e.target.value)} />년
-          </TextInput.Border>
-        </TextInput>
-        <TextInput>
-          <TextInput.Border>
-            <TextInput.Content value={month} onChange={e => setMonth(e.target.value)} />월
-          </TextInput.Border>
-        </TextInput>
-        <TextInput>
-          <TextInput.Border>
-            <TextInput.Content value={date} onChange={e => setDate(e.target.value)} />일
-          </TextInput.Border>
-        </TextInput>
+      <div className="flex gap-4">
+        {["년", "월", "일"].map(label => (
+          <TextInput key={label}>
+            <TextInput.Border>
+              <TextInput.Content
+                value={getInputValue(label)}
+                onChange={e => setInputValue(label, e.target.value)}
+              />
+              <div className="text-primary-default">{label}</div>
+            </TextInput.Border>
+          </TextInput>
+        ))}
       </div>
       <div>
         <ButtonField>

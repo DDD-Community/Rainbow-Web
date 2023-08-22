@@ -10,20 +10,23 @@ interface Option {
 
 interface SelectProps {
   options: Option[];
+  text: string;
   onChange: (selectedValue: string) => void;
 }
 
-export function Select({ options, onChange }: SelectProps) {
+export function Select({ options, text, onChange }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string | undefined>(options[0]?.value);
+  const [selectedName, setSelectedName] = useState<string | undefined>(options[0]?.name);
   const selectRef = useRef<HTMLDivElement | null>(null);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionSelect = (value: string) => {
+  const handleOptionSelect = (value: string, name: string) => {
     setSelectedValue(value);
+    setSelectedName(name);
     onChange(value);
     setIsOpen(false);
   };
@@ -42,27 +45,34 @@ export function Select({ options, onChange }: SelectProps) {
   }, []);
 
   return (
-    <div className={twMerge("relative inline-block w-[331px] text-right ")} ref={selectRef}>
+    <div className={twMerge("relative inline-block w-full")} ref={selectRef}>
       <div>
         <button
           type="button"
-          className="inline-flex justify-between text-primary-default"
+          className={twMerge(
+            "ring-gray-200 ring-1 w-full rounded-[6px] p-2",
+            "r-16-400",
+            "focus-within:ring-primary-default"
+          )}
           onClick={handleToggle}
         >
-          {selectedValue}
+          <div className={twMerge("flex justify-between")}>
+            {selectedName && <div className={twMerge("flex flex-start")}>{selectedName}</div>}
+            {text && <div className={twMerge("text-right text-primary-default")}>{text}</div>}
+          </div>
         </button>
       </div>
       {isOpen && (
-        <div className="mt-2 w-full rounded-md bg-white ring-1 ring-gray-300">
-          <ul className="py-1">
+        <div className="w-full max-h-[276px] rounded-[10px] bg-white p-1.5 space-between ring-1 ring-gray-300 overflow-auto">
+          <ul>
             {options.map(option => (
               <button
                 type="button"
                 key={option.value}
-                className={`w-full flex flex-col items-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 ${
-                  option.value === selectedValue ? "bg-gray-50" : ""
+                className={`w-full flex flex-col items-start px-5 py-2.5 r-16-400 rounded-[10px] text-gray-700 hover:bg-gray-50 ${
+                  option.value === selectedValue ? "bg-gray-50 " : ""
                 }`}
-                onClick={() => handleOptionSelect(option.value)}
+                onClick={() => handleOptionSelect(option.value, option.name)}
               >
                 {option.name}
               </button>

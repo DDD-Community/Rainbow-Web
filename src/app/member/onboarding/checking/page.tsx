@@ -6,7 +6,7 @@ import {
   emailState,
   nicknameState,
   genderState,
-  birthdayState,
+  birthDateState,
   salaryState
 } from "@/src/recoil/user.atoms";
 import { Button } from "@/src/components/Common/Button";
@@ -15,7 +15,7 @@ export default function Checking() {
   const email = useRecoilValue(emailState);
   const nickname = useRecoilValue(nicknameState);
   const gender = useRecoilValue(genderState);
-  const birthday = useRecoilValue(birthdayState);
+  const birthDate = useRecoilValue(birthDateState);
   const salary = useRecoilValue(salaryState);
   const [submitted, setSubmitted] = useState(false);
   const handleNext = () => {
@@ -23,7 +23,7 @@ export default function Checking() {
       email,
       nickname,
       gender,
-      birthday,
+      birthDate,
       salary
     };
     console.log("제출 폼 데이터:", formData);
@@ -37,7 +37,7 @@ export default function Checking() {
       <p>이메일: {email}</p>
       <p>닉네임: {nickname}</p>
       <p>성별: {gender}</p>
-      <p>생일: {birthday}</p>
+      <p>생일: {birthDate}</p>
       <p>연봉: {salary}</p>
       <Button color="default" size="small" onClick={handleNext}>
         확인
