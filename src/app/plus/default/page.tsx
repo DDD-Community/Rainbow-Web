@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Header from "./header";
+import Header from "../header";
 import Section from "./section";
 import Footer from "./footer";
 

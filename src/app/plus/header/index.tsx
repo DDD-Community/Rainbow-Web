@@ -70,7 +70,7 @@ function ButtonArea({
   onClickButton = () => {}
 }: ButtonAreaProps) {
   return (
-    <div>
+    <div className="min-w-[24px]">
       {isShowButton && (
         <Image
           src={imageSrc}
