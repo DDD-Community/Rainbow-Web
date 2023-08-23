@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-// import Onboarding from "./member/onboarding/page";
-import Start from "./member/kakao/Start";
+import Onboarding from "./member/onboarding/page";
+// import Start from "./member/kakao/Start";
 
 function Home() {
   return (
     <div className="flex justify-center items-center">
-      <Start />
-      {/* <Onboarding /> */}
+      {/* <Start /> */}
+      <Onboarding />
     </div>
   );
 }
