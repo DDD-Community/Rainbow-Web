@@ -46,7 +46,7 @@ export default function Salary() {
   };
   const handleNext = () => {
     setSalaryRecoil(selectedValue);
-    window.location.replace("/member/onboarding/checking");
+    window.location.href = "/member/onboarding/checking";
   };
   const canActiveNextButton = Boolean(!selectedValue);
 
