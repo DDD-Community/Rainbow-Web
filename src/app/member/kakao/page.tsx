@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { LoginHandler } from "./LoginHandler";
 
-function Login() {
+function Kakao() {
   const code: string = new URL(window.location.href).searchParams.get("code")!;
 
   useEffect(() => {
@@ -12,4 +12,4 @@ function Login() {
 
   return <div />;
 }
-export default Login;
+export default Kakao;

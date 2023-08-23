@@ -20,7 +20,7 @@ interface LoginResponseType {
 // }
 
 export const fetchAuth = (code: string): Promise<LoginResponseType> =>
-  authInstance.get(`/member/login?code=${code}`);
+  authInstance.get(`/members/login?code=${code}`);
 
 export function LoginHandler(code: string) {
   fetchAuth(code)
