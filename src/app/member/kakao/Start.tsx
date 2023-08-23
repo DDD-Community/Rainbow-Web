@@ -11,17 +11,20 @@ function Start() {
 
   return (
     <div className="flex flex-col justify-center">
-      <div className="flex flex-col items-start pt-20 pb-10">
-        <div className="sb-25-600 text-gray-700">안녕하세요 바이바이입니다</div>
+      <div className="flex flex-col items-center pt-20 pb-10">
+        <div className="sb-25-600 text-gray-700">안녕하세요 </div>
+        <div className="sb-25-600 text-gray-700"> 바이바이 입니다</div>
       </div>
       <LottieAnimation animation={Intro} />
-      <button
-        type="button"
-        className="flex justify-center items-center bg-gray-start text-white r-18-600 w-full "
-        onClick={loginHandler}
-      >
-        카카오 계정으로 시작하기
-      </button>
+      <div className="bg-gray-500 py-5 text-white">
+        <button
+          type="button"
+          className="flex justify-center items-center text-white r-18-600 w-full pb-4 "
+          onClick={loginHandler}
+        >
+          카카오 계정으로 시작하기
+        </button>
+      </div>
     </div>
   );
 }
