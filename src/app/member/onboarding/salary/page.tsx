@@ -75,28 +75,3 @@ export default function Salary() {
     </div>
   );
 }
-
-export async function getServerSideProps() {
-  try {
-    const response = await authInstance.get(`/members/salary`);
-    const serverData = response.data.data;
-
-    const options = serverData.map((item: any) => ({
-      value: item.salaryId.toString(),
-      name: item.salaryRange
-    }));
-
-    return {
-      props: {
-        options
-      }
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        options: []
-      }
-    };
-  }
-}
