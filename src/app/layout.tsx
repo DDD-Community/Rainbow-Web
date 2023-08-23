@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <RecoilRoot>
       <html lang="en">
         <body className={inter.className}>
-          <div className="flex flex-col justify-center items-center w-[375px] border-[5px] border-black">
+          <div className="flex flex-col justify-center items-center w-[375px] shadow-md">
             <DefaultContainer>
               <ReactQueryProvider>{children}</ReactQueryProvider>
             </DefaultContainer>
