@@ -12,6 +12,7 @@ import {
 } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
+import { Information } from "@/src/components/Common/Information/Information";
 
 export default function Checking() {
   const email = useRecoilValue(emailState);
@@ -102,6 +103,7 @@ export default function Checking() {
           </div>
         ))}
       </div>
+      <Information className="py-3">내 정보는 내 프로필에서 다시 수정할 수 있어요</Information>
       <ButtonField>
         <PrimaryButton color="default" size="small" onClick={handleNext}>
           확인

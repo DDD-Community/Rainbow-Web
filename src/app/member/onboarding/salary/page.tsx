@@ -7,6 +7,7 @@ import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { authInstance } from "@/src/api/auth/client";
 import { SelectSalary } from "@/src/components/Common/Select/SelectSalary";
+import { Information } from "@/src/components/Common/Information/Information";
 
 interface SalaryOption {
   value: string;
@@ -59,6 +60,7 @@ export default function Salary() {
         </div>
       </div>
       <SelectSalary options={options} text="만원" onChange={handleSelectChange} />
+      <Information className="py-3">비슷한 연봉을 받는 또래 친구들을 찾아줄게요</Information>
 
       <ButtonField>
         <PrimaryButton
