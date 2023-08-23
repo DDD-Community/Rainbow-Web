@@ -49,13 +49,7 @@ function CategoryCard({
     <div className="flex items-center gap-2.5	w-full h-[60px] bg-gray-50 rounded-10 border border-black/[0.03] pl-[12px] pr-[18px]">
       {/* icon */}
       {/* bg-${} 와 형태로 template literal 사용 시 동작 안됨... */}
-      <div
-        className={`shrink-0 flex justify-center w-10 h-10 rounded-[10px] border-black/[0.03] ${convertBgColorName(
-          categoryType
-        )}`}
-      >
-        <Image src={convertBgImage(categoryType)} alt="" />
-      </div>
+      <CategoryImage categoryType={categoryType} />
 
       {/* category Text */}
       <div className="flex flex-col gap-0.5 w-full">
@@ -137,3 +131,18 @@ const convertBgColorName = (categoryType: CategoryType): string => {
       return "bg-category-yellow";
   }
 };
+
+export function CategoryImage({ categoryType = "health" }: { categoryType: CategoryType }) {
+  return (
+    <div
+      className={`shrink-0 flex justify-center w-10 h-10 rounded-[10px] border-black/[0.03] 
+      ${convertBgColorName(categoryType)}`}
+    >
+      <Image
+        src={convertBgImage(categoryType)}
+        className="cursor-pointer"
+        alt={`${categoryType} icon`}
+      />
+    </div>
+  );
+}
