@@ -10,34 +10,16 @@ interface LoginResponseType {
   data: LoginDataType;
 }
 
-// interface Props {
-//   email: string;
-//   nickname: string;
-//   birthDate: string;
-//   salaryStart: number;
-//   salaryEnd: number;
-//   gender: string;
-// }
-
 export const fetchAuth = (code: string): Promise<LoginResponseType> =>
   authInstance.get(`/members/login?code=${code}`);
 
 export function LoginHandler(code: string) {
-  fetchAuth(code)
-    .then((response: LoginResponseType) => {
-      // console.log(response.data);
-      if (response.data.data.email) {
-        // console.log(response.data.data.email);
-        window.location.replace("/member/onboarding");
-      }
-      // const JWT = response.data.data.accessToken;
-      // if (JWT) localStorage.setItem("EXIT_LOGIN_TOKEN", JWT);
-      // console.log("로그인 성공");
-
-      // window.location.replace("/");
-    })
-    .catch(() => {
-      // console.log("로그인에 실패하였습니다.");
-      // window.location.replace("/login");
-    });
+  fetchAuth(code).then((response: LoginResponseType) => {
+    if (response.data.data.email) {
+      window.location.replace("/member/onboarding");
+    }
+    // const JWT = response.data.data.accessToken;
+    // if (JWT) localStorage.setItem("EXIT_LOGIN_TOKEN", JWT);
+    // console.log("로그인 성공");
+  });
 }
