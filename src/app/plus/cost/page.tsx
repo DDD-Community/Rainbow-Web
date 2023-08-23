@@ -27,7 +27,8 @@ export default function PlusCostPage() {
 
       <Section
         price={price}
-        onChange={e => {
+        expenditureDetail="바나바나 바나나"
+        onChangePrice={e => {
           handlePrice(e.target.value);
         }}
         onClickAddPrice={handleAddPrice}
