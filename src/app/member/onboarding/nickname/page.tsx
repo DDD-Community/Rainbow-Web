@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { nicknameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
@@ -9,14 +9,33 @@ import { TextInput } from "@/src/components/Common/Input";
 
 export default function Nickname() {
   const [nickname, setNickname] = useState("");
+  const [isNicknameDuplicated, setIsNicknameDuplicated] = useState(false);
   const setNicknameRecoil = useSetRecoilState(nicknameState);
+
+  useEffect(() => {
+    async function checkNicknameDuplication() {
+      if (nickname) {
+        try {
+          const response = await fetch(
+            `/members/nickname/check?nickname=${encodeURIComponent(nickname)}`
+          );
+          const data = await response.json();
+          setIsNicknameDuplicated(data.data.isDuplicated);
+        } catch (error) {
+          console.error("Error checking nickname duplication:", error);
+        }
+      }
+    }
+
+    checkNicknameDuplication();
+  }, [nickname]);
 
   const handleNext = () => {
     setNicknameRecoil(nickname);
     window.location.replace("/member/onboarding/gender");
   };
 
-  const canActiveNextButton = Boolean(!nickname);
+  const canActiveNextButton = Boolean(!nickname || isNicknameDuplicated);
 
   return (
     <div className="flex flex-col justify-center">
@@ -27,11 +46,22 @@ export default function Nickname() {
           닉네임을 입력해주세요
         </div>
       </div>
-      <TextInput>
-        <TextInput.Border>
-          <TextInput.Content value={nickname} onChange={e => setNickname(e.target.value)} />
-        </TextInput.Border>
-      </TextInput>
+      {isNicknameDuplicated ? (
+        <TextInput>
+          <TextInput.Border errorMessage="동일한 닉네임이 있어요">
+            <TextInput.Content value={nickname} onChange={e => setNickname(e.target.value)} />
+          </TextInput.Border>
+        </TextInput>
+      ) : (
+        <TextInput>
+          <TextInput.Border>
+            <TextInput.Content value={nickname} onChange={e => setNickname(e.target.value)} />
+          </TextInput.Border>
+        </TextInput>
+      )}
+      {isNicknameDuplicated && (
+        <div className="text-red-500 mt-2">이미 사용 중인 닉네임입니다.</div>
+      )}
       <ButtonField>
         <PrimaryButton
           color="default"

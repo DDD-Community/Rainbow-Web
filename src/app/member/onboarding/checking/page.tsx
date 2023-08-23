@@ -12,7 +12,7 @@ import {
 } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
-import { Information } from "@/src/components/Common/Information/Information";
+import { Information } from "@/src/components/Information/Information";
 
 export default function Checking() {
   const email = useRecoilValue(emailState);

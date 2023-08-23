@@ -7,7 +7,7 @@ import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { authInstance } from "@/src/api/auth/client";
 import { SelectSalary } from "@/src/components/Common/Select/SelectSalary";
-import { Information } from "@/src/components/Common/Information/Information";
+import { Information } from "@/src/components/Information/Information";
 
 interface SalaryOption {
   value: string;
