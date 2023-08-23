@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/router";
 import { LoginDataType } from "@/src/constant/api.constant";
 import { authInstance } from "@/src/api/auth/client";
 // import { useRecoilState } from "recoil";
@@ -14,9 +15,10 @@ export const fetchAuth = (code: string): Promise<LoginResponseType> =>
   authInstance.get(`/members/login?code=${code}`);
 
 export function LoginHandler(code: string) {
+  const router = useRouter();
   fetchAuth(code).then((response: LoginResponseType) => {
     if (response.data.data.email) {
-      window.location.href = "/member/onboarding";
+      router.push("/member/onboarding");
     }
     // const JWT = response.data.data.accessToken;
     // if (JWT) localStorage.setItem("EXIT_LOGIN_TOKEN", JWT);
