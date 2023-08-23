@@ -23,13 +23,13 @@ export default function Email() {
   const canActiveNextButton = Boolean(!email);
 
   return (
-    <div className="flex flex-col justify-between h-screen gap-[26px] px-4 py-10">
-      <div className="flex flex-col pt-20">
-        <span>📧</span>
-        <span className="sb-25-600 text-gray-700">
+    <div className="flex flex-col justify-center">
+      <div className="flex flex-col items-start pt-20 pb-10">
+        <div>📧</div>
+        <div className="sb-25-600 text-gray-700">
           본인 이메일이 맞다면 <br />
           아래 확인 버튼을 눌러주세요
-        </span>
+        </div>
       </div>
       <SelectEmail options={EMAIL} onChange={handleSelectChange} />
 

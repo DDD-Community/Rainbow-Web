@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import {
   emailState,
@@ -10,21 +10,21 @@ import {
   birthDateState,
   salaryState
 } from "@/src/recoil/user.atoms";
-import { Button } from "@/src/components/Common/Button";
+import { PrimaryButton } from "@/src/components/Common/Button";
+import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 
 export default function Checking() {
-  const [email, setEmail] = useRecoilState(emailState);
+  const email = useRecoilValue(emailState);
   const [nickname, setNickname] = useRecoilState(nicknameState);
   const [gender, setGender] = useRecoilState(genderState);
   const [birthDate, setBirthDate] = useRecoilState(birthDateState);
   const [salary, setSalary] = useRecoilState(salaryState);
 
   const data = [
-    { id: uuidv4(), label: "이메일:", value: email, setter: setEmail },
-    { id: uuidv4(), label: "닉네임:", value: nickname, setter: setNickname },
-    { id: uuidv4(), label: "성별:", value: gender, setter: setGender },
-    { id: uuidv4(), label: "생일:", value: birthDate, setter: setBirthDate },
-    { id: uuidv4(), label: "연봉:", value: salary, setter: setSalary }
+    { id: uuidv4(), label: "닉네임", value: nickname, setter: setNickname },
+    { id: uuidv4(), label: "성별", value: gender, setter: setGender },
+    { id: uuidv4(), label: "생일", value: birthDate, setter: setBirthDate },
+    { id: uuidv4(), label: "연봉", value: salary, setter: setSalary }
   ];
 
   const [submitted, setSubmitted] = useState(false);
@@ -58,18 +58,18 @@ export default function Checking() {
   };
 
   return (
-    <div className="flex flex-col justify-between h-screen gap-[26px] px-4 py-10">
-      <div className="flex flex-col pt-20">
-        <span>🤫</span>
-        <span className="sb-25-600 text-gray-700">
+    <div className="flex flex-col justify-center">
+      <div className="flex flex-col items-start pt-20 pb-10">
+        <div>👀</div>
+        <div className="sb-25-600 text-gray-700">
           입력한 정보를 <br />
           한번 더 확인해주세요
-        </span>
+        </div>
       </div>
       <div className="flex flex-col">
         {data.map(item => (
-          <span className="flex justify-between r-14-400" key={item.id}>
-            <span className="text-primary-default">{item.label}</span>
+          <div className="flex justify-between " key={item.id}>
+            <span className="text-primary-default r-14-400 p-2">{item.label}</span>
             {editingId === item.id ? (
               <input
                 type="text"
@@ -83,20 +83,30 @@ export default function Checking() {
               <span className="text-gray-700">{item.value}</span>
             )}
             {editingId === item.id ? (
-              <button type="button" className="text-gray-500" onClick={() => handleSave(item.id)}>
+              <button
+                type="button"
+                className="text-gray-500 p-2"
+                onClick={() => handleSave(item.id)}
+              >
                 저장
               </button>
             ) : (
-              <button type="button" className="text-gray-500" onClick={() => handleEdit(item.id)}>
+              <button
+                type="button"
+                className="text-gray-500 p-2"
+                onClick={() => handleEdit(item.id)}
+              >
                 수정
               </button>
             )}
-          </span>
+          </div>
         ))}
       </div>
-      <Button color="default" size="small" onClick={handleNext}>
-        확인
-      </Button>
+      <ButtonField>
+        <PrimaryButton color="default" size="small" onClick={handleNext}>
+          확인
+        </PrimaryButton>
+      </ButtonField>
       {submitted && <p>폼이 성공적으로 제출되었습니다!</p>}
     </div>
   );

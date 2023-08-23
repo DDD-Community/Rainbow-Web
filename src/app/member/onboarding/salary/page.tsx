@@ -50,13 +50,13 @@ export default function Salary() {
   const canActiveNextButton = Boolean(!selectedValue);
 
   return (
-    <div className="flex flex-col justify-between h-screen gap-[26px] px-4 py-10">
-      <div className="flex flex-col pt-20">
-        <span>🤫</span>
-        <span className="sb-25-600 text-gray-700">
+    <div className="flex flex-col justify-center">
+      <div className="flex flex-col items-start pt-20 pb-10">
+        <div>🤫</div>
+        <div className="sb-25-600 text-gray-700">
           쉿! 님의 <br />
           연봉은 참고만 할게요
-        </span>
+        </div>
       </div>
       <SelectSalary options={options} text="만원" onChange={handleSelectChange} />
 

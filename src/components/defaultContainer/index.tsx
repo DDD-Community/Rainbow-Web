@@ -6,10 +6,8 @@ interface DefaultContainerProps {
 
 function DefaultContainer({ children }: DefaultContainerProps) {
   return (
-    <div className="w-full h-full">
-      <div className="w-343 min-w-343 max-w-375 h-full my-0 mx-auto border-[5px] border-black">
-        {children}
-      </div>
+    <div className="w-343 min-w-343 max-w-375 min-h-screen my-0 mx-auto border-[2px] border-black">
+      {children}
     </div>
   );
 }

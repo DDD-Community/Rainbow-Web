@@ -28,24 +28,28 @@ export default function Gender() {
   const canActiveNextButton = Boolean(!gender);
 
   return (
-    <div className="flex flex-col justify-between h-screen gap-[26px] px-4 py-10">
-      <div className="flex flex-col pt-20">
-        <span>💖</span>
-        <span className="sb-25-600 text-gray-700">
+    <div className="flex flex-col justify-center">
+      <div className="flex flex-col items-start pt-20 pb-10">
+        <div>💖</div>
+        <div className="sb-25-600 text-gray-700">
           님의 <br />
           성별을 선택해주세요
-        </span>
+        </div>
       </div>
       <div className="flex justify-around">
         <button
           type="button"
-          onClick={() => handleGenderClick("female")}
-          className="cursor-pointer"
+          onClick={() => handleGenderClick("male")}
+          className="cursor-pointer sb-16-600"
         >
-          {gender === "female" ? <IconActiveFemale /> : <IconInActiveFemale />}
+          {gender === "male" ? <IconActiveMale /> : <IconInActiveMale />} 남성
         </button>
-        <button type="button" onClick={() => handleGenderClick("male")} className="cursor-pointer">
-          {gender === "male" ? <IconActiveMale /> : <IconInActiveMale />}
+        <button
+          type="button"
+          onClick={() => handleGenderClick("female")}
+          className="cursor-pointer sb-16-600"
+        >
+          {gender === "female" ? <IconActiveFemale /> : <IconInActiveFemale />} 여성
         </button>
       </div>
 

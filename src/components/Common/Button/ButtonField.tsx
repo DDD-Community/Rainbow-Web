@@ -7,7 +7,5 @@ interface ButtonFieldProps {
 }
 
 export function ButtonField({ className, children }: ButtonFieldProps) {
-  return (
-    <div className={twMerge("flex justify-end w-full gap-[20px] py-8", className)}>{children}</div>
-  );
+  return <div className={twMerge("flex justify-end w-full py-8", className)}>{children}</div>;
 }
