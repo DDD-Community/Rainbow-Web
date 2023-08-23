@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { useRouter } from "next/router";
 import { salaryState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
@@ -22,7 +21,6 @@ interface ApiResponse {
 }
 
 export default function Salary() {
-  const router = useRouter();
   const setSalaryRecoil = useSetRecoilState(salaryState);
   const [options, setOptions] = useState<SalaryOption[]>([]);
   const [selectedValue, setSelectedValue] = useState("");
@@ -48,7 +46,7 @@ export default function Salary() {
   };
   const handleNext = () => {
     setSalaryRecoil(selectedValue);
-    router.push("/member/onboarding/checking");
+    window.location.replace("/member/onboarding/checking");
   };
   const canActiveNextButton = Boolean(!selectedValue);
 
