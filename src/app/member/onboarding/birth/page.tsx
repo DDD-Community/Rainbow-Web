@@ -36,8 +36,14 @@ export default function Birth() {
   const canActiveNextButton = Boolean(!year || !month || !date);
 
   return (
-    <div className="flex flex-col items-center">
-      <h2>님의 생일을 입력해주세요</h2>
+    <div className="flex flex-col justify-between h-screen gap-[26px] px-4 py-10">
+      <div className="flex flex-col pt-20">
+        <span>🥳</span>
+        <span className="sb-25-600 text-gray-700">
+          님의 <br />
+          생일을 입력해주세요
+        </span>
+      </div>
       <div className="flex gap-4">
         {["년", "월", "일"].map(label => (
           <TextInput key={label}>

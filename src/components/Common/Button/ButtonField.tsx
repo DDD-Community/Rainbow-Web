@@ -1,9 +1,13 @@
 import React, { ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface ButtonFieldProps {
   children: ReactNode;
+  className?: string;
 }
 
-export function ButtonField({ children }: ButtonFieldProps) {
-  return <div className="flex flex-col items-end h-full w-full g-[10px]">{children}</div>;
+export function ButtonField({ className, children }: ButtonFieldProps) {
+  return (
+    <div className={twMerge("flex justify-end w-full gap-[20px] py-8", className)}>{children}</div>
+  );
 }

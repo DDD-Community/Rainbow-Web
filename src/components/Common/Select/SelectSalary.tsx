@@ -10,11 +10,11 @@ interface Option {
 
 interface SelectProps {
   options: Option[];
-  text: string;
+  text?: string;
   onChange: (selectedValue: string) => void;
 }
 
-export function Select({ options, text, onChange }: SelectProps) {
+export function SelectSalary({ options, text, onChange }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string | undefined>(options[0]?.value);
   const [selectedName, setSelectedName] = useState<string | undefined>(options[0]?.name);
@@ -56,8 +56,12 @@ export function Select({ options, text, onChange }: SelectProps) {
           )}
           onClick={handleToggle}
         >
-          <div className={twMerge("flex justify-between")}>
-            {selectedName && <div className={twMerge("flex flex-start")}>{selectedName}</div>}
+          <div className={twMerge("flex justify-between", "r-16-400")}>
+            {selectedName ? (
+              <div className={twMerge("flex flex-start")}>{selectedName}</div>
+            ) : (
+              <div className={twMerge("text-gray-500")}>해당하는 범위를 선택해주세요</div>
+            )}
             {text && <div className={twMerge("text-right text-primary-default")}>{text}</div>}
           </div>
         </button>

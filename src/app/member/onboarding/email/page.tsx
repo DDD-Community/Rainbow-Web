@@ -4,38 +4,34 @@ import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { emailState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
-import { TextInput } from "@/src/components/Common/Input";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
-import { Select } from "@/src/components/Common/Select";
+import { SelectEmail } from "@/src/components/Common/Select/SelectEmail";
 import { EMAIL } from "@/src/constant/select.constant";
 
 export default function Email() {
-  const [input, setInput] = useState("");
-  const [seleted, setSeleted] = useState("");
+  const [email, setEmail] = useState("");
   const setEmailRecoil = useSetRecoilState(emailState);
 
   const handleNext = () => {
-    setEmailRecoil(combinedEmail);
+    setEmailRecoil(email);
     window.location.replace("/member/onboarding/nickname");
   };
-  const handleSelectChange = (selectedValue: string) => {
-    setSeleted(selectedValue);
+  const handleSelectChange = (combinedValue: string) => {
+    setEmail(combinedValue);
   };
-  const combinedEmail = input + seleted;
 
-  const canActiveNextButton = Boolean(!input || !seleted);
+  const canActiveNextButton = Boolean(!email);
 
   return (
-    <div>
-      <span className="sb-25-600 text-gray-700">
-        본인 이메일이 맞다면 아래 확인 버튼을 눌러주세요
-      </span>
-      <TextInput>
-        <TextInput.Border>
-          <TextInput.Content value={input} onChange={e => setInput(e.target.value)} />
-          <Select options={EMAIL} onChange={handleSelectChange} />
-        </TextInput.Border>
-      </TextInput>
+    <div className="flex flex-col justify-between h-screen gap-[26px] px-4 py-10">
+      <div className="flex flex-col pt-20">
+        <span>📧</span>
+        <span className="sb-25-600 text-gray-700">
+          본인 이메일이 맞다면 <br />
+          아래 확인 버튼을 눌러주세요
+        </span>
+      </div>
+      <SelectEmail options={EMAIL} onChange={handleSelectChange} />
 
       <ButtonField>
         <PrimaryButton

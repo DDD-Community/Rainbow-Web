@@ -28,9 +28,15 @@ export default function Gender() {
   const canActiveNextButton = Boolean(!gender);
 
   return (
-    <div>
-      <h2>님의 성별을 선택해주세요</h2>
-      <div className="flex gap-4">
+    <div className="flex flex-col justify-between h-screen gap-[26px] px-4 py-10">
+      <div className="flex flex-col pt-20">
+        <span>💖</span>
+        <span className="sb-25-600 text-gray-700">
+          님의 <br />
+          성별을 선택해주세요
+        </span>
+      </div>
+      <div className="flex justify-around">
         <button
           type="button"
           onClick={() => handleGenderClick("female")}

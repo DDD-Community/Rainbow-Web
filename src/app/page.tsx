@@ -5,7 +5,7 @@ import Onboarding from "./member/onboarding/page";
 
 function Home() {
   return (
-    <div className="flex-center align-items justify-between h-screen">
+    <div className="flex justify-center items-center h-screen">
       <Onboarding />
     </div>
   );

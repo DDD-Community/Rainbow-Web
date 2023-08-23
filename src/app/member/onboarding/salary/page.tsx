@@ -2,16 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { twMerge } from "tailwind-merge";
 import { salaryState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
-import { Select } from "@/src/components/Common/Select";
 import { authInstance } from "@/src/api/auth/client";
-
-interface PropsType {
-  nickname: string;
-}
+import { SelectSalary } from "@/src/components/Common/Select/SelectSalary";
 
 interface SalaryOption {
   value: string;
@@ -24,10 +19,10 @@ interface ApiResponse {
   salaryId: number;
 }
 
-export default function Salary(nickname: PropsType) {
+export default function Salary() {
   const setSalaryRecoil = useSetRecoilState(salaryState);
   const [options, setOptions] = useState<SalaryOption[]>([]);
-  const [selectedValue, setSelectedValue] = useState(0);
+  const [selectedValue, setSelectedValue] = useState("");
 
   useEffect(() => {
     // 서버에서 데이터를 받아올 API 요청 예시 (실제로는 서버에서 데이터를 가져와야 함)
@@ -45,20 +40,25 @@ export default function Salary(nickname: PropsType) {
     });
   }, []);
 
-  const handleSelectChange = (event: any) => {
-    setSelectedValue(event.target.value);
+  const handleSelectChange = (event: string) => {
+    setSelectedValue(event);
   };
   const handleNext = () => {
     setSalaryRecoil(selectedValue);
     window.location.replace("/member/onboarding/checking");
   };
   const canActiveNextButton = Boolean(!selectedValue);
-  const text = `쉿! ${nickname}님의 연봉은 저희만 볼게요`;
 
   return (
-    <div className={twMerge("flex flex-col justify-between")}>
-      <div className="text-center sb-25-600">{text}</div>
-      <Select options={options} text="만원" onChange={handleSelectChange} />
+    <div className="flex flex-col justify-between h-screen gap-[26px] px-4 py-10">
+      <div className="flex flex-col pt-20">
+        <span>🤫</span>
+        <span className="sb-25-600 text-gray-700">
+          쉿! 님의 <br />
+          연봉은 참고만 할게요
+        </span>
+      </div>
+      <SelectSalary options={options} text="만원" onChange={handleSelectChange} />
 
       <ButtonField>
         <PrimaryButton

@@ -19,7 +19,7 @@ const colors: Record<ButtonColor, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  large: "w-[104px]",
+  large: "w-full",
   small: "w-[82px]"
 };
 

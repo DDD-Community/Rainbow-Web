@@ -26,7 +26,7 @@ export function TextInputBorder({
         className={tw(
           "flex items-center gap-6 p-2",
           "w-full rounded-[6px] border-[1px] r-16-400",
-          "focus-within:border-primary-default",
+          "focus-within:border-primary-default focus-within:border-[2px]",
           errorCss,
           disabledCss,
 

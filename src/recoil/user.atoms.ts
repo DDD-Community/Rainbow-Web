@@ -25,7 +25,7 @@ export const birthDateState = atom<string>({
   default: ""
 });
 
-export const salaryState = atom<number>({
+export const salaryState = atom<string>({
   key: "salaryState",
-  default: 0
+  default: ""
 });
