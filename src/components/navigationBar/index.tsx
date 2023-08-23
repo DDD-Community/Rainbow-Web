@@ -1,20 +1,20 @@
 import Image from "next/image";
 import { IconXMark, IconBack } from "public/assets/images/icons";
 
-interface HeaderProps {
+interface NavigationBarProps {
   title: string;
   isBackButton?: boolean;
   isCloseButton?: boolean;
   onClickBackButton?: () => void;
   onClickCloseButton?: () => void;
 }
-export default function Header({
+export default function NavigationBar({
   title = "",
   isBackButton = false,
   isCloseButton = false,
   onClickBackButton = () => {},
   onClickCloseButton = () => {}
-}: HeaderProps) {
+}: NavigationBarProps) {
   return (
     <header className="flex justify-between items-center">
       <BackButton

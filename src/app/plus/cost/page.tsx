@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Header from "../header";
+import NavigationBar from "src/components/navigationBar";
 import Section from "./section";
 import Footer from "./footer";
 
@@ -23,7 +23,7 @@ export default function PlusCostPage() {
 
   return (
     <div>
-      <Header title="지출 금액" isBackButton onClickBackButton={() => {}} />
+      <NavigationBar title="지출 금액" isBackButton onClickBackButton={() => {}} />
 
       <Section
         price={price}
