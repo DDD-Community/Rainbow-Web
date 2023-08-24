@@ -1,11 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
 import { birthDateState } from "@/src/recoil/user.atoms";
+import {
+  loadRecoilStateFromSessionStorage,
+  saveRecoilStateToSessionStorage
+} from "@/src/recoil/recoilSessionstorage";
 
 export default function Birth() {
   const [year, setYear] = useState("");
@@ -13,10 +17,20 @@ export default function Birth() {
   const [date, setDate] = useState("");
   const setBirthRecoil = useSetRecoilState(birthDateState);
 
-  const birthDate = `${year}-${month}-${date}`;
+  useEffect(() => {
+    const savedBirthDate = loadRecoilStateFromSessionStorage("birthDateState", "") as string;
+    if (savedBirthDate) {
+      const [savedYear, savedMonth, savedDate] = savedBirthDate.split("-");
+      setYear(savedYear);
+      setMonth(savedMonth);
+      setDate(savedDate);
+    }
+  }, []);
 
   const handleNext = () => {
+    const birthDate = `${year}-${month}-${date}`;
     setBirthRecoil(birthDate);
+    saveRecoilStateToSessionStorage("birthDateState", birthDate);
     window.location.replace("/member/onboarding/salary");
   };
 
@@ -33,7 +47,7 @@ export default function Birth() {
     else if (label === "일") setDate(value);
   };
 
-  const canActiveNextButton = Boolean(!year || !month || !date);
+  const canActivateNextButton = Boolean(!year || !month || !date);
 
   return (
     <div className="flex flex-col justify-center">
@@ -62,7 +76,7 @@ export default function Birth() {
           <PrimaryButton
             color="default"
             size="small"
-            disabled={canActiveNextButton}
+            disabled={canActivateNextButton}
             onClick={handleNext}
           >
             확인

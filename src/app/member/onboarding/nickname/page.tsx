@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { nicknameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
+import { saveRecoilStateToSessionStorage } from "@/src/recoil/recoilSessionstorage";
 
 export default function Nickname() {
-  const [nickname, setNickname] = useState("");
+  const [nickname, setNickname] = useRecoilState(nicknameState);
   const [isNicknameDuplicated, setIsNicknameDuplicated] = useState(false);
-  const setNicknameRecoil = useSetRecoilState(nicknameState);
 
   useEffect(() => {
     async function checkNicknameDuplication() {
@@ -31,7 +31,7 @@ export default function Nickname() {
   }, [nickname]);
 
   const handleNext = () => {
-    setNicknameRecoil(nickname);
+    saveRecoilStateToSessionStorage("nicknameState", nickname);
     window.location.replace("/member/onboarding/gender");
   };
 

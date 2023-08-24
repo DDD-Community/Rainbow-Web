@@ -1,19 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { emailState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { SelectEmail } from "@/src/components/Common/Select/SelectEmail";
 import { EMAIL } from "@/src/constant/select.constant";
+import { saveRecoilStateToSessionStorage } from "@/src/recoil/recoilSessionstorage";
 
 export default function Email() {
-  const [email, setEmail] = useState("");
-  const setEmailRecoil = useSetRecoilState(emailState);
+  const [email, setEmail] = useRecoilState(emailState);
 
   const handleNext = () => {
-    setEmailRecoil(email);
+    saveRecoilStateToSessionStorage("emailState", email);
     window.location.replace("/member/onboarding/nickname");
   };
   const handleSelectChange = (combinedValue: string) => {

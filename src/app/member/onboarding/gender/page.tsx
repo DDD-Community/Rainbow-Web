@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { genderState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
@@ -11,17 +10,17 @@ import {
   IconInActiveFemale,
   IconInActiveMale
 } from "@/public/assets/images/icons/gender";
+import { saveRecoilStateToSessionStorage } from "@/src/recoil/recoilSessionstorage";
 
 export default function Gender() {
-  const [gender, setGender] = useState<string>("");
-  const setGenderRecoil = useSetRecoilState(genderState);
+  const [gender, setGender] = useRecoilState(genderState);
 
   const handleGenderClick = (selectedGender: string) => {
     setGender(selectedGender);
   };
 
   const handleNext = () => {
-    setGenderRecoil(gender);
+    saveRecoilStateToSessionStorage("genderState", gender);
     window.location.replace("/member/onboarding/birth");
   };
 

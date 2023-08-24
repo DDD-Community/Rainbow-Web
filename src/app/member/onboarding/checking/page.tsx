@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -13,6 +13,7 @@ import {
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { Information } from "@/src/components/Information/Information";
+import { loadRecoilStateFromSessionStorage } from "@/src/recoil/recoilSessionstorage";
 
 export default function Checking() {
   const email = useRecoilValue(emailState);
@@ -55,8 +56,21 @@ export default function Checking() {
     };
     console.log("제출 폼 데이터:", formData);
     setSubmitted(true);
-    // window.location.replace("/member/onboarding/contract");
+    window.location.replace("/member/onboarding/contract");
   };
+
+  useEffect(() => {
+    const savedNickname = loadRecoilStateFromSessionStorage("nicknameState", "");
+    const savedGender = loadRecoilStateFromSessionStorage("genderState", "");
+    const savedBirthDate = loadRecoilStateFromSessionStorage("birthDateState", "");
+    const savedSalary = loadRecoilStateFromSessionStorage("salaryState", "");
+
+    setNickname(savedNickname);
+    setGender(savedGender);
+    setBirthDate(savedBirthDate);
+    setSalary(savedSalary);
+    setSubmitted(false);
+  }, []);
 
   return (
     <div className="flex flex-col justify-center">

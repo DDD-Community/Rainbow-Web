@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { salaryState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { authInstance } from "@/src/api/auth/client";
 import { SelectSalary } from "@/src/components/Common/Select/SelectSalary";
 import { Information } from "@/src/components/Information/Information";
+import { saveRecoilStateToSessionStorage } from "@/src/recoil/recoilSessionstorage";
 
 interface SalaryOption {
   value: string;
@@ -21,9 +22,8 @@ interface ApiResponse {
 }
 
 export default function Salary() {
-  const setSalaryRecoil = useSetRecoilState(salaryState);
   const [options, setOptions] = useState<SalaryOption[]>([]);
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useRecoilState(salaryState);
 
   useEffect(() => {
     // 서버에서 데이터를 받아올 API 요청 예시 (실제로는 서버에서 데이터를 가져와야 함)
@@ -45,7 +45,7 @@ export default function Salary() {
     setSelectedValue(event);
   };
   const handleNext = () => {
-    setSalaryRecoil(selectedValue);
+    saveRecoilStateToSessionStorage("salaryState", selectedValue);
     window.location.replace("/member/onboarding/checking");
   };
   const canActiveNextButton = Boolean(!selectedValue);

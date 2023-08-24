@@ -1,31 +1,32 @@
 import { atom } from "recoil";
+import { loadRecoilStateFromSessionStorage } from "./recoilSessionstorage";
 
 export const contractAgreedState = atom<boolean>({
   key: "contractAgreedState",
-  default: false
+  default: loadRecoilStateFromSessionStorage<boolean>("contractAgreedState", false)
 });
 
 export const emailState = atom<string>({
   key: "emailState",
-  default: ""
+  default: loadRecoilStateFromSessionStorage<string>("emailState", "")
 });
 
 export const nicknameState = atom<string>({
   key: "nicknameState",
-  default: ""
+  default: loadRecoilStateFromSessionStorage<string>("nicknameState", "")
 });
 
 export const genderState = atom<string>({
   key: "genderState",
-  default: ""
+  default: loadRecoilStateFromSessionStorage<string>("genderState", "")
 });
 
 export const birthDateState = atom<string>({
   key: "birthDateState",
-  default: ""
+  default: loadRecoilStateFromSessionStorage<string>("birthDateState", "")
 });
 
 export const salaryState = atom<string>({
   key: "salaryState",
-  default: ""
+  default: loadRecoilStateFromSessionStorage<string>("salaryState", "")
 });
