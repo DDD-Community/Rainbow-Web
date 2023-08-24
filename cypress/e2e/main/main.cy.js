@@ -12,6 +12,9 @@
 //   });
 // });
 describe("Client-Side Functionality", () => {
+  beforeEach(() => {
+    cy.setCustomWindowProperties(); // 커스텀 커맨드 호출
+  });
   it("should perform some client-side action on /kakao page", () => {
     // 클라이언트 코드를 테스트하는 페이지로 이동
     cy.visit("/member/kakao", {
