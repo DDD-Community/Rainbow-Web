@@ -22,8 +22,8 @@ export function SelectEmail({ options, onChange }: SelectProps) {
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
-  const handleInput = (e: any) => {
-    setInput(e.target.value);
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(event.target.value);
   };
 
   const handleOptionSelect = (value: string) => {

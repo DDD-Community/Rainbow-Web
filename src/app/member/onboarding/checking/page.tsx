@@ -29,19 +29,19 @@ export default function Checking() {
   ];
 
   const [submitted, setSubmitted] = useState(false);
-  const [editingId, setEditingId] = useState(null); // State to track which field is being edited
+  const [editingId, setEditingId] = useState(null);
 
   const handleEdit = (id: any) => {
-    setEditingId(id); // Set the ID of the field being edited
+    setEditingId(id);
   };
 
   const handleSave = (id: any) => {
     const editedField = data.find(item => item.id === id);
 
     if (editedField) {
-      const newValue = editedField.value; // Store the new value before updating
-      editedField.setter(newValue); // Update the Recoil state with the new value
-      setEditingId(null); // Clear the editing state
+      const newValue = editedField.value;
+      editedField.setter(newValue);
+      setEditingId(null);
     }
   };
 
@@ -55,7 +55,7 @@ export default function Checking() {
     };
     console.log("제출 폼 데이터:", formData);
     setSubmitted(true);
-    window.location.replace("/member/onboarding/contract");
+    // window.location.replace("/member/onboarding/contract");
   };
 
   return (

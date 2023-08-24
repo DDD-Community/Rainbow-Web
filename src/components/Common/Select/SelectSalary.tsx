@@ -16,7 +16,6 @@ interface SelectProps {
 
 export function SelectSalary({ options, text, onChange }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<string | undefined>(options[0]?.value);
   const [selectedName, setSelectedName] = useState<string | undefined>(options[0]?.name);
   const selectRef = useRef<HTMLDivElement | null>(null);
 
@@ -24,10 +23,9 @@ export function SelectSalary({ options, text, onChange }: SelectProps) {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionSelect = (value: string, name: string) => {
-    setSelectedValue(value);
+  const handleOptionSelect = (name: string) => {
     setSelectedName(name);
-    onChange(value);
+    onChange(name);
     setIsOpen(false);
   };
 
@@ -74,9 +72,9 @@ export function SelectSalary({ options, text, onChange }: SelectProps) {
                 type="button"
                 key={option.value}
                 className={`w-full flex flex-col items-start px-5 py-2.5 r-16-400 rounded-[10px] text-gray-700 hover:bg-gray-50 ${
-                  option.value === selectedValue ? "bg-gray-50 " : ""
+                  option.name === selectedName ? "bg-gray-50 " : ""
                 }`}
-                onClick={() => handleOptionSelect(option.value, option.name)}
+                onClick={() => handleOptionSelect(option.name)}
               >
                 {option.name}
               </button>
