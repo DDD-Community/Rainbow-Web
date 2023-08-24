@@ -31,6 +31,7 @@ export default function PlusCostPage() {
         onChangePrice={e => {
           handlePrice(e.target.value);
         }}
+        onClickClear={() => setPrice("")}
         onClickAddPrice={handleAddPrice}
       />
 
