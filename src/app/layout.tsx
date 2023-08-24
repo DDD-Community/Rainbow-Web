@@ -15,12 +15,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <RecoilRoot>
       <html lang="en">
         <body className={inter.className}>
-          <div className="flex flex-col justify-center items-center w-[375px] shadow-md">
-            <DefaultContainer>
-              <ReactQueryProvider>{children}</ReactQueryProvider>
-            </DefaultContainer>
-            <ToastContainer position="bottom-center" hideProgressBar />
-          </div>
+          <DefaultContainer>
+            <ReactQueryProvider>{children}</ReactQueryProvider>
+          </DefaultContainer>
+          <ToastContainer position="bottom-center" hideProgressBar />
         </body>
       </html>
     </RecoilRoot>
