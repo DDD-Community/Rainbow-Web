@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { twMerge } from "@/src/types/utils/tailwind.util";
 import { IconPlusSmall } from "@/public/assets/images/icons";
 import {
   IconHandHeart,
@@ -19,7 +20,7 @@ import {
 const TEXT_PUBLIC_SCOPE_OPEN = "전체 공개";
 const TEXT_PUBLIC_SCOPE_CLOSE = "비공개";
 
-type CategoryType =
+export type CategoryType =
   | "book"
   | "bus"
   | "clothes"
@@ -132,15 +133,27 @@ const convertBgColorName = (categoryType: CategoryType): string => {
   }
 };
 
-export function CategoryImage({ categoryType = "health" }: { categoryType: CategoryType }) {
+export function CategoryImage({
+  categoryType = "health",
+  width = "w-10",
+  height = "h-10"
+}: {
+  categoryType: CategoryType;
+  width?: string;
+  height?: string;
+}) {
   return (
     <div
-      className={`shrink-0 flex justify-center w-10 h-10 rounded-[10px] border-black/[0.03] 
-      ${convertBgColorName(categoryType)}`}
+      className={twMerge(
+        width,
+        height,
+        "shrink-0 flex justify-center rounded-[10px] border-black/[0.03]",
+        convertBgColorName(categoryType)
+      )}
     >
       <Image
         src={convertBgImage(categoryType)}
-        className="cursor-pointer"
+        className="w-full h-full p-[12.5px] cursor-pointer"
         alt={`${categoryType} icon`}
       />
     </div>
