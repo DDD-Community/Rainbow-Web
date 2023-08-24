@@ -3,11 +3,13 @@
 "use client";
 
 import { useState, useRef } from "react";
-import "@/app/globals.css";
 
 const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+interface calendarProps {
+  onDateSelect: any;
+}
 
-function Calendar() {
+function Calendar({ onDateSelect }: calendarProps) {
   const currentDate = new Date();
   const koreaDateTime = new Intl.DateTimeFormat("ko-KR", {
     timeZone: "Asia/Seoul"
@@ -79,6 +81,8 @@ function Calendar() {
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
   const handleDateClick = (dayNumber: any) => {
+    const clickedDate = `${currentYear}-${currentMonth + 1}-${dayNumber}`;
+    onDateSelect(clickedDate);
     console.log(`Clicked on ${currentYear}-${currentMonth + 1}-${dayNumber}`);
   };
   return (
