@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { salaryState } from "@/src/recoil/user.atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { nicknameState, salaryState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { authInstance } from "@/src/api/auth/client";
@@ -24,6 +24,7 @@ interface ApiResponse {
 export default function Salary() {
   const [options, setOptions] = useState<SalaryOption[]>([]);
   const [selectedValue, setSelectedValue] = useRecoilState(salaryState);
+  const nicknameValue = useRecoilValue(nicknameState);
 
   useEffect(() => {
     // 서버에서 데이터를 받아올 API 요청 예시 (실제로는 서버에서 데이터를 가져와야 함)
@@ -55,7 +56,7 @@ export default function Salary() {
       <div className="flex flex-col items-start pt-20 pb-10">
         <div>🤫</div>
         <div className="sb-25-600 text-gray-700">
-          쉿! 님의 <br />
+          쉿! {nicknameValue}님의 <br />
           연봉은 참고만 할게요
         </div>
       </div>

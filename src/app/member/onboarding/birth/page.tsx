@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
-import { birthDateState } from "@/src/recoil/user.atoms";
+import { birthDateState, nicknameState } from "@/src/recoil/user.atoms";
 import {
   loadRecoilStateFromSessionStorage,
   saveRecoilStateToSessionStorage
@@ -16,6 +16,7 @@ export default function Birth() {
   const [month, setMonth] = useState("");
   const [date, setDate] = useState("");
   const setBirthRecoil = useSetRecoilState(birthDateState);
+  const nicknameValue = useRecoilValue(nicknameState);
 
   useEffect(() => {
     const savedBirthDate = loadRecoilStateFromSessionStorage("birthDateState", "") as string;
@@ -54,7 +55,7 @@ export default function Birth() {
       <div className="flex flex-col items-start pt-20 pb-10">
         <div>🥳</div>
         <div className="sb-25-600 text-gray-700">
-          님의 <br />
+          {nicknameValue}님의 <br />
           생일을 입력해주세요
         </div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRecoilState } from "recoil";
-import { genderState } from "@/src/recoil/user.atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { genderState, nicknameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import {
@@ -14,6 +14,7 @@ import { saveRecoilStateToSessionStorage } from "@/src/recoil/recoilSessionstora
 
 export default function Gender() {
   const [gender, setGender] = useRecoilState(genderState);
+  const nicknameValue = useRecoilValue(nicknameState);
 
   const handleGenderClick = (selectedGender: string) => {
     setGender(selectedGender);
@@ -31,7 +32,7 @@ export default function Gender() {
       <div className="flex flex-col items-start pt-20 pb-10">
         <div>💖</div>
         <div className="sb-25-600 text-gray-700">
-          님의 <br />
+          {nicknameValue}님의 <br />
           성별을 선택해주세요
         </div>
       </div>
