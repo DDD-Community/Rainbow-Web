@@ -46,7 +46,7 @@ export default function Salary() {
   };
   const handleNext = () => {
     saveRecoilStateToSessionStorage("salaryState", selectedValue);
-    window.location.replace("/member/onboarding/checking");
+    window?.location.replace("/member/onboarding/checking");
   };
   const canActiveNextButton = Boolean(!selectedValue);
 
