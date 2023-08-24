@@ -16,7 +16,7 @@ export default function PlusCostPage() {
   }, []);
 
   return (
-    <div>
+    <main className="py-3.5 px-4">
       <SearchBar value="" placeholder="카테고리 검색" onChange={() => {}} />
 
       <section>
@@ -24,7 +24,7 @@ export default function PlusCostPage() {
 
         {categories.length ? <CategoryList categories={categories} /> : <NoCategories />}
       </section>
-    </div>
+    </main>
   );
 }
 

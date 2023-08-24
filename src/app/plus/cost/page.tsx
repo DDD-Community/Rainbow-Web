@@ -22,7 +22,7 @@ export default function PlusCostPage() {
   };
 
   return (
-    <div>
+    <main className="py-3.5 px-4">
       <NavigationBar title="지출 금액" isBackButton onClickBackButton={() => {}} />
 
       <Section
@@ -35,6 +35,6 @@ export default function PlusCostPage() {
       />
 
       <Footer isActive={Number(price) > 0} onClick={() => {}} />
-    </div>
+    </main>
   );
 }
