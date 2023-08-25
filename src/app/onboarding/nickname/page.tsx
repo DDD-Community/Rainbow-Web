@@ -7,6 +7,7 @@ import { nicknameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
+import { authInstance } from "@/src/api/auth/client";
 
 export default function Nickname() {
   const [nickname, setNickname] = useRecoilState(nicknameState);
@@ -16,10 +17,10 @@ export default function Nickname() {
     async function checkNicknameDuplication() {
       if (nickname) {
         try {
-          const response = await fetch(
+          const response = authInstance.get(
             `/members/nickname/check?nickname=${encodeURIComponent(nickname)}`
           );
-          const data = await response.json();
+          const data = await response;
           setIsNicknameDuplicated(data.data.isDuplicated);
         } catch (error) {
           console.error("Error checking nickname duplication:", error);
