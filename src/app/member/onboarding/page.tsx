@@ -16,8 +16,7 @@ export default function Onboarding() {
       <LottieAnimation className="p-5" animation={OnboardingMotion} />
 
       <ButtonField>
-        {/* Link 컴포넌트를 사용하여 클라이언트 사이드 라우팅 처리 */}
-        <Link href="/member/onboarding/email" className="w-full">
+        <Link href="/member/onboarding/email" className="w-full flex justify-end">
           <PrimaryButton color="default" size="large">
             시작하기
           </PrimaryButton>

@@ -33,7 +33,7 @@ export default function Email() {
       <SelectEmail options={EMAIL} onChange={handleSelectChange} />
 
       <ButtonField>
-        <Link href="/member/onboarding/nickname" className="w-full">
+        <Link href="/member/onboarding/nickname" className="w-full flex justify-end">
           <PrimaryButton
             color="default"
             size="small"

@@ -68,7 +68,7 @@ export default function Birth() {
       </div>
       <div>
         <ButtonField>
-          <Link href="/member/onboarding/salary" className="w-full">
+          <Link href="/member/onboarding/salary" className="w-full flex justify-end">
             <PrimaryButton
               color="default"
               size="small"

@@ -60,7 +60,7 @@ export default function Salary() {
       <Information className="py-3">비슷한 연봉을 받는 또래 친구들을 찾아줄게요</Information>
 
       <ButtonField>
-        <Link href="/member/onboarding/checking" className="w-full">
+        <Link href="/member/onboarding/checking" className="w-full flex justify-end">
           <PrimaryButton color="default" size="small" disabled={canActiveNextButton}>
             확인
           </PrimaryButton>
