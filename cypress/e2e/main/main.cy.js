@@ -15,13 +15,13 @@ describe("Client-Side Functionality", () => {
   beforeEach(() => {
     cy.setCustomWindowProperties(); // 커스텀 커맨드 호출
   });
-  it("should perform some client-side action on /member page", () => {
+  it("should perform some client-side action on /member/kakao page", () => {
     // 클라이언트 코드를 테스트하는 페이지로 이동
-    cy.visit("/member", {
+    cy.visit("/member/kakao", {
       onBeforeLoad(win) {
         // window.location 객체를 모의(mock)하여 필요한 값을 할당
         cy.stub(win, "location").value({
-          pathname: "/member"
+          pathname: "/member/kakao"
           // 다른 필요한 속성들...
         });
       }

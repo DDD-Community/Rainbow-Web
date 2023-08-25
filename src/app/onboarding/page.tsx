@@ -16,7 +16,7 @@ export default function Onboarding() {
       <LottieAnimation className="p-5" animation={OnboardingMotion} />
 
       <ButtonField>
-        <Link href="/member/onboarding/email" className="w-full flex justify-end">
+        <Link href="/onboarding/email" className="w-full flex justify-end">
           <PrimaryButton color="default" size="large">
             시작하기
           </PrimaryButton>
