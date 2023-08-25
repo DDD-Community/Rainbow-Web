@@ -6,11 +6,13 @@ import { useState, useRef } from "react";
 
 const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 interface calendarProps {
-  onDateSelect: any;
+  onDateSelect: (date: string) => void;
+  onDaySelect: any;
 }
 
-function Calendar({ onDateSelect }: calendarProps) {
+function Calendar({ onDateSelect, onDaySelect }: calendarProps) {
   const currentDate = new Date();
+
   const koreaDateTime = new Intl.DateTimeFormat("ko-KR", {
     timeZone: "Asia/Seoul"
   }).format(currentDate);
@@ -81,8 +83,14 @@ function Calendar({ onDateSelect }: calendarProps) {
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
   const handleDateClick = (dayNumber: any) => {
-    const clickedDate = `${currentYear}-${currentMonth + 1}-${dayNumber}`;
-    onDateSelect(clickedDate);
+    const clickedDate = new Date(currentYear, currentMonth, dayNumber);
+    const formattedDate = `${clickedDate.getFullYear()}-${(clickedDate.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}-${clickedDate.getDate().toString().padStart(2, "0")}`;
+
+    const dayOfWeek = daysOfWeek[clickedDate.getDay()];
+    onDateSelect(formattedDate);
+    onDaySelect(dayOfWeek);
     console.log(`Clicked on ${currentYear}-${currentMonth + 1}-${dayNumber}`);
   };
   return (
