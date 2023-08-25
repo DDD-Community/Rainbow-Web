@@ -1,20 +1,20 @@
 "use client";
 
 import { useRecoilState } from "recoil";
+import Link from "next/link"; // Link 컴포넌트 임포트
 import { emailState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { SelectEmail } from "@/src/components/Common/Select/SelectEmail";
 import { EMAIL } from "@/src/constant/select.constant";
-import { saveRecoilStateToSessionStorage } from "@/src/recoil/recoilSessionstorage";
 
 export default function Email() {
   const [email, setEmail] = useRecoilState(emailState);
 
   const handleNext = () => {
-    saveRecoilStateToSessionStorage("emailState", email);
-    window.location.replace("/member/onboarding/nickname");
+    setEmail(email);
   };
+
   const handleSelectChange = (combinedValue: string) => {
     setEmail(combinedValue);
   };
@@ -33,14 +33,16 @@ export default function Email() {
       <SelectEmail options={EMAIL} onChange={handleSelectChange} />
 
       <ButtonField>
-        <PrimaryButton
-          color="default"
-          size="small"
-          disabled={canActiveNextButton}
-          onClick={handleNext}
-        >
-          확인
-        </PrimaryButton>
+        <Link href="/member/onboarding/nickname">
+          <PrimaryButton
+            color="default"
+            size="small"
+            disabled={canActiveNextButton}
+            onClick={handleNext}
+          >
+            확인
+          </PrimaryButton>
+        </Link>
       </ButtonField>
     </div>
   );

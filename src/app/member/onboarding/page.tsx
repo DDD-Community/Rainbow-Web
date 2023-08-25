@@ -1,15 +1,11 @@
-"use client";
-
 import React from "react";
+import Link from "next/link";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import LottieAnimation from "@/src/hooks/LottieAnimation";
 import { OnboardingMotion } from "@/public/assets/motions";
 
 export default function Onboarding() {
-  const handleClickNextButton = () => {
-    window.location.replace("/member/onboarding/email");
-  };
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col items-center pt-20">
@@ -20,9 +16,12 @@ export default function Onboarding() {
       <LottieAnimation className="p-5" animation={OnboardingMotion} />
 
       <ButtonField>
-        <PrimaryButton color="default" size="large" onClick={handleClickNextButton}>
-          시작하기
-        </PrimaryButton>
+        {/* Link 컴포넌트를 사용하여 클라이언트 사이드 라우팅 처리 */}
+        <Link href="/member/onboarding/email" className="w-full">
+          <PrimaryButton color="default" size="large">
+            시작하기
+          </PrimaryButton>
+        </Link>
       </ButtonField>
     </div>
   );

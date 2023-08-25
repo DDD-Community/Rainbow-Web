@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import Link from "next/link";
 import { nicknameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
-import { saveRecoilStateToSessionStorage } from "@/src/recoil/recoilSessionstorage";
 
 export default function Nickname() {
   const [nickname, setNickname] = useRecoilState(nicknameState);
@@ -31,8 +31,7 @@ export default function Nickname() {
   }, [nickname]);
 
   const handleNext = () => {
-    saveRecoilStateToSessionStorage("nicknameState", nickname);
-    window.location.replace("/member/onboarding/gender");
+    setNickname(nickname);
   };
 
   const canActiveNextButton = Boolean(!nickname || isNicknameDuplicated);
@@ -63,14 +62,16 @@ export default function Nickname() {
         <div className="text-red-500 mt-2">이미 사용 중인 닉네임입니다.</div>
       )}
       <ButtonField>
-        <PrimaryButton
-          color="default"
-          size="small"
-          disabled={canActiveNextButton}
-          onClick={handleNext}
-        >
-          확인
-        </PrimaryButton>
+        <Link href="/member/onboarding/gender">
+          <PrimaryButton
+            color="default"
+            size="small"
+            disabled={canActiveNextButton}
+            onClick={handleNext}
+          >
+            확인
+          </PrimaryButton>
+        </Link>
       </ButtonField>
     </div>
   );

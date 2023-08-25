@@ -1,6 +1,7 @@
 "use client";
 
 import { useRecoilState, useRecoilValue } from "recoil";
+import Link from "next/link";
 import { genderState, nicknameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
@@ -10,7 +11,6 @@ import {
   IconInActiveFemale,
   IconInActiveMale
 } from "@/public/assets/images/icons/gender";
-import { saveRecoilStateToSessionStorage } from "@/src/recoil/recoilSessionstorage";
 
 export default function Gender() {
   const [gender, setGender] = useRecoilState(genderState);
@@ -21,8 +21,7 @@ export default function Gender() {
   };
 
   const handleNext = () => {
-    saveRecoilStateToSessionStorage("genderState", gender);
-    window.location.replace("/member/onboarding/birth");
+    setGender(gender);
   };
 
   const canActiveNextButton = Boolean(!gender);
@@ -54,14 +53,16 @@ export default function Gender() {
       </div>
 
       <ButtonField>
-        <PrimaryButton
-          color="default"
-          size="small"
-          disabled={canActiveNextButton}
-          onClick={handleNext}
-        >
-          확인
-        </PrimaryButton>
+        <Link href="/member/onboarding/birth">
+          <PrimaryButton
+            color="default"
+            size="small"
+            disabled={canActiveNextButton}
+            onClick={handleNext}
+          >
+            확인
+          </PrimaryButton>
+        </Link>
       </ButtonField>
     </div>
   );

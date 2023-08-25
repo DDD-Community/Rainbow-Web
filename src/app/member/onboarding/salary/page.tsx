@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import Link from "next/link";
 import { nicknameState, salaryState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { authInstance } from "@/src/api/auth/client";
 import { SelectSalary } from "@/src/components/Common/Select/SelectSalary";
 import { Information } from "@/src/components/Information/Information";
-import { saveRecoilStateToSessionStorage } from "@/src/recoil/recoilSessionstorage";
 
 interface SalaryOption {
   value: string;
@@ -45,10 +45,6 @@ export default function Salary() {
   const handleSelectChange = (event: string) => {
     setSelectedValue(event);
   };
-  const handleNext = () => {
-    saveRecoilStateToSessionStorage("salaryState", selectedValue);
-    window.location.replace("/member/onboarding/checking");
-  };
   const canActiveNextButton = Boolean(!selectedValue);
 
   return (
@@ -64,14 +60,11 @@ export default function Salary() {
       <Information className="py-3">비슷한 연봉을 받는 또래 친구들을 찾아줄게요</Information>
 
       <ButtonField>
-        <PrimaryButton
-          color="default"
-          size="small"
-          disabled={canActiveNextButton}
-          onClick={handleNext}
-        >
-          확인
-        </PrimaryButton>
+        <Link href="/member/onboarding/checking">
+          <PrimaryButton color="default" size="small" disabled={canActiveNextButton}>
+            확인
+          </PrimaryButton>
+        </Link>
       </ButtonField>
     </div>
   );

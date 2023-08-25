@@ -1,38 +1,32 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import Link from "next/link";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
 import { birthDateState, nicknameState } from "@/src/recoil/user.atoms";
-import {
-  loadRecoilStateFromSessionStorage,
-  saveRecoilStateToSessionStorage
-} from "@/src/recoil/recoilSessionstorage";
 
 export default function Birth() {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [date, setDate] = useState("");
-  const setBirthRecoil = useSetRecoilState(birthDateState);
+  const [birth, setBirth] = useRecoilState(birthDateState);
   const nicknameValue = useRecoilValue(nicknameState);
 
   useEffect(() => {
-    const savedBirthDate = loadRecoilStateFromSessionStorage("birthDateState", "") as string;
-    if (savedBirthDate) {
-      const [savedYear, savedMonth, savedDate] = savedBirthDate.split("-");
+    if (birth) {
+      const [savedYear, savedMonth, savedDate] = birth.split("-");
       setYear(savedYear);
       setMonth(savedMonth);
       setDate(savedDate);
     }
-  }, []);
+  }, [birth]);
 
   const handleNext = () => {
     const birthDate = `${year}-${month}-${date}`;
-    setBirthRecoil(birthDate);
-    saveRecoilStateToSessionStorage("birthDateState", birthDate);
-    window.location.replace("/member/onboarding/salary");
+    setBirth(birthDate);
   };
 
   const getInputValue = (label: string) => {
@@ -48,7 +42,7 @@ export default function Birth() {
     else if (label === "일") setDate(value);
   };
 
-  const canActivateNextButton = Boolean(!year || !month || !date);
+  const canActiveNextButton = Boolean(!year || !month || !date);
 
   return (
     <div className="flex flex-col justify-center">
@@ -74,14 +68,16 @@ export default function Birth() {
       </div>
       <div>
         <ButtonField>
-          <PrimaryButton
-            color="default"
-            size="small"
-            disabled={canActivateNextButton}
-            onClick={handleNext}
-          >
-            확인
-          </PrimaryButton>
+          <Link href="/member/onboarding/salary">
+            <PrimaryButton
+              color="default"
+              size="small"
+              disabled={canActiveNextButton}
+              onClick={handleNext}
+            >
+              확인
+            </PrimaryButton>
+          </Link>
         </ButtonField>
       </div>
     </div>

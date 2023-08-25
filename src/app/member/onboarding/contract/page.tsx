@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
+import Link from "next/link";
 import { contractAgreedState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import FormSubmitComponent from "@/src/hooks/FormSubmitComponent";
@@ -35,7 +36,6 @@ export default function Contract() {
   const handleNext = (): void => {
     setContractAgreed(true);
     setSubmitted(true);
-    window.location.replace("/member/onboarding/following");
   };
   const toggleAllCheckboxes = () => {
     const allChecked = Object.values(checkboxStates).every(value => value);
@@ -84,9 +84,11 @@ export default function Contract() {
             ))}
           </div>
           <ButtonField>
-            <PrimaryButton color="default" size="large" onClick={handleNext}>
-              동의하고 가입하기
-            </PrimaryButton>
+            <Link href="/member/onboarding/following">
+              <PrimaryButton color="default" size="large" onClick={handleNext}>
+                동의하고 가입하기
+              </PrimaryButton>
+            </Link>
           </ButtonField>
         </div>
       )}
