@@ -68,7 +68,7 @@ export default function Birth() {
       </div>
       <div>
         <ButtonField>
-          <Link href="/member/onboarding/salary">
+          <Link href="/member/onboarding/salary" className="w-full">
             <PrimaryButton
               color="default"
               size="small"

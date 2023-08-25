@@ -84,7 +84,7 @@ export default function Contract() {
             ))}
           </div>
           <ButtonField>
-            <Link href="/member/onboarding/following">
+            <Link href="/member/onboarding/following" className="w-full">
               <PrimaryButton color="default" size="large" onClick={handleNext}>
                 동의하고 가입하기
               </PrimaryButton>

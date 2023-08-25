@@ -53,7 +53,7 @@ export default function Gender() {
       </div>
 
       <ButtonField>
-        <Link href="/member/onboarding/birth">
+        <Link href="/member/onboarding/birth" className="w-full">
           <PrimaryButton
             color="default"
             size="small"

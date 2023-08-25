@@ -62,7 +62,7 @@ export default function Nickname() {
         <div className="text-red-500 mt-2">이미 사용 중인 닉네임입니다.</div>
       )}
       <ButtonField>
-        <Link href="/member/onboarding/gender">
+        <Link href="/member/onboarding/gender" className="w-full">
           <PrimaryButton
             color="default"
             size="small"

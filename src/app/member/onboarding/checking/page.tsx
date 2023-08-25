@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 import {
   emailState,
@@ -115,9 +116,11 @@ export default function Checking() {
       </div>
       <Information className="py-3">내 정보는 내 프로필에서 다시 수정할 수 있어요</Information>
       <ButtonField>
-        <PrimaryButton color="default" size="small" onClick={handleNext}>
-          확인
-        </PrimaryButton>
+        <Link href="/member/onboarding/contract" className="w-full">
+          <PrimaryButton color="default" size="small" onClick={handleNext}>
+            확인
+          </PrimaryButton>
+        </Link>
       </ButtonField>
       {submitted && <p>폼이 성공적으로 제출되었습니다!</p>}
     </div>

@@ -33,7 +33,7 @@ export default function Email() {
       <SelectEmail options={EMAIL} onChange={handleSelectChange} />
 
       <ButtonField>
-        <Link href="/member/onboarding/nickname">
+        <Link href="/member/onboarding/nickname" className="w-full">
           <PrimaryButton
             color="default"
             size="small"
