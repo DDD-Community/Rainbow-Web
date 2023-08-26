@@ -10,7 +10,7 @@ function Start() {
   };
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="w-343 flex flex-col justify-center">
       <div className="flex flex-col items-center pt-20 pb-10">
         <div className="sb-25-600 text-gray-700">안녕하세요 </div>
         <div className="sb-25-600 text-gray-700"> 바이바이 입니다</div>

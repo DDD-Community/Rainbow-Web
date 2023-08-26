@@ -7,7 +7,7 @@ import { OnboardingMotion } from "@/public/assets/motions";
 
 export default function Onboarding() {
   return (
-    <div className="flex flex-col items-center">
+    <div className="w-343 flex flex-col items-center">
       <div className="flex flex-col items-center pt-20">
         <div className="text-gray-700 sb-25-600">지출 관리의 시작</div>
         <div className="text-gray-700 sb-25-600 pb-3">👋바이바이와 함께 해요</div>

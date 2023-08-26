@@ -14,7 +14,7 @@ export default function Following() {
     console.log(`${nicknameValue}님 정보 등록이 완료 되었습니다.`);
   };
   return (
-    <div className="flex flex-col justify-center">
+    <div className="w-343 flex flex-col justify-center">
       <div className="flex flex-col items-start pt-20 pb-10">
         <div>🙌</div>
         <div className="sb-25-600 text-gray-700">

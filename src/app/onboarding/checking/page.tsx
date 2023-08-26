@@ -70,7 +70,7 @@ export default function Checking() {
   }, [savedNickname, savedGender, savedBirthDate, savedSalary]);
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="w-343 flex flex-col justify-center">
       <div className="flex flex-col items-start pt-20 pb-10">
         <div>👀</div>
         <div className="sb-25-600 text-gray-700">

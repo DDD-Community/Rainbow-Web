@@ -46,7 +46,7 @@ export default function Contract() {
   };
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="w-343 flex flex-col justify-center">
       {contractAgreed ? (
         <>
           <span className="sb-25-600 text-gray-700">약관에 동의하셨습니다.</span>
