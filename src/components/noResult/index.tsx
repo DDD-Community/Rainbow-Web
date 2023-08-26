@@ -24,7 +24,9 @@ function DescriptionArea({ descriptions = [NO_RESULT_DESCRIPTION] }: Description
   return (
     <div>
       {descriptions.map(description => (
-        <p className="text-center r-14-400 text-gray-600">{description}</p>
+        <p key={description} className="text-center r-14-400 text-gray-600">
+          {description}
+        </p>
       ))}
     </div>
   );

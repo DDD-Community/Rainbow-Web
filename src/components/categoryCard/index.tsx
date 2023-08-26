@@ -17,8 +17,8 @@ import {
   IconOthers
 } from "@/public/assets/images/icons/category";
 
-const TEXT_PUBLIC_SCOPE_OPEN = "전체 공개";
-const TEXT_PUBLIC_SCOPE_CLOSE = "비공개";
+export const TEXT_PUBLIC_SCOPE_OPEN = "전체 공개";
+export const TEXT_PUBLIC_SCOPE_CLOSE = "비공개";
 
 export type CategoryType =
   | "book"

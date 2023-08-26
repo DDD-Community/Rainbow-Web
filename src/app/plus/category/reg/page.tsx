@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import NavigationBar from "@/src/components/navigationBar";
 import { DividerHorizon } from "@/src/components/Common/Divider";
@@ -24,6 +25,7 @@ const categoryTypes: CategoryType[] = [
 ];
 
 export default function PlusAddCategoryPage() {
+  const router = useRouter();
   // categories type 나중에 수정 예정(임시로 string 설정 후 title 설정되게 해놓음)
   // const [categories, setCategories] = useState<string[]>([]);
 
@@ -41,7 +43,11 @@ export default function PlusAddCategoryPage() {
 
   return (
     <main className="pt-3.5">
-      <NavigationBar isCloseButton title="카테고리 추가" onClickCloseButton={() => {}} />
+      <NavigationBar
+        isCloseButton
+        title="카테고리 추가"
+        onClickCloseButton={() => router.replace("/plus/category")}
+      />
       <section className="px-4">
         <div className="mt-[60px] mb-[30px]">
           <textarea

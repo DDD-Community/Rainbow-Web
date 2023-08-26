@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import { useRecoilState } from "recoil";
 import NavigationBar from "src/components/navigationBar";
+import { expensePriceState } from "src/recoil/plus.atoms";
 import Section from "./section";
 import Footer from "./footer";
 
 export default function PlusCostPage() {
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useRecoilState(expensePriceState);
 
   const handlePrice = (value: string) => {
     const replaceValue = value.replace(/[^\d]/g, "");
@@ -35,7 +37,7 @@ export default function PlusCostPage() {
         onClickAddPrice={handleAddPrice}
       />
 
-      <Footer isActive={Number(price) > 0} onClick={() => {}} />
+      <Footer isActive={Number(price) > 0} />
     </main>
   );
 }

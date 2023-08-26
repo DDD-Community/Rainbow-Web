@@ -1,47 +1,164 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import React, { useState, useRef } from "react";
 import NavigationBar from "src/components/navigationBar";
-import { CategoryImage, CategoryType } from "src/components/categoryCard";
+import { twMerge } from "@/src/types/utils/tailwind.util";
+import {
+  CategoryImage,
+  CategoryType,
+  TEXT_PUBLIC_SCOPE_OPEN,
+  TEXT_PUBLIC_SCOPE_CLOSE
+} from "src/components/categoryCard";
 import { PrimaryButton, SubButton } from "src/components/Common/Button";
 import { DividerHorizon } from "@/src/components/Common/Divider";
 import IconPlus from "public/assets/images/icons/plus";
 import { addCommasToNumber } from "src/types/utils/utils";
-
-const SHOW_EXPENSE_VISIBILITY = "전체 공개";
-const HIDE_EXPENSE_VISIBILITY = "비공개";
+import { expenseDetailState, expensePriceState, expenseCategoryState } from "src/recoil/plus.atoms";
+import IconXMark from "@/public/assets/images/icons/xMark";
 
 export default function PageLayout() {
-  const [price, setPrice] = useState(0);
+  const inputFile1Ref = useRef<HTMLInputElement>(null);
+  const inputFile2Ref = useRef<HTMLInputElement>(null);
+
+  const router = useRouter();
+  const [expenseDetail] = useRecoilState(expenseDetailState);
+  const [expensePrice] = useRecoilState(expensePriceState);
+  const [expenseCategory] = useRecoilState(expenseCategoryState);
+
   const [memoValue, setMemoValue] = useState("");
 
-  const isButtonActive = Number(price) > 0;
+  const isButtonActive = Number(expensePrice) > 0;
 
-  useEffect(() => {
-    setPrice(23000);
-  }, []);
+  const [firstFileInputImage, setFirstFileInputImage] = useState<string>("");
+  const [secondFileInputImage, setSecondFileInputImage] = useState<string>("");
+
+  const handleChangeFileInput = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      if (index === 0) {
+        setFirstFileInputImage(imageUrl);
+      } else {
+        setSecondFileInputImage(imageUrl);
+      }
+    }
+  };
+
+  const handleClickFileInputClearButton = (index: number) => {
+    console.log(index);
+
+    // 이미지 2개 중 왼쪽 이미지를 먼저 지울 경우
+    if (index === 0 && secondFileInputImage !== "") {
+      if (inputFile1Ref.current && inputFile2Ref.current) {
+        inputFile1Ref.current.value = inputFile2Ref.current.value;
+        inputFile2Ref.current.value = "";
+      }
+
+      setFirstFileInputImage(secondFileInputImage);
+      setSecondFileInputImage("");
+      return;
+    }
+    if (inputFile1Ref.current && inputFile2Ref.current) {
+      if (index === 0) {
+        setFirstFileInputImage("");
+        inputFile1Ref.current.value = "";
+      } else {
+        setSecondFileInputImage("");
+        inputFile2Ref.current.value = "";
+      }
+    }
+  };
 
   return (
     <main className="py-3.5 px-4">
-      <NavigationBar title="지출 등록" isBackButton onClickBackButton={() => {}} />
+      <NavigationBar title="지출 등록" isBackButton onClickBackButton={() => router.back()} />
 
-      <ExpensePrice price={23000} />
+      <ExpensePrice price={Number(expensePrice)} />
 
-      <ExpenseDetail expenseDetail="바나바나 바나나" />
+      <ExpenseDetail expenseDetail={expenseDetail} />
 
       <div className="mt-[30px] mb-3">
         <DividerHorizon />
       </div>
 
-      <SelectedCategory categoryType="clothes" text="Category Text" />
+      <SelectedCategory
+        categoryType={expenseCategory.type}
+        text={expenseCategory.name}
+        isOpen={expenseCategory.isOpen}
+      />
 
-      <button
-        type="button"
-        className="flex flex-col gap-1 justify-center items-center mt-3 w-full h-[150px] bg-gray-50 rounded-[10px] border border-black/[0.06]"
-      >
-        <IconPlus fill="#8C9097" />
-        <span className="m-13-500 text-gray-500">사진 추가 (0/2)</span>
-      </button>
+      <div className="flex w-full gap-2.5">
+        <div className="relative flex flex-auto flex-col gap-1 justify-center items-center mt-3 w-full h-[150px] bg-gray-50 rounded-[10px] border border-black/[0.06] overflow-hidden">
+          <input
+            ref={inputFile1Ref}
+            type="file"
+            value=""
+            accept="image/*"
+            className="z-10 absolute w-full h-full border border-gray-500 opacity-0"
+            onChange={e => handleChangeFileInput(e, 0)}
+          />
+          <IconPlus fill="#8C9097" />
+          <span className="m-13-500 text-gray-500">사진 추가 (0/2)</span>
+
+          <Image
+            src={firstFileInputImage}
+            width={300}
+            height={150}
+            className={twMerge(
+              "absolute top-0 left-0 w-full h-full object-cover",
+              firstFileInputImage === "" && "hidden"
+            )}
+            alt="first image clear button"
+          />
+          {firstFileInputImage && (
+            <button
+              type="button"
+              className="z-20 absolute top-[11px] right-[11px] flex items-center justify-center w-[18px] h-[18px] bg-white rounded-[50%] cursor-pointer"
+              onClick={() => handleClickFileInputClearButton(0)}
+            >
+              <IconXMark width={15} height={15} fill="#8C9097" />
+            </button>
+          )}
+        </div>
+
+        {firstFileInputImage && (
+          <div className="relative flex flex-auto flex-col gap-1 justify-center items-center mt-3 w-full h-[150px] bg-gray-50 rounded-[10px] border border-black/[0.06] overflow-hidden">
+            <input
+              ref={inputFile2Ref}
+              type="file"
+              value=""
+              accept="image/*"
+              className="z-10 absolute w-full h-full border border-gray-500 opacity-0"
+              onChange={e => handleChangeFileInput(e, 1)}
+            />
+            <IconPlus fill="#8C9097" />
+            <span className="m-13-500 text-gray-500">사진 추가 (1/2)</span>
+
+            <Image
+              src={secondFileInputImage}
+              width={300}
+              height={150}
+              className={twMerge(
+                "absolute top-0 left-0 w-full h-full object-cover",
+                secondFileInputImage === "" && "hidden"
+              )}
+              alt="second image clear button"
+            />
+            {secondFileInputImage && (
+              <button
+                type="button"
+                className="z-20 absolute top-[11px] right-[11px] flex items-center justify-center w-[18px] h-[18px] bg-white rounded-[50%] cursor-pointer"
+                onClick={() => handleClickFileInputClearButton(1)}
+              >
+                <IconXMark width={15} height={15} fill="#8C9097" />
+              </button>
+            )}
+          </div>
+        )}
+      </div>
 
       <Memo text={memoValue} onChangeText={e => setMemoValue(e.target.value)} />
 
@@ -85,13 +202,13 @@ function ExpenseDetail({ expenseDetail = "" }: ExpenseDetailProps) {
 interface SelectedCategoryProps {
   categoryType: CategoryType;
   text: string;
-  isExpenseVisibility?: boolean;
+  isOpen?: boolean;
   onClick?: () => void;
 }
 function SelectedCategory({
   categoryType = "clothes",
   text = "",
-  isExpenseVisibility = true,
+  isOpen = true,
   onClick = () => {}
 }: SelectedCategoryProps) {
   return (
@@ -103,7 +220,7 @@ function SelectedCategory({
         <div className="flex flex-col justify-center gap-0.5">
           <span className="sb-13-600">{text}</span>
           <span className="m-11-500 text-gray-500">
-            {isExpenseVisibility ? SHOW_EXPENSE_VISIBILITY : HIDE_EXPENSE_VISIBILITY}
+            {isOpen ? TEXT_PUBLIC_SCOPE_OPEN : TEXT_PUBLIC_SCOPE_CLOSE}
           </span>
         </div>
       </div>
@@ -127,7 +244,7 @@ function Memo({ text = "", onChangeText = () => {} }: MemoProps) {
         placeholder="메모를 여기에 작성"
         onChange={onChangeText}
         maxLength={50}
-       />
+      />
       <span className="absolute right-4 bottom-[15px] r-14-400 text-gray-600">
         {text.length <= 50 ? text.length : 50}/50
       </span>
