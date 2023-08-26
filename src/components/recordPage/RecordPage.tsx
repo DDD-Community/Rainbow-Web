@@ -8,7 +8,7 @@ type RecordPageProps = {
 
 function RecordPage({ selectedDate, selectedDay }: RecordPageProps) {
   return (
-    <div className="bg-white rounded-t-[10px] flex flex-col justify-center mt-10 p-2">
+    <div className="bg-white rounded-t-[10px] flex flex-col justify-center mt-10 p-2 w-full">
       <div className="w-full flex justify-between p-2">
         <div className="flex flex-col">
           {selectedDay && <div className="sb-14-600 text-gray-700 ">오늘 {selectedDay}요일</div>}

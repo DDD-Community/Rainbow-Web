@@ -13,8 +13,10 @@ function Main() {
     setSelectedDay(day);
   };
   return (
-    <div className="flex flex-col justify-between bg-gray-100">
-      <Calendar onDateSelect={handleDateSelect} onDaySelect={handleDaySelct} />
+    <div className="flex flex-col justify-between items-center bg-gray-100">
+      <div className="w-343 flex flex-col  ">
+        <Calendar onDateSelect={handleDateSelect} onDaySelect={handleDaySelct} />
+      </div>
       <RecordPage selectedDate={selectedDate} selectedDay={selectedDay} />
     </div>
   );
