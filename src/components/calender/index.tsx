@@ -4,7 +4,7 @@
 
 import { useState, useRef } from "react";
 
-const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+const daysOfWeek = ["월", "화", "수", "목", "금", "토", "일"];
 interface calendarProps {
   onDateSelect: (date: string) => void;
   onDaySelect: any;
