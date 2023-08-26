@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Link from "next/link";
-import { nicknameState } from "@/src/recoil/user.atoms";
+import { checkingState, nicknameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
@@ -12,6 +12,7 @@ import { authInstance } from "@/src/api/auth/client";
 export default function Nickname() {
   const [nickname, setNickname] = useRecoilState(nicknameState);
   const [isNicknameDuplicated, setIsNicknameDuplicated] = useState(false);
+  const checkingValue = useRecoilValue(checkingState);
 
   useEffect(() => {
     async function checkNicknameDuplication() {
@@ -63,16 +64,29 @@ export default function Nickname() {
         <div className="text-red-500 mt-2">이미 사용 중인 닉네임입니다.</div>
       )}
       <ButtonField>
-        <Link href="/onboarding/gender" className="w-full flex justify-end">
-          <PrimaryButton
-            color="default"
-            size="small"
-            disabled={canActiveNextButton}
-            onClick={handleNext}
-          >
-            확인
-          </PrimaryButton>
-        </Link>
+        {checkingValue ? (
+          <Link href="/onboarding/checking" className="w-full flex justify-end">
+            <PrimaryButton
+              color="default"
+              size="small"
+              disabled={canActiveNextButton}
+              onClick={handleNext}
+            >
+              확인
+            </PrimaryButton>
+          </Link>
+        ) : (
+          <Link href="/onboarding/gender" className="w-full flex justify-end">
+            <PrimaryButton
+              color="default"
+              size="small"
+              disabled={canActiveNextButton}
+              onClick={handleNext}
+            >
+              확인
+            </PrimaryButton>
+          </Link>
+        )}
       </ButtonField>
     </div>
   );
