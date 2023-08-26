@@ -19,7 +19,7 @@ export default function Email() {
     setEmail(combinedValue);
   };
 
-  const canActiveNextButton = Boolean(!email);
+  const canActiveNextButton = Boolean(!emailState);
 
   return (
     <div className="flex flex-col justify-center">
