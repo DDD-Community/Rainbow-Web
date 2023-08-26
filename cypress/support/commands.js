@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -23,3 +24,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+// commands.js 파일
+Cypress.Commands.add("setCustomWindowProperties", () => {
+  cy.window().then(win => {
+    // window 객체의 속성들을 원하는 값으로 설정
+    win.someProperty = "mocked value";
+    // 다른 필요한 속성들...
+  });
+});
