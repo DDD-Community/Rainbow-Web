@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useRecoilState } from "recoil";
 import { twMerge } from "@/src/types/utils/tailwind.util";
+import { emailState } from "@/src/recoil/user.atoms";
 
 interface Option {
   value: string;
@@ -15,8 +17,8 @@ interface SelectProps {
 
 export function SelectEmail({ options, onChange }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState<string | undefined>(undefined);
-  const [selectedValue, setSelectedValue] = useState<string | undefined>("@선택");
+  const [input, setInput] = useRecoilState(emailState);
+  const [selectedValue, setSelectedValue] = useState<string>("@선택");
   const selectRef = useRef<HTMLDivElement | null>(null);
 
   const handleToggle = () => {
@@ -59,6 +61,7 @@ export function SelectEmail({ options, onChange }: SelectProps) {
         <input
           className="focus:outline-none"
           type="input"
+          value={input}
           onChange={handleInput}
           placeholder="이메일"
         />

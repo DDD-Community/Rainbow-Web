@@ -1,25 +1,20 @@
 "use client";
 
-import { useRecoilState } from "recoil";
 import Link from "next/link"; // Link 컴포넌트 임포트
-import { emailState } from "@/src/recoil/user.atoms";
+import { useState } from "react";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { SelectEmail } from "@/src/components/Common/Select/SelectEmail";
 import { EMAIL } from "@/src/constant/select.constant";
 
 export default function Email() {
-  const [email, setEmail] = useRecoilState(emailState);
-
-  const handleNext = () => {
-    setEmail(email);
-  };
+  const [active, setActive] = useState(false);
 
   const handleSelectChange = (combinedValue: string) => {
-    setEmail(combinedValue);
+    setActive(!combinedValue);
   };
 
-  const canActiveNextButton = Boolean(!emailState);
+  const canActiveNextButton = active;
 
   return (
     <div className="flex flex-col justify-center">
@@ -34,12 +29,7 @@ export default function Email() {
 
       <ButtonField>
         <Link href="/onboarding/nickname" className="w-full flex justify-end">
-          <PrimaryButton
-            color="default"
-            size="small"
-            disabled={canActiveNextButton}
-            onClick={handleNext}
-          >
+          <PrimaryButton color="default" size="small" disabled={canActiveNextButton}>
             확인
           </PrimaryButton>
         </Link>

@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useRecoilState } from "recoil";
 import { twMerge } from "@/src/types/utils/tailwind.util";
+import { salaryState } from "@/src/recoil/user.atoms";
 
 interface Option {
   value: string;
@@ -16,7 +18,7 @@ interface SelectProps {
 
 export function SelectSalary({ options, text, onChange }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedName, setSelectedName] = useState<string | undefined>(options[0]?.name);
+  const [selectedName, setSelectedName] = useRecoilState(salaryState);
   const selectRef = useRef<HTMLDivElement | null>(null);
 
   const handleToggle = () => {

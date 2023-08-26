@@ -24,7 +24,7 @@ export default function Gender() {
     setGender(gender);
   };
 
-  const canActiveNextButton = Boolean(!genderState);
+  const canActiveNextButton = Boolean(!gender);
 
   return (
     <div className="flex flex-col justify-center">

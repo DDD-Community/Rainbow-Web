@@ -35,7 +35,7 @@ export default function Nickname() {
     setNickname(nickname);
   };
 
-  const canActiveNextButton = Boolean(!nicknameState || isNicknameDuplicated);
+  const canActiveNextButton = Boolean(!nickname || isNicknameDuplicated);
 
   return (
     <div className="flex flex-col justify-center">

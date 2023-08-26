@@ -25,8 +25,13 @@ export default function Birth() {
   }, [birth]);
 
   const handleNext = () => {
-    const birthDate = `${year}-${month}-${date}`;
-    setBirth(birthDate);
+    const yearNum = parseInt(year, 10);
+    const monthNum = parseInt(month, 10);
+    const dateNum = parseInt(date, 10);
+
+    const birthDate = new Date(yearNum, monthNum - 1, dateNum + 1);
+    const formattedBirthDate = birthDate.toISOString().split("T")[0];
+    setBirth(formattedBirthDate);
   };
 
   const getInputValue = (label: string) => {
@@ -68,7 +73,7 @@ export default function Birth() {
       </div>
       <div>
         <ButtonField>
-          <Link href="/member/onboarding/salary" className="w-full flex justify-end">
+          <Link href="/onboarding/salary" className="w-full flex justify-end">
             <PrimaryButton
               color="default"
               size="small"
