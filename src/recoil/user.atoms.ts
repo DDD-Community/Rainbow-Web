@@ -29,3 +29,8 @@ export const salaryState = atom<string>({
   key: "salaryState",
   default: ""
 });
+
+export const checkingState = atom<boolean>({
+  key: "checkingState",
+  default: false
+});
