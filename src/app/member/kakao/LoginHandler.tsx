@@ -16,7 +16,7 @@ export const fetchAuth = (code: string): Promise<LoginResponseType> =>
 export function LoginHandler(code: string) {
   fetchAuth(code).then((response: LoginResponseType) => {
     if (response.data.data.email) {
-      window.location.replace("/member/onboarding");
+      window.location.replace("/onboarding");
     }
     // const JWT = response.data.data.accessToken;
     // if (JWT) localStorage.setItem("EXIT_LOGIN_TOKEN", JWT);
