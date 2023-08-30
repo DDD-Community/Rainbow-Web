@@ -1,13 +1,24 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
+import { LoginDataType } from "@/src/constant/api.constant";
 import { LoginHandler } from "./LoginHandler";
 
+interface LoginResponseType {
+  data: LoginDataType;
+}
+
 function Kakao() {
-  const code: string = new URL(window.location.href).searchParams.get("code")!;
+  const router = useRouter();
 
   useEffect(() => {
-    LoginHandler(code);
+    const code: string = new URL(process.env.NEXT_PUBLIC_DOMAIN ?? "").searchParams.get("code")!;
+    LoginHandler(code).then((res: LoginResponseType) => {
+      if (res.data.data.email) {
+        router.replace("/member/onboarding");
+      }
+    });
   }, []);
 
   return <div />;
