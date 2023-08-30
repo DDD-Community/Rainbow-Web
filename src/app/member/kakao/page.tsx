@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
+import { useRouter } from "next/router";
 import { LoginDataType } from "@/src/constant/api.constant";
 import { authInstance } from "@/src/api/auth/client";
 import { kakaoIdState } from "@/src/recoil/user.atoms";
@@ -23,6 +24,7 @@ export const LoginHandler = (code: string) =>
   });
 
 function Kakao() {
+  const router = useRouter();
   const code: string = new URL(window.location.href).searchParams.get("code")!;
   const setKakaoId = useSetRecoilState(kakaoIdState);
 
@@ -30,7 +32,7 @@ function Kakao() {
     LoginHandler(code).then(kakaoId => {
       if (kakaoId) {
         setKakaoId(kakaoId);
-        window.location.replace("/onboarding");
+        router.replace("/onboarding");
       }
     });
   }, []);
