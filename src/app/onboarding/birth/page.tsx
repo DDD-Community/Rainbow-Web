@@ -6,7 +6,7 @@ import Link from "next/link";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
-import { birthDateState, nicknameState } from "@/src/recoil/user.atoms";
+import { birthDateState, checkingState, nicknameState } from "@/src/recoil/user.atoms";
 
 export default function Birth() {
   const [year, setYear] = useState("");
@@ -14,6 +14,8 @@ export default function Birth() {
   const [date, setDate] = useState("");
   const [birth, setBirth] = useRecoilState(birthDateState);
   const nicknameValue = useRecoilValue(nicknameState);
+
+  const checkingValue = useRecoilValue(checkingState);
 
   useEffect(() => {
     if (birth) {
@@ -73,16 +75,29 @@ export default function Birth() {
       </div>
       <div>
         <ButtonField>
-          <Link href="/onboarding/salary" className="w-full flex justify-end">
-            <PrimaryButton
-              color="default"
-              size="small"
-              disabled={canActiveNextButton}
-              onClick={handleNext}
-            >
-              확인
-            </PrimaryButton>
-          </Link>
+          {checkingValue ? (
+            <Link href="/onboarding/checking" className="w-full flex justify-end">
+              <PrimaryButton
+                color="default"
+                size="small"
+                disabled={canActiveNextButton}
+                onClick={handleNext}
+              >
+                확인
+              </PrimaryButton>
+            </Link>
+          ) : (
+            <Link href="/onboarding/salary" className="w-full flex justify-end">
+              <PrimaryButton
+                color="default"
+                size="small"
+                disabled={canActiveNextButton}
+                onClick={handleNext}
+              >
+                확인
+              </PrimaryButton>
+            </Link>
+          )}
         </ButtonField>
       </div>
     </div>

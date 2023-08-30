@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import React, { useEffect } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -9,7 +9,8 @@ import {
   nicknameState,
   genderState,
   birthDateState,
-  salaryState
+  salaryState,
+  checkingState
 } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
@@ -17,34 +18,22 @@ import { Information } from "@/src/components/Information/Information";
 
 export default function Checking() {
   const email = useRecoilValue(emailState);
-  const [nickname, setNickname] = useRecoilState(nicknameState);
-  const [gender, setGender] = useRecoilState(genderState);
-  const [birthDate, setBirthDate] = useRecoilState(birthDateState);
-  const [salary, setSalary] = useRecoilState(salaryState);
+  const nickname = useRecoilValue(nicknameState);
+  const gender = useRecoilValue(genderState);
+  const birthDate = useRecoilValue(birthDateState);
+  const salary = useRecoilValue(salaryState);
+  const setChecking = useSetRecoilState(checkingState);
+
+  useEffect(() => {
+    setChecking(true);
+  }, []);
 
   const data = [
-    { id: uuidv4(), label: "닉네임", value: nickname, setter: setNickname },
-    { id: uuidv4(), label: "성별", value: gender, setter: setGender },
-    { id: uuidv4(), label: "생일", value: birthDate, setter: setBirthDate },
-    { id: uuidv4(), label: "연봉", value: salary, setter: setSalary }
+    { id: uuidv4(), label: "닉네임", value: nickname, link: "/onboarding/nickname" },
+    { id: uuidv4(), label: "성별", value: gender, link: "/onboarding/gender" },
+    { id: uuidv4(), label: "생일", value: birthDate, link: "/onboarding/birth" },
+    { id: uuidv4(), label: "연봉", value: salary, link: "/onboarding/salary" }
   ];
-
-  const [submitted, setSubmitted] = useState(false);
-  const [editingId, setEditingId] = useState(null);
-
-  const handleEdit = (id: any) => {
-    setEditingId(id);
-  };
-
-  const handleSave = (id: any) => {
-    const editedField = data.find(item => item.id === id);
-
-    if (editedField) {
-      const newValue = editedField.value;
-      editedField.setter(newValue);
-      setEditingId(null);
-    }
-  };
 
   const handleNext = () => {
     const formData = {
@@ -55,19 +44,7 @@ export default function Checking() {
       salary
     };
     console.log("제출 폼 데이터:", formData);
-    setSubmitted(true);
   };
-  const savedNickname = useRecoilValue(nicknameState);
-  const savedGender = useRecoilValue(genderState);
-  const savedBirthDate = useRecoilValue(birthDateState);
-  const savedSalary = useRecoilValue(salaryState);
-  useEffect(() => {
-    setNickname(savedNickname);
-    setGender(savedGender);
-    setBirthDate(savedBirthDate);
-    setSalary(savedSalary);
-    setSubmitted(false);
-  }, [savedNickname, savedGender, savedBirthDate, savedSalary]);
 
   return (
     <div className="w-343 flex flex-col justify-center">
@@ -81,36 +58,11 @@ export default function Checking() {
       <div className="flex flex-col">
         {data.map(item => (
           <div className="flex justify-between " key={item.id}>
-            <span className="text-primary-default r-14-400 p-2">{item.label}</span>
-            {editingId === item.id ? (
-              <input
-                type="text"
-                value={item.value}
-                onChange={e => {
-                  const newValue = e.target.value;
-                  item.setter(newValue); // Update the Recoil state with the new value
-                }}
-              />
-            ) : (
-              <span className="text-gray-700">{item.value}</span>
-            )}
-            {editingId === item.id ? (
-              <button
-                type="button"
-                className="text-gray-500 p-2"
-                onClick={() => handleSave(item.id)}
-              >
-                저장
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="text-gray-500 p-2"
-                onClick={() => handleEdit(item.id)}
-              >
-                수정
-              </button>
-            )}
+            <div className="text-primary-default r-14-400 p-2">{item.label}</div>
+            <div className="text-gray-700 r-14-400 p-2">{item.value}</div>
+            <Link href={item.link} className="text-gray-500 p-2">
+              수정
+            </Link>
           </div>
         ))}
       </div>
@@ -122,7 +74,6 @@ export default function Checking() {
           </PrimaryButton>
         </Link>
       </ButtonField>
-      {submitted && <p>폼이 성공적으로 제출되었습니다!</p>}
     </div>
   );
 }

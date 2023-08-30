@@ -1,97 +1,142 @@
+@font-face {
+  font-family: 'Pretendard-Black';
+  src: url('/fonts/Pretendard-Black.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard-Bold';
+  src: url('/fonts/Pretendard-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard-ExtraBold';
+  src: url('/fonts/Pretendard-ExtraBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard-ExtraLight';
+  src: url('/fonts/Pretendard-ExtraLight.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard-Light';
+  src: url('/fonts/Pretendard-Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard-Medium';
+  src: url('/fonts/Pretendard-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard-SemiBold';
+  src: url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard-Thin';
+  src: url('/fonts/Pretendard-Thin.woff2') format('woff2');
+}
+
+body {
+	font-family: 'Pretendard-Regular'
+}
 .m-10-500 {
   font-size: 10px;
   font-weight: 500;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .sb-10-600 {
   font-size: 10px;
   font-weight: 600;
-  /* font-family: sb; */
+  font-family: 'Pretendard-SemiBold';
 }
 .m-11-500 {
   font-size: 11px;
   font-weight: 500;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .m-12-400 {
   font-size: 12px;
   font-weight: 400;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .m-12-500 {
   font-size: 12px;
   font-weight: 500;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .r-12-500 {
   font-size: 12px;
   font-weight: 500;
-  /* font-family: r; */
+  font-family: 'Pretendard-Regular';
 }
 .m-13-500 {
   font-size: 13px;
   font-weight: 500;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .m-13-600 {
   font-size: 13px;
   font-weight: 600;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .sb-13-600 {
   font-size: 13px;
   font-weight: 600;
-  /* font-family: sb; */
+  font-family: 'Pretendard-SemiBold';
 }
 .r-14-400 {
   font-size: 14px;
   font-weight: 400;
-  /* font-family: r; */
+  font-family: 'Pretendard-Regular';
 }
 .m-14-500 {
   font-size: 14px;
   font-weight: 500;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .sb-14-600 {
   font-size: 14px;
   font-weight: 600;
-  /* font-family: sb; */
+  font-family: 'Pretendard-SemiBold';
 }
 .m-15-500 {
   font-size: 15px;
   font-weight: 500;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .sb-15-600 {
   font-size: 15px;
   font-weight: 600;
-  /* font-family: sb; */
+  font-family: 'Pretendard-SemiBold';
 }
 .r-16-400 {
   font-size: 16px;
   font-weight: 400;
-  /* font-family: r; */
+  font-family: 'Pretendard-Regular';
 }
 .m-16-500 {
   font-size: 16px;
   font-weight: 500;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .sb-16-600 {
   font-size: 16px;
   font-weight: 600;
-  /* font-family: sb; */
+  font-family: 'Pretendard-SemiBold';
 }
 .b-16-700 {
   font-size: 16px;
   font-weight: 700;
-  /* font-family: b; */
+  font-family: 'Pretendard-Bold';
 }
 .r-18-400 {
   font-size: 18px;
   font-weight: 400;
-  /* font-family: r; */
+  font-family: 'Pretendard-Regular';
+}
+.r-18-600 {
+  font-size: 18px;
+  font-weight: 400;
+  font-family: 'Pretendard-Regular';
 }
 .r-18-600 {
   font-size: 18px;
@@ -101,30 +146,30 @@
 .sb-22-600 {
   font-size: 22px;
   font-weight: 600;
-  /* font-family: sb; */
+  font-family: 'Pretendard-SemiBold';
 }
 .sb-25-600 {
   font-size: 25px;
   font-weight: 600;
-  /* font-family: sb; */
+  font-family: 'Pretendard-SemiBold';
 }
 .m-30-500 {
   font-size: 30px;
   font-weight: 500;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .m-34-500 {
   font-size: 34px;
   font-weight: 500;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .m-35-500 {
   font-size: 35px;
   font-weight: 500;
-  /* font-family: m; */
+  font-family: 'Pretendard-Medium';
 }
 .sb-35-600 {
   font-size: 35px;
   font-weight: 600;
-  /* font-family: sb; */
+  font-family: 'Pretendard-SemiBold';
 }

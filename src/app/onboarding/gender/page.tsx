@@ -2,7 +2,7 @@
 
 import { useRecoilState, useRecoilValue } from "recoil";
 import Link from "next/link";
-import { genderState, nicknameState } from "@/src/recoil/user.atoms";
+import { checkingState, genderState, nicknameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import {
@@ -15,6 +15,8 @@ import {
 export default function Gender() {
   const [gender, setGender] = useRecoilState(genderState);
   const nicknameValue = useRecoilValue(nicknameState);
+
+  const checkingValue = useRecoilValue(checkingState);
 
   const handleGenderClick = (selectedGender: string) => {
     setGender(selectedGender);
@@ -53,16 +55,29 @@ export default function Gender() {
       </div>
 
       <ButtonField>
-        <Link href="/onboarding/birth" className="w-full flex justify-end">
-          <PrimaryButton
-            color="default"
-            size="small"
-            disabled={canActiveNextButton}
-            onClick={handleNext}
-          >
-            확인
-          </PrimaryButton>
-        </Link>
+        {checkingValue ? (
+          <Link href="/onboarding/checking" className="w-full flex justify-end">
+            <PrimaryButton
+              color="default"
+              size="small"
+              disabled={canActiveNextButton}
+              onClick={handleNext}
+            >
+              확인
+            </PrimaryButton>
+          </Link>
+        ) : (
+          <Link href="/onboarding/birth" className="w-full flex justify-end">
+            <PrimaryButton
+              color="default"
+              size="small"
+              disabled={canActiveNextButton}
+              onClick={handleNext}
+            >
+              확인
+            </PrimaryButton>
+          </Link>
+        )}
       </ButtonField>
     </div>
   );
