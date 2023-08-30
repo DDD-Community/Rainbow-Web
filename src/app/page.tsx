@@ -1,15 +1,18 @@
 "use client";
 
 import React from "react";
+import DefaultContainer from "../components/defaultContainer";
 import Onboarding from "./onboarding/page";
 // import Start from "./member/kakao/Start";
 
 function Home() {
   return (
-    <div className="flex justify-center items-center">
-      {/* <Start /> */}
-      <Onboarding />
-    </div>
+    <DefaultContainer>
+      <div className="flex justify-center items-center">
+        {/* <Start /> */}
+        <Onboarding />
+      </div>
+    </DefaultContainer>
   );
 }
 

@@ -6,7 +6,6 @@ import { Inter } from "next/font/google";
 import { RecoilRoot } from "recoil";
 import "../styles/globals.css";
 import ReactQueryProvider from "@/src/queries/ReactQueryProvider";
-import DefaultContainer from "../components/defaultContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,9 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <RecoilRoot>
       <html lang="en">
         <body className={inter.className}>
-          <DefaultContainer>
-            <ReactQueryProvider>{children}</ReactQueryProvider>
-          </DefaultContainer>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
           <ToastContainer position="bottom-center" hideProgressBar />
         </body>
       </html>
