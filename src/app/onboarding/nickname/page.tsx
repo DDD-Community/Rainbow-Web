@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Link from "next/link";
 import { checkingState, nicknameState } from "@/src/recoil/user.atoms";
@@ -13,6 +13,7 @@ export default function Nickname() {
   const [nickname, setNickname] = useRecoilState(nicknameState);
   const [isNicknameDuplicated, setIsNicknameDuplicated] = useState(false);
   const checkingValue = useRecoilValue(checkingState);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     async function checkNicknameDuplication() {
@@ -32,11 +33,21 @@ export default function Nickname() {
     checkNicknameDuplication();
   }, [nickname]);
 
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    if (input.length <= 16) {
+      setErrorMessage("");
+    } else {
+      setErrorMessage("닉네임은 16자 이하여야 합니다.");
+    }
+    setNickname(input);
+  };
+
   const handleNext = () => {
     setNickname(nickname);
   };
 
-  const canActiveNextButton = Boolean(!nickname || isNicknameDuplicated);
+  const canActiveNextButton = Boolean(!nickname || isNicknameDuplicated || errorMessage);
 
   return (
     <div className="w-343 flex flex-col justify-center">
@@ -50,13 +61,13 @@ export default function Nickname() {
       {isNicknameDuplicated ? (
         <TextInput>
           <TextInput.Border errorMessage="동일한 닉네임이 있어요">
-            <TextInput.Content value={nickname} onChange={e => setNickname(e.target.value)} />
+            <TextInput.Content value={nickname} onChange={onChangeInput} />
           </TextInput.Border>
         </TextInput>
       ) : (
         <TextInput>
-          <TextInput.Border>
-            <TextInput.Content value={nickname} onChange={e => setNickname(e.target.value)} />
+          <TextInput.Border errorMessage={errorMessage}>
+            <TextInput.Content value={nickname} onChange={onChangeInput} />
           </TextInput.Border>
         </TextInput>
       )}

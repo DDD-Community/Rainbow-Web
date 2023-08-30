@@ -8,13 +8,11 @@ type TextInputBorderProps = {
   errorMessage?: string;
   className?: string;
   disabled?: boolean;
-  maxLength?: number;
 };
 
 export function TextInputBorder({
   errorMessage,
   disabled,
-  maxLength,
   children,
   className
 }: PropsWithChildren<TextInputBorderProps>) {
@@ -37,7 +35,7 @@ export function TextInputBorder({
       >
         {children}
       </div>
-      {(errorMessage || !!maxLength) && <p className="text-primary-default">{errorMessage}</p>}
+      {errorMessage && <p className="m-12-500 text-primary-default">{errorMessage}</p>}
     </>
   );
 }

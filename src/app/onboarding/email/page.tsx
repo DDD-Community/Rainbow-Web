@@ -37,7 +37,7 @@ export default function Email() {
     setActive(!combinedValue);
   };
 
-  const canActiveNextButton = active;
+  const canActiveNextButton = Boolean(!email || isEmailDuplicated || active);
 
   return (
     <div className="w-343 flex flex-col justify-center">
