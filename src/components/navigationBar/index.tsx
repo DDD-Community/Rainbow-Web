@@ -1,4 +1,4 @@
-import Image from "next/image";
+import React from "react";
 import { IconXMark, IconBack } from "public/assets/images/icons";
 
 interface NavigationBarProps {
@@ -17,36 +17,32 @@ export default function NavigationBar({
 }: NavigationBarProps) {
   return (
     <header className="flex justify-between items-center">
-      <BackButton
-        imageSrc={IconBack}
-        isShowButton={isBackButton}
-        onClickButton={onClickBackButton}
-      />
+      <BackButton isShowButton={isBackButton} onClickButton={onClickBackButton} />
 
       <HeaderTitle title={title} />
 
-      <CloseButton
-        imageSrc={IconXMark}
-        isShowButton={isCloseButton}
-        onClickButton={onClickCloseButton}
-      />
+      <CloseButton isShowButton={isCloseButton} onClickButton={onClickCloseButton} />
     </header>
   );
 }
 
 interface ButtonAreaProps {
-  imageSrc: string;
-  isShowButton: boolean;
-  onClickButton: () => void;
+  children?: React.ReactNode;
+  isShowButton?: boolean;
+  onClickButton?: () => void;
 }
 
 function BackButton({
-  imageSrc = "",
   isShowButton = false,
   onClickButton = () => {}
-}: ButtonAreaProps) {
+}: {
+  isShowButton?: boolean;
+  onClickButton?: () => void;
+}) {
   return (
-    <ButtonArea imageSrc={imageSrc} isShowButton={isShowButton} onClickButton={onClickButton} />
+    <ButtonArea isShowButton={isShowButton} onClickButton={onClickButton}>
+      <IconBack alt="back icon" />
+    </ButtonArea>
   );
 }
 
@@ -55,30 +51,27 @@ function HeaderTitle({ title }: { title: string }) {
 }
 
 function CloseButton({
-  imageSrc = "",
   isShowButton = false,
   onClickButton = () => {}
-}: ButtonAreaProps) {
+}: {
+  isShowButton?: boolean;
+  onClickButton?: () => void;
+}) {
   return (
-    <ButtonArea imageSrc={imageSrc} isShowButton={isShowButton} onClickButton={onClickButton} />
+    <ButtonArea isShowButton={isShowButton} onClickButton={onClickButton}>
+      <IconXMark alt="close icon" onClick={onClickButton} />
+    </ButtonArea>
   );
 }
 
-function ButtonArea({
-  imageSrc = "",
-  isShowButton = false,
-  onClickButton = () => {}
-}: ButtonAreaProps) {
+function ButtonArea({ children, isShowButton = false, onClickButton = () => {} }: ButtonAreaProps) {
   return (
-    <div className="min-w-[24px]">
-      {isShowButton && (
-        <Image
-          src={imageSrc}
-          className="cursor-pointer"
-          onClick={onClickButton}
-          alt="Back Button"
-        />
-      )}
-    </div>
+    <button
+      type="button"
+      className={`min-w-[24px] ${isShowButton ? "" : "invisible"}`}
+      onClick={onClickButton}
+    >
+      {children}
+    </button>
   );
 }
