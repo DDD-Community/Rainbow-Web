@@ -10,7 +10,9 @@ import {
   genderState,
   birthDateState,
   salaryState,
-  checkingState
+  checkingState,
+  userFormState,
+  kakaoIdState
 } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
@@ -23,6 +25,8 @@ export default function Checking() {
   const birthDate = useRecoilValue(birthDateState);
   const salary = useRecoilValue(salaryState);
   const setChecking = useSetRecoilState(checkingState);
+  const setUserForm = useSetRecoilState(userFormState);
+  const kakaoId = useRecoilValue(kakaoIdState);
 
   useEffect(() => {
     setChecking(true);
@@ -37,13 +41,15 @@ export default function Checking() {
 
   const handleNext = () => {
     const formData = {
-      email,
-      nickname,
-      gender,
       birthDate,
+      email,
+      gender,
+      kakaoId,
+      nickname,
       salary
     };
     console.log("제출 폼 데이터:", formData);
+    setUserForm(formData);
   };
 
   return (
@@ -68,7 +74,7 @@ export default function Checking() {
       </div>
       <Information className="py-3">내 정보는 내 프로필에서 다시 수정할 수 있어요</Information>
       <ButtonField>
-        <Link href="/member/onboarding/contract" className="w-full">
+        <Link href="/onboarding/contract" className="w-full">
           <PrimaryButton color="default" size="small" onClick={handleNext}>
             확인
           </PrimaryButton>
