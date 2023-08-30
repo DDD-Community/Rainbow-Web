@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { LoginDataType } from "@/src/constant/api.constant";
 import { authInstance } from "@/src/api/auth/client";
 import { kakaoIdState } from "@/src/recoil/user.atoms";
