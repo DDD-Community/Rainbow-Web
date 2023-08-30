@@ -21,12 +21,19 @@ export function SelectEmail({ options, onChange, errorMessage }: SelectProps) {
   const [input, setInput] = useRecoilState(emailState);
   const [selectedValue, setSelectedValue] = useState<string>("@선택");
   const selectRef = useRef<HTMLDivElement | null>(null);
+  const [errorKorean, setErrorKorean] = useState("");
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(event.target.value);
+    const inputValue = event.target.value;
+    setInput(inputValue);
+    if (/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(inputValue)) {
+      setErrorKorean("이메일에는 한글을 사용할 수 없습니다.");
+    } else {
+      setErrorKorean("");
+    }
   };
 
   const handleOptionSelect = (value: string) => {
@@ -49,11 +56,16 @@ export function SelectEmail({ options, onChange, errorMessage }: SelectProps) {
     };
   }, []);
 
-  const errorCss =
+  const errorDuplicateCss =
     errorMessage && "border-[1px] border-primary-default focus-within:border-primary-default";
+  const errorKoreanCss =
+    errorKorean && "border-[1px] border-primary-default focus-within:border-primary-default";
   return (
     <>
-      <div className={twMerge("relative inline-block w-full", errorCss)} ref={selectRef}>
+      <div
+        className={twMerge("relative inline-block w-full", errorDuplicateCss, errorKoreanCss)}
+        ref={selectRef}
+      >
         <div
           className={twMerge(
             "flex justify-between",
@@ -96,7 +108,8 @@ export function SelectEmail({ options, onChange, errorMessage }: SelectProps) {
           </div>
         )}
       </div>
-      {errorMessage && <p className="text-primary-default">{errorMessage}</p>}
+      {errorMessage && <p className="m-12-500 text-primary-default">{errorMessage}</p>}
+      {errorKorean && <p className="m-12-500 text-primary-default">{errorKorean}</p>}
     </>
   );
 }
