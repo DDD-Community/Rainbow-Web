@@ -20,12 +20,17 @@ export const genderState = atom<string>({
   default: ""
 });
 
-export const birthdayState = atom<string>({
-  key: "birthdayState",
+export const birthDateState = atom<string>({
+  key: "birthDateState",
   default: ""
 });
 
 export const salaryState = atom<string>({
   key: "salaryState",
   default: ""
+});
+
+export const checkingState = atom<boolean>({
+  key: "checkingState",
+  default: false
 });
