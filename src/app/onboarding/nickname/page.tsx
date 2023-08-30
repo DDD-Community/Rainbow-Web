@@ -60,9 +60,6 @@ export default function Nickname() {
           </TextInput.Border>
         </TextInput>
       )}
-      {isNicknameDuplicated && (
-        <div className="text-red-500 mt-2">이미 사용 중인 닉네임입니다.</div>
-      )}
       <ButtonField>
         {checkingValue ? (
           <Link href="/onboarding/checking" className="w-full flex justify-end">
