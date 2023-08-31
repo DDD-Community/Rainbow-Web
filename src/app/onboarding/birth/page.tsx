@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-globals */
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -16,6 +18,10 @@ export default function Birth() {
   const nicknameValue = useRecoilValue(nicknameState);
 
   const checkingValue = useRecoilValue(checkingState);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState(false);
+
+  const isNumber = (value: any) => /^[0-9]*$/.test(value);
 
   useEffect(() => {
     if (birth) {
@@ -23,6 +29,10 @@ export default function Birth() {
       setYear(savedYear);
       setMonth(savedMonth);
       setDate(savedDate);
+    }
+    if (!isNumber(year) || !isNumber(month) || !isNumber(date)) {
+      setErrorMessage("년, 월, 일은 숫자로 입력해주세요.");
+      setError(true);
     }
   }, [birth]);
 
@@ -32,6 +42,18 @@ export default function Birth() {
     const dateNum = parseInt(date, 10);
 
     const birthDate = new Date(yearNum, monthNum - 1, dateNum + 1);
+
+    if (
+      isNaN(yearNum) ||
+      isNaN(monthNum) ||
+      isNaN(dateNum) ||
+      birthDate.getMonth() !== monthNum - 1
+    ) {
+      setErrorMessage("유효한 날짜를 입력해주세요.");
+      setError(true);
+      return;
+    }
+
     const formattedBirthDate = birthDate.toISOString().split("T")[0];
     setBirth(formattedBirthDate);
   };
@@ -49,7 +71,7 @@ export default function Birth() {
     else if (label === "일") setDate(value);
   };
 
-  const canActiveNextButton = Boolean(!year || !month || !date);
+  const canActiveNextButton = Boolean(!year || !month || !date || error);
 
   return (
     <div className="w-343 flex flex-col justify-center">
@@ -73,6 +95,7 @@ export default function Birth() {
           </TextInput>
         ))}
       </div>
+      {errorMessage && <div className="m-12-500 text-primary-default ">{errorMessage}</div>}
       <div>
         <ButtonField>
           {checkingValue ? (
