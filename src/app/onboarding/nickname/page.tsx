@@ -17,7 +17,8 @@ export default function Nickname() {
 
   useEffect(() => {
     async function checkNicknameDuplication() {
-      if (nickname) {
+      if (nickname && nickname.length <= 16) {
+        // 닉네임 길이 확인
         try {
           const response = authInstance.get(
             `/members/nickname/check?nickname=${encodeURIComponent(nickname)}`
