@@ -17,7 +17,8 @@ export default function Email() {
 
   useEffect(() => {
     async function checkNicknameDuplication() {
-      if (email) {
+      if (email && /^[A-Za-z0-9+_.-]+@(.+)$/.test(email)) {
+        // 올바른 이메일 형식 검사
         try {
           const response = authInstance.get(
             `/members/email/check?email=${encodeURIComponent(email)}`
@@ -27,6 +28,8 @@ export default function Email() {
         } catch (error) {
           console.error("Error checking nickname duplication:", error);
         }
+      } else {
+        setIsEmailDuplicated(false); // 올바르지 않은 이메일 형식일 경우 중복 여부 초기화
       }
     }
 
