@@ -3,14 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Link from "next/link";
-import { checkingState, nicknameState } from "@/src/recoil/user.atoms";
+import { checkingState, nickNameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
 import { authInstance } from "@/src/api/auth/client";
 
 export default function Nickname() {
-  const [nickname, setNickname] = useRecoilState(nicknameState);
+  const [nickname, setNickname] = useRecoilState(nickNameState);
   const [isNicknameDuplicated, setIsNicknameDuplicated] = useState(false);
   const checkingValue = useRecoilValue(checkingState);
   const [errorMessage, setErrorMessage] = useState("");

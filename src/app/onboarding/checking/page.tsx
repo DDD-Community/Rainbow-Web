@@ -6,13 +6,13 @@ import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 import {
   emailState,
-  nicknameState,
+  nickNameState,
   genderState,
   birthDateState,
   salaryState,
   checkingState,
   userFormState,
-  kakaoIdState
+  kaKaoIdState
 } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
@@ -20,20 +20,20 @@ import { Information } from "@/src/components/Information/Information";
 
 export default function Checking() {
   const email = useRecoilValue(emailState);
-  const nickname = useRecoilValue(nicknameState);
+  const nickName = useRecoilValue(nickNameState);
   const gender = useRecoilValue(genderState);
   const birthDate = useRecoilValue(birthDateState);
   const salary = useRecoilValue(salaryState);
   const setChecking = useSetRecoilState(checkingState);
   const setUserForm = useSetRecoilState(userFormState);
-  const kakaoId = useRecoilValue(kakaoIdState);
+  const kaKaoId = useRecoilValue(kaKaoIdState);
 
   useEffect(() => {
     setChecking(true);
   }, []);
 
   const data = [
-    { id: uuidv4(), label: "닉네임", value: nickname, link: "/onboarding/nickname" },
+    { id: uuidv4(), label: "닉네임", value: nickName, link: "/onboarding/nickname" },
     { id: uuidv4(), label: "성별", value: gender, link: "/onboarding/gender" },
     { id: uuidv4(), label: "생일", value: birthDate, link: "/onboarding/birth" },
     { id: uuidv4(), label: "연봉", value: salary, link: "/onboarding/salary" }
@@ -44,8 +44,8 @@ export default function Checking() {
       birthDate,
       email,
       gender,
-      kakaoId,
-      nickname,
+      kaKaoId,
+      nickName,
       salary
     };
     console.log("제출 폼 데이터:", formData);

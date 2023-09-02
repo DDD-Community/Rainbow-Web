@@ -8,14 +8,14 @@ import Link from "next/link";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
-import { birthDateState, checkingState, nicknameState } from "@/src/recoil/user.atoms";
+import { birthDateState, checkingState, nickNameState } from "@/src/recoil/user.atoms";
 
 export default function Birth() {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [date, setDate] = useState("");
   const [birth, setBirth] = useRecoilState(birthDateState);
-  const nicknameValue = useRecoilValue(nicknameState);
+  const nicknameValue = useRecoilValue(nickNameState);
 
   const checkingValue = useRecoilValue(checkingState);
   const [errorMessage, setErrorMessage] = useState("");

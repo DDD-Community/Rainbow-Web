@@ -5,7 +5,7 @@ import { useSetRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
 import { LoginDataType } from "@/src/constant/api.constant";
 import { authInstance } from "@/src/api/auth/client";
-import { kakaoIdState } from "@/src/recoil/user.atoms";
+import { kaKaoIdState } from "@/src/recoil/user.atoms";
 
 interface LoginResponseType {
   data: LoginDataType;
@@ -25,8 +25,8 @@ export const LoginHandler = (code: string) =>
 
 function Kakao() {
   const router = useRouter();
-  const code: string = new URL(process.env.NEXT_PUBLIC_DOMAIN ?? "").searchParams.get("code")!;
-  const setKakaoId = useSetRecoilState(kakaoIdState);
+  const code: string = new URL(document.URL).searchParams.get("code")!;
+  const setKakaoId = useSetRecoilState(kaKaoIdState);
 
   useEffect(() => {
     LoginHandler(code).then(kakaoId => {
