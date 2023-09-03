@@ -7,8 +7,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/auth/kakao",
-        destination: "http://43.201.219.27:8080/auth/kakao"
+        source: "/:path*",
+        destination: "http://apis.buybye.kr:8080/:path*"
       }
     ];
   },

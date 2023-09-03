@@ -17,7 +17,7 @@ export const instance = axios.create({
 
 export const authInstance = axios.create({
   baseURL: "http://apis.buybye.kr:8080",
-  withCredentials: false,
+  withCredentials: true,
   headers: {
     // Authorization: `${getAccessTokenLocalStorage()}`
   }
