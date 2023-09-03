@@ -33,3 +33,12 @@
 //     // 클라이언트 코드 테스트 종료
 //   });
 // });
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+let currentURL;
+
+if (Cypress) {
+  currentURL = Cypress.env("currentDomain");
+} else {
+  currentURL = window.location.href;
+}
