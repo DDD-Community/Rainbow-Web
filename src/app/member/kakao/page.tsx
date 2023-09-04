@@ -28,7 +28,9 @@ export const LoginHandler = (code: string) =>
 
 function Kakao() {
   const router = useRouter();
-  const code: string = new URL(window.location.href).searchParams.get("code")!;
+  const code: string = new URL(
+    typeof window !== "undefined" ? window.location.href : ""
+  ).searchParams.get("code")!;
   const setKakaoId = useSetRecoilState(kaKaoIdState);
   const setEmail = useSetRecoilState(emailState);
 
