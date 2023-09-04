@@ -5,7 +5,7 @@ export const contractAgreedState = atom<boolean>({
   default: false
 });
 
-export const kakaoIdState = atom<number>({
+export const kaKaoIdState = atom<number>({
   key: "kakaoIdState",
   default: 0
 });
@@ -15,7 +15,7 @@ export const emailState = atom<string>({
   default: ""
 });
 
-export const nicknameState = atom<string>({
+export const nickNameState = atom<string>({
   key: "nicknameState",
   default: ""
 });
@@ -44,8 +44,8 @@ interface FormData {
   birthDate: string;
   email: string;
   gender: string;
-  kakaoId: number;
-  nickname: string;
+  kaKaoId: number;
+  nickName: string;
   salary: string;
 }
 
@@ -55,8 +55,8 @@ export const userFormState = atom<FormData>({
     birthDate: "",
     email: "",
     gender: "",
-    kakaoId: 0,
-    nickname: "",
+    kaKaoId: 0,
+    nickName: "",
     salary: ""
   }
 });

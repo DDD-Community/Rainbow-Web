@@ -2,7 +2,7 @@
 
 import { useRecoilState, useRecoilValue } from "recoil";
 import Link from "next/link";
-import { checkingState, genderState, nicknameState } from "@/src/recoil/user.atoms";
+import { checkingState, genderState, nickNameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import {
@@ -14,7 +14,7 @@ import {
 
 export default function Gender() {
   const [gender, setGender] = useRecoilState(genderState);
-  const nicknameValue = useRecoilValue(nicknameState);
+  const nicknameValue = useRecoilValue(nickNameState);
 
   const checkingValue = useRecoilValue(checkingState);
 
