@@ -2,26 +2,15 @@
 
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { nickNameState, userFormState } from "@/src/recoil/user.atoms";
+import { nickNameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import UserCard from "@/src/components/userCard";
-import { authInstance } from "@/src/api/auth/client";
 
 export default function Following() {
   const nicknameValue = useRecoilValue(nickNameState);
-  const userFormValue = useRecoilValue(userFormState);
-
-  const fetchAuth = () => authInstance.post(`/members/signUp`, userFormValue);
 
   const handleNext = async () => {
-    fetchAuth().then(response => {
-      const JWT = response.data.accessToken;
-      if (JWT) {
-        localStorage.setItem("EXIT_LOGIN_TOKEN", JWT);
-        console.log("로그인 성공");
-      }
-    });
     console.log(`${nicknameValue}님 정보 등록이 완료 되었습니다.`);
   };
   return (
