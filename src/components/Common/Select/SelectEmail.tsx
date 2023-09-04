@@ -19,7 +19,9 @@ interface SelectProps {
 export function SelectEmail({ options, onChange, errorMessage }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useRecoilState(emailState);
+
   const atIndex = email.indexOf("@");
+
   const userEmail = atIndex !== -1 ? email.slice(0, atIndex) : "";
   const [input, setInput] = useState(userEmail);
 
@@ -34,8 +36,8 @@ export function SelectEmail({ options, onChange, errorMessage }: SelectProps) {
   };
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
-    setInput(inputValue);
     setEmail(inputValue + selectedValue);
+    setInput(inputValue);
     if (/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(inputValue)) {
       setErrorKorean("이메일에는 한글을 사용할 수 없습니다.");
     } else {
@@ -44,10 +46,10 @@ export function SelectEmail({ options, onChange, errorMessage }: SelectProps) {
   };
 
   const handleOptionSelect = (value: string) => {
+    const combinedValue = `${input}@${value}`;
+    setEmail(combinedValue);
     setSelectedValue(value);
-    setEmail(input + value);
     setIsOpen(false);
-    const combinedValue = `${input} ${value}`;
     onChange(combinedValue);
   };
 
@@ -70,16 +72,15 @@ export function SelectEmail({ options, onChange, errorMessage }: SelectProps) {
     errorKorean && "border-[1px] border-primary-default focus-within:border-primary-default";
   return (
     <>
-      <div
-        className={twMerge("relative inline-block w-full", errorDuplicateCss, errorKoreanCss)}
-        ref={selectRef}
-      >
+      <div className={twMerge("relative inline-block w-full")} ref={selectRef}>
         <div
           className={twMerge(
             "flex justify-between",
             "ring-gray-200 ring-1 w-full rounded-[6px] p-2",
             "r-16-400",
-            "focus-within:ring-primary-default"
+            "focus-within:ring-primary-default",
+            errorDuplicateCss,
+            errorKoreanCss
           )}
         >
           <input
