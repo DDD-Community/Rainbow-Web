@@ -13,10 +13,26 @@ export default function Contract() {
   const [contractAgreed, setContractAgreed] = useRecoilState(contractAgreedState);
   const [submitted, setSubmitted] = useState(false);
   const checkboxData = [
-    { id: 1, label: "개인 정보 취급 방침 (필수)" },
-    { id: 2, label: "사용자 이용 약관 (필수)" },
-    { id: 3, label: "제 3자 정보 제공 동의 (필수)" },
-    { id: 4, label: "만 14세 이상입니다 (필수)" }
+    {
+      id: 1,
+      label: "개인 정보 취급 방침",
+      link: "https://www.notion.so/ceaa67fb76344d3eb7aa53f9e4e69815?pvs=4"
+    },
+    {
+      id: 2,
+      label: "사용자 이용 약관",
+      link: "https://www.notion.so/7ff6ae8f70144af3b40f2e13e3f68528?pvs=4"
+    },
+    {
+      id: 3,
+      label: "제 3자 정보 제공 동의",
+      link: "https://www.notion.so/3-f986b22d6f5b46f8bcf50b1a06f20fbc?pvs=4"
+    },
+    {
+      id: 4,
+      label: "만 14세 이상입니다",
+      link: "https://www.notion.so/14-759400ed1cac4a2592a75fbc0bb84e71?pvs=4"
+    }
   ];
 
   const [checkboxStates, setCheckboxStates] = useState(
@@ -79,7 +95,9 @@ export default function Contract() {
                   isChecked={checkboxStates[checkbox.id]}
                   onChange={() => handleCheckboxChange(checkbox.id)}
                 />
-                {/* <div className="m-14-500 text-gray-500">보기</div> */}
+                <Link href={checkbox.link} className="m-14-500 text-gray-500">
+                  보기
+                </Link>
               </div>
             ))}
           </div>

@@ -2,15 +2,15 @@
 
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { nicknameState } from "@/src/recoil/user.atoms";
+import { nickNameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import UserCard from "@/src/components/userCard";
 
 export default function Following() {
-  const nicknameValue = useRecoilValue(nicknameState);
+  const nicknameValue = useRecoilValue(nickNameState);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     console.log(`${nicknameValue}님 정보 등록이 완료 되었습니다.`);
   };
   return (

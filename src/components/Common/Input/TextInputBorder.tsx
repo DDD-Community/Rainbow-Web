@@ -35,7 +35,7 @@ export function TextInputBorder({
       >
         {children}
       </div>
-      {errorMessage && <p className="text-primary-default">{errorMessage}</p>}
+      {errorMessage && <p className="m-12-500 text-primary-default">{errorMessage}</p>}
     </>
   );
 }
