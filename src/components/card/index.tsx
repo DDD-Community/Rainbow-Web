@@ -70,8 +70,8 @@ export function CardEmojiBoard({ className = "", emojiList = [] }: CardEmojiBoar
         "flex flex-wrap gap-2 w-full min-h-[50px] px-3 py-2.5 border rounded-lg bg-[#F8F9FC]"
       )}
     >
-      {emojiList.map((emojiType: EmojiTypes) => (
-        <div className="w-[30px] h-[30px]">
+      {emojiList.map((emojiType: EmojiTypes, index) => (
+        <div key={index} className="w-[30px] h-[30px]">
           <Image src={convertEmotionIcon(emojiType)} alt={`emotion ${emojiType} icon`} />
         </div>
       ))}

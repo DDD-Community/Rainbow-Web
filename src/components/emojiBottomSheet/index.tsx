@@ -33,12 +33,13 @@ export default function EmojiTooltipModal({
   return (
     <BottomSheet open={open} onDismiss={onDismiss}>
       <div className="flex items-center justify-center gap-3 mb-14">
-        {emojiKeys.map(key => {
+        {emojiKeys.map((key, index) => {
           const emojiName = key as EmojiTypes;
           const emojiImageSrc = emojiIcons[emojiName as EmojiTypes];
 
           return (
             <Image
+              key={index}
               src={emojiImageSrc}
               className="w-14 h-14 cursor-pointer"
               onClick={() => onClickEmoji(emojiName)}
