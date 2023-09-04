@@ -28,20 +28,21 @@ export const LoginHandler = (code: string) =>
 
 function Kakao() {
   const router = useRouter();
-  const code: string = new URL(
-    typeof window !== "undefined" ? window.location.href : ""
-  ).searchParams.get("code")!;
+  const url = typeof window !== "undefined" ? new URL(window.location.href) : null;
+  const code: string | null = url ? url.searchParams.get("code") : null;
   const setKakaoId = useSetRecoilState(kaKaoIdState);
   const setEmail = useSetRecoilState(emailState);
 
   useEffect(() => {
-    LoginHandler(code).then(data => {
-      if (data && data.kakaoId && data.email) {
-        setKakaoId(data.kakaoId);
-        setEmail(data.email);
-        router.replace("/onboarding");
-      }
-    });
+    if (code !== null) {
+      LoginHandler(code).then(data => {
+        if (data && data.kakaoId && data.email) {
+          setKakaoId(data.kakaoId);
+          setEmail(data.email);
+          router.replace("/onboarding");
+        }
+      });
+    }
   }, []);
 
   return <div />;
