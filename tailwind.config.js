@@ -36,6 +36,9 @@ module.exports = {
       colors: {
         dimmed: "rgba(0, 0, 0, 0.24)",
 
+        "kakao-yellow": "#fee500",
+        "kakao-brown": "#3c1e1e",
+
         "gray-700": "#27262E",
         "gray-600": "#5E6066",
         "gray-500": "#8C9097",

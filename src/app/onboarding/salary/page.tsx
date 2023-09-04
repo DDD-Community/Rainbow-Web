@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Link from "next/link";
-import { nicknameState, salaryState } from "@/src/recoil/user.atoms";
+import { nickNameState, salaryState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { authInstance } from "@/src/api/auth/client";
@@ -24,7 +24,7 @@ interface ApiResponse {
 export default function Salary() {
   const [options, setOptions] = useState<SalaryOption[]>([]);
   const [selectedValue, setSelectedValue] = useRecoilState(salaryState);
-  const nicknameValue = useRecoilValue(nicknameState);
+  const nicknameValue = useRecoilValue(nickNameState);
 
   useEffect(() => {
     // 서버에서 데이터를 받아올 API 요청 예시 (실제로는 서버에서 데이터를 가져와야 함)
