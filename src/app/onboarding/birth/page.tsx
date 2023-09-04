@@ -21,7 +21,14 @@ export default function Birth() {
   const [errorMessage, setErrorMessage] = useState("");
   const [error, setError] = useState(false);
 
-  const isNumber = (value: any) => /^[0-9]*$/.test(value);
+  const isNumber = (value: any) => {
+    if (/^[0-9]*$/.test(value)) {
+      return true; // 숫자로만 이루어진 경우 true 반환
+    }
+    setErrorMessage("년, 월, 일은 숫자로 입력해주세요.");
+    setError(true);
+    return false; // 숫자로만 이루어져 있지 않으면 false 반환
+  };
 
   useEffect(() => {
     if (birth) {
@@ -31,8 +38,12 @@ export default function Birth() {
       setDate(savedDate);
     }
     if (!isNumber(year) || !isNumber(month) || !isNumber(date)) {
+      // 한글을 입력하거나 숫자가 아닌 경우에만 오류 표시
       setErrorMessage("년, 월, 일은 숫자로 입력해주세요.");
       setError(true);
+    } else {
+      setErrorMessage(""); // 숫자 입력이 올바른 경우 오류 메시지를 초기화
+      setError(false);
     }
   }, [birth]);
 
@@ -42,17 +53,6 @@ export default function Birth() {
     const dateNum = parseInt(date, 10);
 
     const birthDate = new Date(yearNum, monthNum - 1, dateNum + 1);
-
-    if (
-      isNaN(yearNum) ||
-      isNaN(monthNum) ||
-      isNaN(dateNum) ||
-      birthDate.getMonth() !== monthNum - 1
-    ) {
-      setErrorMessage("유효한 날짜를 입력해주세요.");
-      setError(true);
-      return;
-    }
 
     const formattedBirthDate = birthDate.toISOString().split("T")[0];
     setBirth(formattedBirthDate);
