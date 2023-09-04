@@ -18,8 +18,14 @@ interface SelectProps {
 
 export function SelectEmail({ options, onChange, errorMessage }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useRecoilState(emailState);
-  const [selectedValue, setSelectedValue] = useState<string>("@선택");
+  const [email, setEmail] = useRecoilState(emailState);
+  const atIndex = email.indexOf("@");
+  const userEmail = atIndex !== -1 ? email.slice(0, atIndex) : "";
+  const [input, setInput] = useState(userEmail);
+
+  const emailType = atIndex !== -1 ? email.slice(atIndex) : "@선택";
+  const [selectedValue, setSelectedValue] = useState<string>(emailType);
+
   const selectRef = useRef<HTMLDivElement | null>(null);
   const [errorKorean, setErrorKorean] = useState("");
 
@@ -29,6 +35,7 @@ export function SelectEmail({ options, onChange, errorMessage }: SelectProps) {
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     setInput(inputValue);
+    setEmail(inputValue + selectedValue);
     if (/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(inputValue)) {
       setErrorKorean("이메일에는 한글을 사용할 수 없습니다.");
     } else {
@@ -38,6 +45,7 @@ export function SelectEmail({ options, onChange, errorMessage }: SelectProps) {
 
   const handleOptionSelect = (value: string) => {
     setSelectedValue(value);
+    setEmail(input + value);
     setIsOpen(false);
     const combinedValue = `${input} ${value}`;
     onChange(combinedValue);
