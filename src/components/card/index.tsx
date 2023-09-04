@@ -1,13 +1,11 @@
 import Image from "next/image";
 import { EmojiTypes } from "@/types";
-import {
-  IconAngry,
-  IconHappy,
-  IconSad,
-  IconSurprised,
-  IconThinking,
-  IconEmotionPlus
-} from "@/public/assets/images/emotion";
+import IconAngry from "@/public/assets/images/emotion/angry";
+import IconHappy from "@/public/assets/images/emotion/happy";
+import IconSad from "@/public/assets/images/emotion/sad";
+import IconSurprised from "@/public/assets/images/emotion/surprised";
+import IconThinking from "@/public/assets/images/emotion/thinking";
+import IconEmotionPlus from "@/public/assets/images/emotion/plus";
 import { addCommasToNumber } from "@/src/types/utils/utils";
 
 export interface CardHeaderProps {
@@ -24,12 +22,9 @@ export function CardHeader({ title = "", price = 0, onClick }: CardHeaderProps) 
           price
         )}원`}</div>
         <div className="w-6 h-6">
-          <Image
-            src={IconEmotionPlus}
-            className="cursor-pointer"
-            onClick={onClick}
-            alt="emotion plus icon"
-          />
+          <button type="button" className="cursor-pointer" onClick={onClick}>
+            <IconEmotionPlus width={24} height={24} />
+          </button>
         </div>
       </div>
     </div>
@@ -72,7 +67,8 @@ export function CardEmojiBoard({ className = "", emojiList = [] }: CardEmojiBoar
     >
       {emojiList.map((emojiType: EmojiTypes, index) => (
         <div key={index} className="w-[30px] h-[30px]">
-          <Image src={convertEmotionIcon(emojiType)} alt={`emotion ${emojiType} icon`} />
+          {convertEmotionIcon(emojiType)}
+          {/* <Image src={convertEmotionIcon(emojiType)} alt={`emotion ${emojiType} icon`} /> */}
         </div>
       ))}
     </div>
@@ -82,16 +78,16 @@ export function CardEmojiBoard({ className = "", emojiList = [] }: CardEmojiBoar
 const convertEmotionIcon = (emotionType: EmojiTypes) => {
   switch (emotionType) {
     case "angry":
-      return IconAngry;
+      return <IconAngry />;
     case "happy":
-      return IconHappy;
+      return <IconHappy />;
     case "sad":
-      return IconSad;
+      return <IconSad />;
     case "surprised":
-      return IconSurprised;
+      return <IconSurprised />;
     case "thinking":
-      return IconThinking;
+      return <IconThinking />;
     default:
-      return IconEmotionPlus;
+      return <IconEmotionPlus />;
   }
 };
