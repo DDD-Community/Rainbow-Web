@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
+const PROXY = process.env.NEXT_PUBLIC_DOMAIN === "http://localhost:3000/" ? "" : "/proxy";
 
 // const getAccessTokenLocalStorage = () => {
 //   const accessToken = localStorage.getItem("EXIT_LOGIN_TOKEN");
