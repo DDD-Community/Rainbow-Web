@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
@@ -133,19 +136,26 @@ function Calendar({ onDateSelect, onDaySelect }: calendarProps) {
               >
                 {dayNumber > 0 && dayNumber <= daysInMonth && (
                   <>
-                    <button
-                      type="button"
-                      className="w-full h-full"
-                      onClick={() => {
-                        handleDateClick(dayNumber);
-                      }}
-                    />
+                    {dayNumber === selectedDay ? (
+                      <div
+                        className="w-full h-full flex justify-center items-center mb-[5px]"
+                        onClick={() => {
+                          handleDateClick(dayNumber);
+                        }}
+                      >
+                        <div className="flex-center sb-10-600 text-white">{dayNumber}</div>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        className="w-full h-full"
+                        onClick={() => {
+                          handleDateClick(dayNumber);
+                        }}
+                      />
+                    )}
                     <div className="flex-center sb-10-600 text-gray-800">
-                      {dayNumber > 0 && dayNumber <= daysInMonth
-                        ? isToday
-                          ? "오늘"
-                          : dayNumber
-                        : ""}
+                      {isToday ? "오늘" : dayNumber}
                     </div>
                   </>
                 )}
