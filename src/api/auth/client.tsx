@@ -19,7 +19,7 @@ export const authInstance = axios.create({
   baseURL: "http://apis.buybye.kr:8080",
   withCredentials: true,
   headers: {
-    // Authorization: `${getAccessTokenLocalStorage()}`
+    Authorization: `${getAccessTokenLocalStorage()}`
   }
 });
 
