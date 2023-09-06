@@ -1,17 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import Link from "next/link";
 import { contractAgreedState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
-import FormSubmitComponent from "@/src/hooks/FormSubmitComponent";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import Checkbox from "@/src/components/Common/Checkbox";
 
 export default function Contract() {
   const [contractAgreed, setContractAgreed] = useRecoilState(contractAgreedState);
-  const [submitted, setSubmitted] = useState(false);
   const checkboxData = [
     {
       id: 1,
@@ -49,10 +47,12 @@ export default function Contract() {
     }));
   };
 
-  const handleNext = (): void => {
-    setContractAgreed(true);
-    setSubmitted(true);
-  };
+  // 모든 체크박스 상태가 변경될 때마다 호출되는 useEffect 사용
+  useEffect(() => {
+    const allChecked = Object.values(checkboxStates).every(value => value);
+    setContractAgreed(allChecked);
+  }, [checkboxStates]);
+
   const toggleAllCheckboxes = () => {
     const allChecked = Object.values(checkboxStates).every(value => value);
     const updatedStates = Object.fromEntries(
@@ -60,57 +60,50 @@ export default function Contract() {
     );
     setCheckboxStates(updatedStates);
   };
+  const canActiveNextButton = Boolean(!contractAgreed);
 
   return (
     <div className="w-343 flex flex-col justify-center">
-      {contractAgreed ? (
-        <>
-          <span className="sb-25-600 text-gray-700">약관에 동의하셨습니다.</span>
-          <FormSubmitComponent />
-        </>
-      ) : (
-        <div className="flex flex-col items-start pt-20 pb-10">
-          <div>👀</div>
-          <div className="sb-25-600 text-gray-700">
-            앱 사용을 위해 <br />
-            약관에 동의해주세요
-          </div>
-          <div className="r-12-400 text-gray-600 py-5">
-            정확한 지출 데이터 조회와 쉬운 바이바이 서비스 제공을 위해 약관 동의가 꼭 필요합니다.
-          </div>
-          <div className="bg-gray-50 w-full rounded-[10px] flex items-center p-3 border-[1px] border-gray-50 mb-3">
-            <Checkbox
-              size="m"
-              labelText="전체 약관에 동의합니다"
-              isChecked={Object.values(checkboxStates).every(value => value)}
-              onChange={toggleAllCheckboxes}
-            />
-          </div>
-          <div className="flex flex-col w-full">
-            {checkboxData.map(checkbox => (
-              <div className="flex justify-between p-1">
-                <Checkbox
-                  size="s"
-                  labelText={checkbox.label}
-                  isChecked={checkboxStates[checkbox.id]}
-                  onChange={() => handleCheckboxChange(checkbox.id)}
-                />
-                <Link href={checkbox.link} className="m-14-500 text-gray-500">
-                  보기
-                </Link>
-              </div>
-            ))}
-          </div>
-          <ButtonField>
-            <Link href="/onboarding/following" className="w-full">
-              <PrimaryButton color="default" size="large" onClick={handleNext}>
-                동의하고 가입하기
-              </PrimaryButton>
-            </Link>
-          </ButtonField>
+      <div className="flex flex-col items-start pt-20 pb-10">
+        <div>👀</div>
+        <div className="sb-25-600 text-gray-700">
+          앱 사용을 위해 <br />
+          약관에 동의해주세요
         </div>
-      )}
-      {submitted && <p>폼이 성공적으로 제출되었습니다!</p>}
+        <div className="r-12-400 text-gray-600 py-5">
+          정확한 지출 데이터 조회와 쉬운 바이바이 서비스 제공을 위해 약관 동의가 꼭 필요합니다.
+        </div>
+        <div className="bg-gray-50 w-full rounded-[10px] flex items-center p-3 border-[1px] border-gray-50 mb-3">
+          <Checkbox
+            size="m"
+            labelText="전체 약관에 동의합니다"
+            isChecked={Object.values(checkboxStates).every(value => value)}
+            onChange={toggleAllCheckboxes}
+          />
+        </div>
+        <div className="flex flex-col w-full">
+          {checkboxData.map(checkbox => (
+            <div className="flex justify-between p-1">
+              <Checkbox
+                size="s"
+                labelText={checkbox.label}
+                isChecked={checkboxStates[checkbox.id]}
+                onChange={() => handleCheckboxChange(checkbox.id)}
+              />
+              <Link href={checkbox.link} className="m-14-500 text-gray-500">
+                보기
+              </Link>
+            </div>
+          ))}
+        </div>
+        <ButtonField>
+          <Link href="/onboarding/following" className="w-full">
+            <PrimaryButton color="default" size="large" disabled={canActiveNextButton}>
+              동의하고 가입하기
+            </PrimaryButton>
+          </Link>
+        </ButtonField>
+      </div>
     </div>
   );
 }

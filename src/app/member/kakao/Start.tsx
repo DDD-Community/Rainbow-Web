@@ -17,6 +17,7 @@ function Start() {
           <IconBuyBye />
         </div>
         <LottieAnimation animation={Intro} className="px-[26px] mt-[26px]" />
+        {/* <Logout /> */}
         <ButtonField className="mb-[20px]">
           <Link
             href={KAKAO_URL}

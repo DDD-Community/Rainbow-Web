@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { twMerge } from "tailwind-merge";
 import { IconPlusSmall, IconCheckedSmall } from "@/public/assets/images/icons";
 
 const TEXT_USER_STATE = "새로 가입한 또래친구";
@@ -9,21 +10,26 @@ interface UserCardProps {
   userImage?: string;
   userState?: userStateTypes;
   isChecked?: boolean;
+  className?: string;
 }
 
 function UserCard({
   nickName = "홍길동",
   userImage = "",
   userState = "new",
-  isChecked = false
+  isChecked = false,
+  className
 }: UserCardProps) {
   return (
     <div
-      className={`flex items-center gap-2.5	w-full h-[60px] ${
-        isChecked ? "bg-primary-bg-disabled" : "bg-gray-50"
-      } rounded-10 border ${
-        isChecked ? "border-primary-disabled" : "border-black/[0.03]"
-      } pl-[16px] pr-[22px]`}
+      className={twMerge(
+        `flex items-center gap-2.5	w-full h-[60px] ${
+          isChecked ? "bg-primary-bg-disabled" : "bg-gray-50"
+        } rounded-10 border ${
+          isChecked ? "border-primary-disabled" : "border-black/[0.03]"
+        } pl-[16px] pr-[22px]`,
+        className
+      )}
     >
       {/* user image */}
       <div className="shrink-0 flex justify-center w-10 h-10 rounded-[50%] border-black/[0.03] bg-gray-300">
