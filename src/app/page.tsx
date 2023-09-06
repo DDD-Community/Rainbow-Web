@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import Main from "./main/page";
+import Start from "./member/kakao/Start";
 
 function Home() {
   return (
     <div className="flex-center align-items justify-between h-screen">
-      <Main />
+      <Start />
     </div>
   );
 }

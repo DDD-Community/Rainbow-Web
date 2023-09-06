@@ -1,24 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import Link from "next/link";
 import { nickNameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import UserCard from "@/src/components/userCard";
-// import { authInstance } from "@/src/api/auth/client";
+import { instance } from "@/src/api/auth/client";
 
 export default function Following() {
   const nicknameValue = useRecoilValue(nickNameState);
-  // useEffect(() => {
-  //   const fetchAuth = () => authInstance.get(`/members/suggestedMemberList`);
-  //   fetchAuth().then(response => {
-  //     console.log(response.data);
-  //     const followingData = response.data;
-  //     if (followingData) console.log(followingData.members.nickName);
-  //   });
-  // }, []);
+  useEffect(() => {
+    const fetchAuth = () => instance.get(`/members/suggestedMemberList`);
+    fetchAuth().then(response => {
+      console.log(response.data);
+      const followingData = response.data;
+      if (followingData) console.log(followingData.members.nickName);
+    });
+  }, []);
 
   const handleNext = async () => {
     console.log(`${nicknameValue}님 정보 등록이 완료 되었습니다.`);

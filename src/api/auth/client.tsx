@@ -2,16 +2,16 @@ import axios from "axios";
 
 const PROXY = process.env.NEXT_PUBLIC_DOMAIN === "http://localhost:3000/" ? "" : "/proxy";
 
-// const getAccessTokenLocalStorage = () => {
-//   const accessToken = localStorage.getItem("EXIT_LOGIN_TOKEN");
-//   return accessToken ? `Bearer ${accessToken}` : "";
-// };
+const getAccessTokenLocalStorage = () => {
+  const accessToken = localStorage.getItem("EXIT_LOGIN_TOKEN");
+  return accessToken ? `Bearer ${accessToken}` : "";
+};
 
 export const instance = axios.create({
   baseURL: PROXY,
   withCredentials: false,
   headers: {
-    // Authorization: `${getAccessTokenLocalStorage()}`
+    Authorization: `${getAccessTokenLocalStorage()}`
   }
 });
 
