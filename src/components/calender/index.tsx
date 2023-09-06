@@ -7,6 +7,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { IconChecked } from "@/public/assets/images/icons";
 
 const daysOfWeek = ["월", "화", "수", "목", "금", "토", "일"];
 interface calendarProps {
@@ -143,7 +144,9 @@ function Calendar({ onDateSelect, onDaySelect }: calendarProps) {
                           handleDateClick(dayNumber);
                         }}
                       >
-                        <div className="flex-center sb-10-600 text-white">{dayNumber}</div>
+                        <div className="flex-center sb-10-600 text-white">
+                          {isToday ? dayNumber : <IconChecked fill="white" />}
+                        </div>
                       </div>
                     ) : (
                       <button
