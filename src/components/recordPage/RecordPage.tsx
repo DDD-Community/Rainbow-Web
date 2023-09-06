@@ -1,5 +1,8 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from "react";
 import { RoundedButton } from "../Common/Button/Rounded/Sub/RoundedButton";
+import EmblaCarousel from "./EmblaCarousel";
 
 type RecordPageProps = {
   selectedDate: any;
@@ -20,6 +23,7 @@ function RecordPage({ selectedDate, selectedDay }: RecordPageProps) {
       <RoundedButton color="default" size="large" className="mt-3">
         + 지출추가
       </RoundedButton>
+      <EmblaCarousel />
     </div>
   );
 }
