@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import Calendar from "@/src/components/calender";
 import RecordPage from "@/src/components/recordPage/RecordPage";
