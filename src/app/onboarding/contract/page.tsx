@@ -96,7 +96,7 @@ export default function Contract() {
           ))}
         </div>
         <ButtonField>
-          <Link href="/main" className="w-full">
+          <Link href="/onboarding/following" className="w-full">
             <PrimaryButton
               color="default"
               size="large"
