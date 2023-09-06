@@ -3,7 +3,7 @@
 import useEmblaCarousel, { EmblaOptionsType } from "embla-carousel-react";
 import React, { useState } from "react";
 import EmojiBottomSheet from "../emojiBottomSheet";
-import UserFeedList from "./UserFeedList";
+// import UserFeedList from "./UserFeedList";
 
 type PropType = {
   options?: EmblaOptionsType;
@@ -22,9 +22,7 @@ function EmblaCarousel(props: PropType) {
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container flex flex-col">
-          <div className="embla__slide">
-            <UserFeedList openEmojiBottomSheet={openEmojiBottomSheet} />
-          </div>
+          {/* <UserFeedList openEmojiBottomSheet={openEmojiBottomSheet} /> */}
         </div>
         <EmojiBottomSheet
           open={isEmojiBottomSheet}

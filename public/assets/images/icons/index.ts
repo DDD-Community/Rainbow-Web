@@ -22,3 +22,5 @@ export { default as IconMy } from "./my.svg";
 
 export { default as IconKakao } from "./logo-kakao.svg";
 export { default as IconBuyBye } from "./logo-buybye.svg";
+
+export { default as Pen } from "./pen.svg";
