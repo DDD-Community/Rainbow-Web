@@ -13,7 +13,7 @@ export const TOKEN = {
 export interface JsonWebKey {
   data: string;
   email: string;
-  kakaoId: number;
+  kaKaoId: number;
   message: string;
 }
 
