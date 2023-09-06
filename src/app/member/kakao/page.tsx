@@ -17,10 +17,10 @@ export const fetchAuth = (code: string): Promise<LoginResponseType> =>
 export const LoginHandler = (code: string) =>
   fetchAuth(code).then((response: LoginResponseType) => {
     const firstData = response.data.data;
-    if (firstData.email && firstData.kakaoId) {
+    if (firstData.email && firstData.kaKaoId) {
       return {
         email: firstData.email,
-        kakaoId: firstData.kakaoId
+        kaKaoId: firstData.kaKaoId
       };
     }
     return null;
@@ -36,8 +36,8 @@ function Kakao() {
   useEffect(() => {
     if (code !== null) {
       LoginHandler(code).then(data => {
-        if (data && data.kakaoId && data.email) {
-          setKakaoId(data.kakaoId);
+        if (data && data.kaKaoId && data.email) {
+          setKakaoId(data.kaKaoId);
           setEmail(data.email);
           router.replace("/onboarding");
         }
