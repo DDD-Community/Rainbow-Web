@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import Link from "next/link";
 import { contractAgreedState } from "@/src/recoil/user.atoms";
@@ -10,7 +10,6 @@ import Checkbox from "@/src/components/Common/Checkbox";
 
 export default function Contract() {
   const [contractAgreed, setContractAgreed] = useRecoilState(contractAgreedState);
-  const [submitted, setSubmitted] = useState(false);
   const checkboxData = [
     {
       id: 1,
@@ -48,10 +47,12 @@ export default function Contract() {
     }));
   };
 
-  const handleNext = (): void => {
-    setContractAgreed(true);
-    setSubmitted(true);
-  };
+  // 모든 체크박스 상태가 변경될 때마다 호출되는 useEffect 사용
+  useEffect(() => {
+    const allChecked = Object.values(checkboxStates).every(value => value);
+    setContractAgreed(allChecked);
+  }, [checkboxStates]);
+
   const toggleAllCheckboxes = () => {
     const allChecked = Object.values(checkboxStates).every(value => value);
     const updatedStates = Object.fromEntries(
@@ -59,7 +60,7 @@ export default function Contract() {
     );
     setCheckboxStates(updatedStates);
   };
-  const canActiveNextButton = Boolean(!submitted || !contractAgreed);
+  const canActiveNextButton = Boolean(!contractAgreed);
 
   return (
     <div className="w-343 flex flex-col justify-center">
@@ -97,12 +98,7 @@ export default function Contract() {
         </div>
         <ButtonField>
           <Link href="/onboarding/following" className="w-full">
-            <PrimaryButton
-              color="default"
-              size="large"
-              onClick={handleNext}
-              disabled={canActiveNextButton}
-            >
+            <PrimaryButton color="default" size="large" disabled={canActiveNextButton}>
               동의하고 가입하기
             </PrimaryButton>
           </Link>
