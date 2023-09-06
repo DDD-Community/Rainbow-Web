@@ -22,7 +22,6 @@ function Main() {
           <div className="sb-15-600 text-gray-700 ">닉네임 </div>
           <div className="m-15-500 text-gray-600 mx-[10px]">이번달 지출</div>
         </div>
-
         <Calendar onDateSelect={handleDateSelect} onDaySelect={handleDaySelct} />
       </div>
       <RecordPage selectedDate={selectedDate} selectedDay={selectedDay} />

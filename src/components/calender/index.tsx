@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
 "use client";
@@ -12,13 +13,9 @@ interface calendarProps {
 
 function Calendar({ onDateSelect, onDaySelect }: calendarProps) {
   const currentDate = new Date();
-
-  const koreaDateTime = new Intl.DateTimeFormat("ko-KR", {
-    timeZone: "Asia/Seoul"
-  }).format(currentDate);
-
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
+  const [selectedDay, setSelectedDay] = useState<number | null>(currentDate.getDate());
 
   const calendarRef = useRef(null);
   const startXRef = useRef(null);
@@ -91,6 +88,7 @@ function Calendar({ onDateSelect, onDaySelect }: calendarProps) {
     const dayOfWeek = daysOfWeek[clickedDate.getDay()];
     onDateSelect(formattedDate);
     onDaySelect(dayOfWeek);
+    setSelectedDay(dayNumber);
     console.log(`Clicked on ${currentYear}-${currentMonth + 1}-${dayNumber}`);
   };
   return (
@@ -104,11 +102,8 @@ function Calendar({ onDateSelect, onDaySelect }: calendarProps) {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="text-center">
-          <h1 className="text-3xl font-semibold mb-2">
-            {currentYear}년 {currentMonth + 1}월
-          </h1>
-          <p>한국 시간: {koreaDateTime}</p>
+        <div className="flex m-14-500 text-gray-700">
+          {currentYear}년 {currentMonth + 1}월
         </div>
         <div className="mt-5 grid grid-cols-7 gap-4 m-12-500">
           {daysOfWeek.map(day => (
@@ -121,12 +116,18 @@ function Calendar({ onDateSelect, onDaySelect }: calendarProps) {
           ))}
           {Array.from({ length: daysInMonth }, (_, index) => {
             const dayNumber = index + 1;
+            const isToday =
+              currentYear === currentDate.getFullYear() &&
+              currentMonth === currentDate.getMonth() &&
+              dayNumber === currentDate.getDate();
             return (
               <div
                 key={`day-${index}`}
                 className={`flex-center p-1 ${
                   dayNumber > 0 && dayNumber <= daysInMonth
-                    ? "bg-gray-200 cursor-pointer rounded-lg ring-1 ring-gray-300 w-8 h-8"
+                    ? `bg-gray-200 cursor-pointer rounded-lg ring-1 ring-gray-300 w-8 h-8 ${
+                        dayNumber === selectedDay ? "bg-gray-700" : ""
+                      }`
                     : ""
                 }`}
               >
@@ -140,7 +141,11 @@ function Calendar({ onDateSelect, onDaySelect }: calendarProps) {
                       }}
                     />
                     <div className="flex-center sb-10-600 text-gray-800">
-                      {dayNumber > 0 && dayNumber <= daysInMonth ? dayNumber : ""}
+                      {dayNumber > 0 && dayNumber <= daysInMonth
+                        ? isToday
+                          ? "오늘"
+                          : dayNumber
+                        : ""}
                     </div>
                   </>
                 )}
