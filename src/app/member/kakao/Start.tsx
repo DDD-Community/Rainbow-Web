@@ -6,6 +6,7 @@ import { Intro } from "@/public/assets/motions";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { KAKAO_URL } from "@/src/constant/api.constant";
 import LottieAnimation from "@/src/hooks/LottieAnimation";
+import Logout from "@/src/components/logout";
 
 function Start() {
   return (
@@ -17,6 +18,7 @@ function Start() {
           <IconBuyBye />
         </div>
         <LottieAnimation animation={Intro} className="px-[26px] mt-[26px]" />
+        <Logout />
         <ButtonField className="mb-[20px]">
           <Link
             href={KAKAO_URL}

@@ -3,7 +3,11 @@ import { RoundedButton } from "../Common/Button/Rounded/Sub/RoundedButton";
 
 function Logout() {
   const handleLogout = () => {
-    localStorage.removeItem("EXIT_LOGIN_TOKEN");
+    if (localStorage.getItem("EXIT_LOGIN_TOKEN")) {
+      localStorage.removeItem("EXIT_LOGIN_TOKEN");
+    }
+
+    console.log("로그아웃 버튼이 눌렸습니다");
   };
 
   return (
