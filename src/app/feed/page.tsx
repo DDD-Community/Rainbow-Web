@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
+
 import EmojiBottomSheet from "@/src/components/emojiBottomSheet";
 import { UserFeedCard } from "@/src/components/userFeedCard";
 import SearchBar from "@/src/components/searchBar";
 import { DividerHorizon } from "@/src/components/Common/Divider";
 
+import useFooterNavBar from "@/src/hooks/useFooterNavBar";
+
 export default function FeedPage() {
+  useFooterNavBar({ open: true, type: "feed" });
+
   const [searchWord, setSearchWord] = useState("");
 
   const [isEmojiBottomSheet, setIsEmojiBottomSheet] = useState(false);
@@ -15,7 +20,7 @@ export default function FeedPage() {
   const closeEmojiBottomSheet = () => setIsEmojiBottomSheet(false);
 
   return (
-    <main className="flex flex-col gap-5 pt-3.5 px-4 pb-5">
+    <main className="flex flex-col gap-5 pt-3.5 px-4 pb-5 overflow-auto">
       {/* Search Area */}
       <div className="flex gap-3">
         <SearchBar value={searchWord} onChange={e => setSearchWord(e.target.value)} />
