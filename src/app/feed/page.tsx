@@ -20,7 +20,7 @@ export default function FeedPage() {
   const closeEmojiBottomSheet = () => setIsEmojiBottomSheet(false);
 
   return (
-    <main className="flex flex-col gap-5 pt-3.5 px-4 pb-5 overflow-auto">
+    <main className="flex flex-col gap-5 pt-3.5 px-4 pb-5">
       {/* Search Area */}
       <div className="flex gap-3">
         <SearchBar value={searchWord} onChange={e => setSearchWord(e.target.value)} />
