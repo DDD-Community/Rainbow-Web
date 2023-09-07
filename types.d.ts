@@ -22,3 +22,6 @@ export type ExpenseCategoryTypes = {
   name: string;
   isOpen?: boolean;
 };
+
+// footer nav bar active types
+export type FooterNavBarActiveTypes = "main" | "feed" | "alarm" | "my";
