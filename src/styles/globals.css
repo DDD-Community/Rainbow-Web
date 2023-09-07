@@ -13,6 +13,9 @@ html, body {
 
   --dimmed: rgba(0, 0, 0, 0.24);
 
+  --kakao-yellow: #fee500;
+  --kakao-brown: #3c1e1e;
+
   --gray-700: #27262e;
   --gray-600: #5e6066;
   --gray-500: #8c9097;

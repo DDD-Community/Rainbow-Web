@@ -5,5 +5,8 @@ module.exports = {
     // setupNodeEvents(on, config) {
     //   // implement node event listeners here
     // },
+  },
+  env: {
+    currentDomain: "http://localhost:3000"
   }
 };

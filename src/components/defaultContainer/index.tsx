@@ -1,21 +1,13 @@
 import React from "react";
-import BottomNavigationBar from "@/src/components/bottomNavigationBar";
 
 interface DefaultContainerProps {
-  isBottomNavBar?: boolean;
   children: React.ReactNode;
 }
 
-function DefaultContainer({ children, isBottomNavBar = true }: DefaultContainerProps) {
+function DefaultContainer({ children }: DefaultContainerProps) {
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex flex-col w-[375px] h-full shadow-md mx-auto">
-        <div className="w-343 min-w-343 max-w-375 h-full my-0 mx-auto overflow-auto">
-          {children}
-        </div>
-
-        {isBottomNavBar && <BottomNavigationBar />}
-      </div>
+    <div className="shadow-md mx-auto">
+      <div className="w-375 min-w-375 max-w-375 min-h-screen my-0 mx-auto">{children}</div>
     </div>
   );
 }

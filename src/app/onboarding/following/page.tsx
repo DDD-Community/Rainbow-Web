@@ -1,16 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { nicknameState } from "@/src/recoil/user.atoms";
+import Link from "next/link";
+import { nickNameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import UserCard from "@/src/components/userCard";
+import { instance } from "@/src/api/auth/client";
 
 export default function Following() {
-  const nicknameValue = useRecoilValue(nicknameState);
+  const nicknameValue = useRecoilValue(nickNameState);
+  useEffect(() => {
+    const fetchAuth = () => instance.get(`/members/suggestedMemberList`);
+    fetchAuth().then(response => {
+      console.log(response.data);
+      const followingData = response.data;
+      if (followingData) console.log(followingData.members.nickName);
+    });
+  }, []);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     console.log(`${nicknameValue}님 정보 등록이 완료 되었습니다.`);
   };
   return (
@@ -26,13 +36,17 @@ export default function Following() {
           내 데이터에 따라 나이와 연봉이 비슷한 친구들을 추천드려요.
         </div>
       </div>
-      <div>
-        <UserCard nickName="왕보리" userImage="" userState="new" isChecked />
+      <div className="flex flex-col">
+        <UserCard className="m-[10px]" nickName="왕보리" userImage="" userState="new" isChecked />
+        <UserCard className="m-[10px]" nickName="왕모리" userImage="" userState="new" />
+        <UserCard className="m-[10px]" nickName="왕도리" userImage="" userState="new" isChecked />
       </div>
       <ButtonField>
-        <PrimaryButton color="default" size="large" onClick={handleNext}>
-          시작하기
-        </PrimaryButton>
+        <Link href="/main" className="w-full">
+          <PrimaryButton color="default" size="large" onClick={handleNext}>
+            시작하기
+          </PrimaryButton>
+        </Link>
       </ButtonField>
     </div>
   );
