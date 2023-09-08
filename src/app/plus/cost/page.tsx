@@ -2,12 +2,14 @@
 
 import React from "react";
 import { useRecoilState } from "recoil";
+import { useRouter } from "next/navigation";
 import NavigationBar from "src/components/navigationBar";
 import { expensePriceState } from "src/recoil/plus.atoms";
 import Section from "./section";
 import Footer from "./footer";
 
 export default function PlusCostPage() {
+  const router = useRouter();
   const [price, setPrice] = useRecoilState(expensePriceState);
 
   const handlePrice = (value: string) => {
@@ -25,7 +27,7 @@ export default function PlusCostPage() {
 
   return (
     <main className="py-3.5 px-4">
-      <NavigationBar title="지출 금액" isBackButton onClickBackButton={() => {}} />
+      <NavigationBar title="지출 금액" isBackButton onClickBackButton={() => router.back()} />
 
       <Section
         price={price}
