@@ -18,12 +18,12 @@ import { expenseCategoryState } from "src/recoil/plus.atoms";
 
 export default function PlusCostPage() {
   const router = useRouter();
+  // eslint-disable-next-line
   const [expenseCategory, setExpenseCategory] = useRecoilState(expenseCategoryState);
   const [searchValue, setSearchValue] = useState<string>("");
   const [categories, setCategories] = useState<ExpenseCategoryTypes[]>([]);
 
   const handleClickCategory = (category: ExpenseCategoryTypes) => {
-    console.log(expenseCategory);
     setExpenseCategory(category);
     router.push("/plus/reg");
   };

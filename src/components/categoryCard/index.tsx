@@ -1,21 +1,20 @@
 import Image from "next/image";
 import { twMerge } from "@/src/types/utils/tailwind.util";
 import { IconPlusSmall } from "@/public/assets/images/icons";
-import {
-  IconHandHeart,
-  IconBook,
-  IconBus,
-  IconMedical,
-  IconFood,
-  IconHealth,
-  IconDrink,
-  IconClothes,
-  IconHome,
-  IconPhone,
-  IconDailyNecessity,
-  IconTicket,
-  IconOthers
-} from "@/public/assets/images/icons/category";
+
+import IconHandHeart from "@/public/assets/images/icons/category/handHeart";
+import IconBook from "@/public/assets/images/icons/category/book";
+import IconBus from "@/public/assets/images/icons/category/bus";
+import IconMedical from "@/public/assets/images/icons/category/medical";
+import IconFood from "@/public/assets/images/icons/category/food";
+import IconHealth from "@/public/assets/images/icons/category/health";
+import IconDrink from "@/public/assets/images/icons/category/drink";
+import IconClothes from "@/public/assets/images/icons/category/clothes";
+import IconHome from "@/public/assets/images/icons/category/home";
+import IconPhone from "@/public/assets/images/icons/category/phone";
+import IconDailyNecessity from "@/public/assets/images/icons/category/dailyNecessity";
+import IconTicket from "@/public/assets/images/icons/category/ticket";
+import IconOthers from "@/public/assets/images/icons/category/others";
 
 export const TEXT_PUBLIC_SCOPE_OPEN = "전체 공개";
 export const TEXT_PUBLIC_SCOPE_CLOSE = "비공개";
@@ -67,36 +66,36 @@ function CategoryCard({
 }
 export default CategoryCard;
 
-const convertBgImage = (categoryType: CategoryType): string => {
+const convertBgImage = (categoryType: CategoryType) => {
   switch (categoryType) {
     case "hand-heart":
-      return IconHandHeart;
+      return <IconHandHeart width={40} height={40} />;
     case "book":
-      return IconBook;
+      return <IconBook width={40} height={40} />;
     case "bus":
-      return IconBus;
+      return <IconBus width={40} height={40} />;
     case "medical":
-      return IconMedical;
+      return <IconMedical width={40} height={40} />;
     case "food":
-      return IconFood;
+      return <IconFood width={40} height={40} />;
     case "health":
-      return IconHealth;
+      return <IconHealth width={40} height={40} />;
     case "drink":
-      return IconDrink;
+      return <IconDrink width={40} height={40} />;
     case "clothes":
-      return IconClothes;
+      return <IconClothes width={40} height={40} />;
     case "home":
-      return IconHome;
+      return <IconHome width={40} height={40} />;
     case "phone":
-      return IconPhone;
+      return <IconPhone width={40} height={40} />;
     case "daily-necessity":
-      return IconDailyNecessity;
+      return <IconDailyNecessity width={40} height={40} />;
     case "ticket":
-      return IconTicket;
+      return <IconTicket width={40} height={40} />;
     case "others":
-      return IconOthers;
+      return <IconOthers width={40} height={40} />;
     default:
-      return IconHandHeart;
+      return <IconHandHeart width={40} height={40} />;
   }
 };
 
@@ -147,15 +146,13 @@ export function CategoryImage({
       className={twMerge(
         width,
         height,
-        "shrink-0 flex justify-center rounded-[10px] border-black/[0.03]",
+        "flex items-center justify-center shrink-0 flex justify-center rounded-[10px] border-black/[0.03]",
         convertBgColorName(categoryType)
       )}
     >
-      <Image
-        src={convertBgImage(categoryType)}
-        className="w-full h-full p-[12.5px] cursor-pointer"
-        alt={`${categoryType} icon`}
-      />
+      <div className="flex items-center justify-center cursor-pointer p-[12.5px] [&>*:first-child]:w-[100%]">
+        {convertBgImage(categoryType)}
+      </div>
     </div>
   );
 }
