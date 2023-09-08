@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
+
 import EmojiBottomSheet from "@/src/components/emojiBottomSheet";
 import { UserFeedCard } from "@/src/components/userFeedCard";
 import SearchBar from "@/src/components/searchBar";
 import { DividerHorizon } from "@/src/components/Common/Divider";
 
+import useFooterNavBar from "@/src/hooks/useFooterNavBar";
+
 export default function FeedPage() {
+  useFooterNavBar({ open: true, type: "feed" });
+
   const [searchWord, setSearchWord] = useState("");
 
   const [isEmojiBottomSheet, setIsEmojiBottomSheet] = useState(false);
