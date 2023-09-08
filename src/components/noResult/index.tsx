@@ -1,6 +1,5 @@
 import React from "react";
-import Image from "next/image";
-import { IconNoText } from "@/public/assets/images/emotion";
+import IconNoText from "@/public/assets/images/emotion/no-text";
 
 const NO_RESULT_DESCRIPTION = "또래 친구가 올린 지출 내역이 아직 없어요";
 
@@ -13,7 +12,7 @@ interface NoResultProps extends DescriptionAreaProps {}
 export default function NoResult({ descriptions = [NO_RESULT_DESCRIPTION] }: NoResultProps) {
   return (
     <div className="flex flex-col items-center gap-4">
-      <Image src={IconNoText} alt="No Text Emotion Image" />
+      <IconNoText />
 
       <DescriptionArea descriptions={descriptions} />
     </div>
