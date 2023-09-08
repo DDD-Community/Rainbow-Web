@@ -2,11 +2,11 @@ import { atom } from "recoil";
 import { FooterNavBarActiveTypes } from "@/types";
 
 export const isOpenState = atom<boolean>({
-  key: "expensePrice",
+  key: "footerNavBarOpen",
   default: false
 });
 
 export const activeTypeState = atom<FooterNavBarActiveTypes>({
-  key: "expenseCategory",
+  key: "footerNavBarActiveType",
   default: "main"
 });
