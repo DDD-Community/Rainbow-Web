@@ -2,12 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  height: 100%;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
   --dimmed: rgba(0, 0, 0, 0.24);
+
+  --kakao-yellow: #fee500;
+  --kakao-brown: #3c1e1e;
 
   --gray-700: #27262e;
   --gray-600: #5e6066;

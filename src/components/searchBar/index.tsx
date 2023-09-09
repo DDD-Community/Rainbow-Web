@@ -9,12 +9,16 @@ interface SearchBarProps {
   value: string;
   placeholder?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function SearchBar({
   placeholder = DEFAULT_PLACEHOLDER_TEXT,
   value = "",
-  onChange = () => {}
+  onChange = () => {},
+  onFocus = () => {},
+  onBlur = () => {}
 }: SearchBarProps) {
   return (
     <div className="relative w-full">
@@ -26,6 +30,8 @@ function SearchBar({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     </div>
   );

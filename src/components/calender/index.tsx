@@ -1,20 +1,25 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
 "use client";
 
 import { useState, useRef } from "react";
-import "@/app/globals.css";
+import { IconChecked } from "@/public/assets/images/icons";
 
-const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+const daysOfWeek = ["월", "화", "수", "목", "금", "토", "일"];
+interface calendarProps {
+  onDateSelect: (date: string) => void;
+  onDaySelect: any;
+}
 
-function Calendar() {
+function Calendar({ onDateSelect, onDaySelect }: calendarProps) {
   const currentDate = new Date();
-  const koreaDateTime = new Intl.DateTimeFormat("ko-KR", {
-    timeZone: "Asia/Seoul"
-  }).format(currentDate);
-
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
+  const [selectedDay, setSelectedDay] = useState<number | null>(currentDate.getDate());
 
   const calendarRef = useRef(null);
   const startXRef = useRef(null);
@@ -79,6 +84,15 @@ function Calendar() {
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
   const handleDateClick = (dayNumber: any) => {
+    const clickedDate = new Date(currentYear, currentMonth, dayNumber);
+    const formattedDate = `${clickedDate.getFullYear()}-${(clickedDate.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}-${clickedDate.getDate().toString().padStart(2, "0")}`;
+
+    const dayOfWeek = daysOfWeek[clickedDate.getDay()];
+    onDateSelect(formattedDate);
+    onDaySelect(dayOfWeek);
+    setSelectedDay(dayNumber);
     console.log(`Clicked on ${currentYear}-${currentMonth + 1}-${dayNumber}`);
   };
   return (
@@ -92,11 +106,8 @@ function Calendar() {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="text-center">
-          <h1 className="text-3xl font-semibold mb-2">
-            {currentYear}년 {currentMonth + 1}월
-          </h1>
-          <p>한국 시간: {koreaDateTime}</p>
+        <div className="flex m-14-500 text-gray-700">
+          {currentYear}년 {currentMonth + 1}월
         </div>
         <div className="mt-5 grid grid-cols-7 gap-4 m-12-500">
           {daysOfWeek.map(day => (
@@ -109,26 +120,45 @@ function Calendar() {
           ))}
           {Array.from({ length: daysInMonth }, (_, index) => {
             const dayNumber = index + 1;
+            const isToday =
+              currentYear === currentDate.getFullYear() &&
+              currentMonth === currentDate.getMonth() &&
+              dayNumber === currentDate.getDate();
             return (
               <div
                 key={`day-${index}`}
                 className={`flex-center p-1 ${
                   dayNumber > 0 && dayNumber <= daysInMonth
-                    ? "bg-gray-200 cursor-pointer rounded-lg ring-1 ring-gray-300 w-8 h-8"
+                    ? `bg-gray-200 cursor-pointer rounded-lg ring-1 ring-gray-300 w-8 h-8 ${
+                        dayNumber === selectedDay ? "bg-gray-700" : ""
+                      }`
                     : ""
                 }`}
               >
                 {dayNumber > 0 && dayNumber <= daysInMonth && (
                   <>
-                    <button
-                      type="button"
-                      className="w-full h-full"
-                      onClick={() => {
-                        handleDateClick(dayNumber);
-                      }}
-                    />
+                    {dayNumber === selectedDay ? (
+                      <div
+                        className="w-full h-full flex justify-center items-center mb-[5px]"
+                        onClick={() => {
+                          handleDateClick(dayNumber);
+                        }}
+                      >
+                        <div className="flex-center sb-10-600 text-white">
+                          {isToday ? dayNumber : <IconChecked fill="white" />}
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        className="w-full h-full"
+                        onClick={() => {
+                          handleDateClick(dayNumber);
+                        }}
+                      />
+                    )}
                     <div className="flex-center sb-10-600 text-gray-800">
-                      {dayNumber > 0 && dayNumber <= daysInMonth ? dayNumber : ""}
+                      {isToday ? "오늘" : dayNumber}
                     </div>
                   </>
                 )}
