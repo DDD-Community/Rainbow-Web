@@ -1,15 +1,15 @@
 const PRIMARY_DEFAULT_COLOR = "#27262E";
 
-interface CheckIconProps {
+interface IconProps {
   width?: number;
   height?: number;
   fill?: string;
 }
-export default function CheckIcon({
+export default function SearchIcon({
   width = 24,
   height = 24,
   fill = PRIMARY_DEFAULT_COLOR
-}: CheckIconProps) {
+}: IconProps) {
   return (
     <svg
       width={width}
@@ -28,7 +28,7 @@ export default function CheckIcon({
       </g>
       <defs>
         <clipPath id="clip0_520_3871">
-          <rect width="24" height="24" fill="white" />
+          <rect width={24} height={24} fill="white" />
         </clipPath>
       </defs>
     </svg>

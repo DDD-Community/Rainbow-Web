@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Fragment } from "react";
 import { SubTag, SecondaryTag } from "../tag";
 import { FeedCard, FeedCardProps } from "./feedCard";
 
@@ -75,7 +75,11 @@ function UserFeedInfo({
     <div className="flex items-center gap-2 pl-1">
       <div className="flex flex-col direction-row gap-0.5">
         <span className="sb-13-600 text-gray-700">{nickName}</span>
-        <div className="flex gap-0.5">{userTags.map(userTag => convertTag(userTag))}</div>
+        <div className="flex gap-0.5">
+          {userTags.map(userTag => (
+            <Fragment key={userTag}>{convertTag(userTag)}</Fragment>
+          ))}
+        </div>
       </div>
     </div>
   );

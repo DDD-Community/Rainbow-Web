@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Fragment } from "react";
 
 import EmojiBottomSheet from "@/src/components/emojiBottomSheet";
 import { UserFeedCard } from "@/src/components/userFeedCard";
@@ -8,7 +8,9 @@ import SearchBar from "@/src/components/searchBar";
 import { DividerHorizon } from "@/src/components/Common/Divider";
 import useFooterNavBar from "@/src/hooks/useFooterNavBar";
 import IconBack from "@/public/assets/images/icons/back";
+import NoResultArea from "@/src/components/noResult";
 import NickNameSearchArea from "./nickNameSearch";
+import { feedHandler } from "./feedHandler";
 
 export default function FeedPage() {
   useFooterNavBar({ open: true, type: "feed" });
@@ -17,6 +19,18 @@ export default function FeedPage() {
   const [isSearchNickNameFocus, setIsSearchNickNameFocus] = useState(false);
 
   const [isEmojiBottomSheet, setIsEmojiBottomSheet] = useState(false);
+  // const [selectedExpenseId, setSelectedExpenseId] = useState(0);
+  const [userFeedList, setUserFeedList] = useState([]);
+
+  useEffect(() => {
+    feedHandler().then(res => {
+      const { data } = res;
+
+      if (data.message === "ok") {
+        setUserFeedList(data.data);
+      }
+    });
+  }, []);
 
   const openEmojiBottomSheet = () => setIsEmojiBottomSheet(true);
   const closeEmojiBottomSheet = () => setIsEmojiBottomSheet(false);
@@ -45,7 +59,10 @@ export default function FeedPage() {
       {isSearchNickNameFocus ? (
         <NickNameSearchArea searchWord={searchWord} />
       ) : (
-        <UserFeedUserListArea onClickPlusButton={openEmojiBottomSheet} />
+        <UserFeedUserListArea
+          userFeedList={userFeedList}
+          onClickPlusButton={openEmojiBottomSheet}
+        />
       )}
 
       <section />
@@ -60,53 +77,61 @@ export default function FeedPage() {
 }
 
 interface FeedUserListAreaProps {
-  // userFeedList: any;
+  userFeedList: any;
   onClickPlusButton: () => void;
 }
 function UserFeedUserListArea({
-  // userFeedList = [],
+  userFeedList = [],
   onClickPlusButton = () => {}
 }: FeedUserListAreaProps) {
+  if (!!userFeedList.length === false) {
+    return (
+      <div className="mt-[44px]">
+        <NoResultArea descriptions={["또래 친구가 올린", "지출 내역이 아직 없어요"]} />
+      </div>
+    );
+  }
+
   return (
     <div>
-      <UserFeedCard
-        nickName="닉네임"
-        title="바이바이 샐러드"
-        price={42000}
-        content=""
-        imageSrcArray={[]}
-        emojiList={[]}
-        onClickPlusButton={onClickPlusButton}
-      />
+      {userFeedList.map((userFeed: any, index: number) => {
+        const {
+          // memberId,
+          nickName,
+          expenseResponse
+          // isFriend
+        } = userFeed;
 
-      <div className="my-[18px]">
-        <DividerHorizon />
-      </div>
+        const {
+          amount,
+          content,
+          // date: expanseDate,
+          expenseId,
+          imageList,
+          memo
+        } = expenseResponse;
 
-      <UserFeedCard
-        nickName="nickName"
-        userTags={["popular-expenses", "spending-buddy"]}
-        title="바이바이 샐러드"
-        price={42000}
-        content="집 근처에 있는 샐러드 가게에 갔는데 안사먹을 수가 없었다...진짜 대박 맛집이었어...애들아 다들 먹어....ㅋㅋㅋ"
-        imageSrcArray={[]}
-        emojiList={["angry", "angry", "angry", "surprised", "sad"]}
-        onClickPlusButton={onClickPlusButton}
-      />
+        return (
+          <Fragment key={expenseId}>
+            <UserFeedCard
+              nickName={nickName}
+              title={content}
+              price={amount}
+              content={memo}
+              imageSrcArray={imageList}
+              emojiList={[]}
+              onClickPlusButton={onClickPlusButton}
+            />
 
-      <div className="my-[18px]">
-        <DividerHorizon />
-      </div>
-
-      <UserFeedCard
-        nickName="nickName"
-        title="바이바이 샐러드"
-        price={42000}
-        content=""
-        imageSrcArray={[]}
-        emojiList={["angry", "angry", "angry", "surprised", "sad"]}
-        onClickPlusButton={onClickPlusButton}
-      />
+            {/* 경계선 마지막 제외 */}
+            {userFeedList.length - 1 !== index && (
+              <div className="my-[18px]">
+                <DividerHorizon />
+              </div>
+            )}
+          </Fragment>
+        );
+      })}
     </div>
   );
 }
