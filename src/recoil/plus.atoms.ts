@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { ExpenseCategoryTypes } from "@/types";
+import { CategoriesTypes } from "../app/plus/category/getCategories";
 
 export const expenseDetailState = atom<string>({
   key: "expenseDetail",
@@ -11,11 +11,12 @@ export const expensePriceState = atom<string>({
   default: ""
 });
 
-export const expenseCategoryState = atom<ExpenseCategoryTypes>({
+export const expenseCategoryState = atom<CategoriesTypes>({
   key: "expenseCategory",
   default: {
-    type: "clothes",
+    categoryId: 0,
     name: "",
-    isOpen: false
+    status: false,
+    customCategoryImage: "food"
   }
 });

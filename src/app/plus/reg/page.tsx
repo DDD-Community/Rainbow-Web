@@ -85,9 +85,9 @@ export default function PageLayout() {
       </div>
 
       <SelectedCategory
-        categoryType={expenseCategory.type}
+        categoryType={expenseCategory.customCategoryImage}
         text={expenseCategory.name}
-        isOpen={expenseCategory.isOpen}
+        isOpen={expenseCategory.status}
       />
 
       <div className="flex w-full gap-2.5">

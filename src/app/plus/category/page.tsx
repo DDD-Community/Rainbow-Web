@@ -1,9 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import * as queryKeys from "@/src/queries/queryKeys";
 import SearchBar from "src/components/searchBar";
 import { SubButton } from "src/components/Common/Button";
 import { RoundedButton } from "src/components/Common/Button/Rounded/Sub/RoundedButton";
@@ -13,35 +15,24 @@ import {
   CategoryImage
 } from "src/components/categoryCard";
 import NoResult from "@/src/components/noResult";
-import { ExpenseCategoryTypes } from "@/types";
 import { expenseCategoryState } from "src/recoil/plus.atoms";
+import { getCategories, CategoriesTypes } from "./getCategories";
 
 export default function PlusCostPage() {
   const router = useRouter();
   // eslint-disable-next-line
   const [expenseCategory, setExpenseCategory] = useRecoilState(expenseCategoryState);
   const [searchValue, setSearchValue] = useState<string>("");
-  const [categories, setCategories] = useState<ExpenseCategoryTypes[]>([]);
 
-  const handleClickCategory = (category: ExpenseCategoryTypes) => {
+  const { data: categories } = useQuery({
+    queryKey: queryKeys.PLUS_CATEGORIES,
+    queryFn: getCategories
+  });
+
+  const handleClickCategory = (category: CategoriesTypes) => {
     setExpenseCategory(category);
     router.push("/plus/reg");
   };
-
-  useEffect(() => {
-    setCategories([
-      {
-        type: "clothes",
-        name: "text",
-        isOpen: false
-      },
-      {
-        type: "book",
-        name: "book text",
-        isOpen: true
-      }
-    ]);
-  }, []);
 
   return (
     <main className="py-3.5 px-4">
@@ -54,7 +45,7 @@ export default function PlusCostPage() {
       <section>
         <CategoryHeader />
 
-        {categories.length ? (
+        {categories?.length ? (
           <CategoryList
             searchValue={searchValue}
             categories={categories}
@@ -86,26 +77,29 @@ function CategoryHeader() {
 
 interface CategoryListProps {
   searchValue: string;
-  categories: ExpenseCategoryTypes[];
-  onClickCategory?: (category: ExpenseCategoryTypes) => void;
+  categories: CategoriesTypes[];
+  onClickCategory?: (category: CategoriesTypes) => void;
 }
 function CategoryList({
   searchValue = "",
   categories = [],
   onClickCategory = () => {}
 }: CategoryListProps) {
+  console.log(categories);
   return (
     <div className="mt-1.5">
       {categories.map(category => {
-        const { type: categoryType, name: categoryName, isOpen } = category;
+        const {
+          categoryId,
+          customCategoryImage: categoryType,
+          name: categoryName,
+          status
+        } = category;
         const isView = categoryName.trim().indexOf(searchValue.trim()) >= 0;
 
         return (
           isView && (
-            <article
-              key={`${category.type}-${category.name}`}
-              className="flex justify-between items-center gap-2.5 py-2"
-            >
+            <article key={categoryId} className="flex justify-between items-center gap-2.5 py-2">
               <div className="flex gap-2.5">
                 <div>
                   <CategoryImage categoryType={categoryType} />
@@ -113,7 +107,7 @@ function CategoryList({
                 <div className="flex flex-col justify-center gap-0.5">
                   <span className="sb-13-600">{categoryName}</span>
                   <span className="m-11-500 text-gray-500">
-                    {isOpen ? TEXT_PUBLIC_SCOPE_OPEN : TEXT_PUBLIC_SCOPE_CLOSE}
+                    {status ? TEXT_PUBLIC_SCOPE_OPEN : TEXT_PUBLIC_SCOPE_CLOSE}
                   </span>
                 </div>
               </div>
