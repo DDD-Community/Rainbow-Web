@@ -9,19 +9,19 @@ import { CategoryImage, CategoryType } from "src/components/categoryCard";
 import Toggle from "@/src/components/toggle";
 
 const categoryTypes: CategoryType[] = [
+  "hand-heart",
   "book",
   "bus",
-  "clothes",
-  "daily-necessity",
-  "drink",
-  "food",
-  "hand-heart",
-  "health",
-  "home",
+  "ticket",
   "medical",
-  "others",
+  "daily-necessity",
+  "food",
+  "health",
+  "drink",
+  "clothes",
+  "home",
   "phone",
-  "ticket"
+  "others"
 ];
 
 export default function PlusAddCategoryPage() {
