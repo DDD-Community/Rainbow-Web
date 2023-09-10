@@ -40,10 +40,10 @@ export const showSecondaryToast = (text: string, useFull?: boolean, options?: To
   });
 };
 
-export const showInfomationToast = (text: string, useFull?: boolean, options?: ToastOptions) => {
+export const showInformationToast = (text: string, useFull?: boolean, options?: ToastOptions) => {
   toast(text, {
     icon: <IconExclamationMark />,
-    className: `infomation-toast ${useFull ? "w-[343px]" : ""}`,
+    className: `information-toast ${useFull ? "w-[343px]" : ""}`,
     ...DEFAULT_COMMON_TOAST_OPTIONS,
     ...options
   });
