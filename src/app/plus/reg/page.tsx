@@ -48,8 +48,6 @@ export default function PageLayout() {
   };
 
   const handleClickFileInputClearButton = (index: number) => {
-    console.log(index);
-
     // 이미지 2개 중 왼쪽 이미지를 먼저 지울 경우
     if (index === 0 && secondFileInputImage !== "") {
       if (inputFile1Ref.current && inputFile2Ref.current) {

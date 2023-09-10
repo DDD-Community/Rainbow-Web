@@ -85,7 +85,6 @@ function CategoryList({
   categories = [],
   onClickCategory = () => {}
 }: CategoryListProps) {
-  console.log(categories);
   return (
     <div className="mt-1.5">
       {categories.map(category => {

@@ -7,6 +7,8 @@ import { DividerHorizon } from "@/src/components/Common/Divider";
 import { PrimaryButton } from "src/components/Common/Button";
 import { CategoryImage, CategoryType } from "src/components/categoryCard";
 import Toggle from "@/src/components/toggle";
+import { showPrimaryToast, showInformationToast } from "@/src/types/utils/toast.util";
+import { postCategory } from "./postCategory";
 
 const categoryTypes: CategoryType[] = [
   "hand-heart",
@@ -37,6 +39,20 @@ export default function PlusAddCategoryPage() {
     const tempCategoryType =
       isSelectedCategoryType.length && isSelectedCategoryType === categoryType ? "" : categoryType;
     setIsSelectedCategoryType(tempCategoryType);
+  };
+
+  const handleAddCategory = async () => {
+    const responseStatus = await postCategory({
+      customCategoryImage: isSelectedCategoryType,
+      name: categoryValue,
+      status: isExpenseVisibility
+    });
+    if (responseStatus === 200) {
+      showPrimaryToast("카테고리가 추가되었어요");
+      router.replace("/plus/category");
+    } else {
+      showInformationToast("카테고리 추가에 실패했어요! 다시 시도해주세요!");
+    }
   };
 
   const isButtonActive = isSelectedCategoryType && categoryValue;
@@ -101,7 +117,7 @@ export default function PlusAddCategoryPage() {
           disabled={!isButtonActive}
           color={isButtonActive ? "default" : "disabled"}
           className="w-[141px] h-[46px]"
-          onClick={() => isButtonActive && console.log("is Active")}
+          onClick={() => isButtonActive && handleAddCategory()}
         >
           + 카테고리 추가
         </PrimaryButton>
