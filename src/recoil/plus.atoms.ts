@@ -20,3 +20,11 @@ export const expenseCategoryState = atom<CategoriesTypes>({
     customCategoryImage: "food"
   }
 });
+
+export const expenseDateState = atom({
+  key: "expenseDate",
+  default: {
+    date: "2023-09-11",
+    dailyExpenseId: 1
+  }
+});

@@ -16,14 +16,23 @@ import { PrimaryButton, SubButton } from "src/components/Common/Button";
 import { DividerHorizon } from "@/src/components/Common/Divider";
 import IconPlus from "public/assets/images/icons/plus";
 import { addCommasToNumber } from "src/types/utils/utils";
-import { expenseDetailState, expensePriceState, expenseCategoryState } from "src/recoil/plus.atoms";
+import {
+  expenseDetailState,
+  expensePriceState,
+  expenseCategoryState,
+  expenseDateState
+} from "src/recoil/plus.atoms";
 import IconXMark from "@/public/assets/images/icons/xMark";
+import { showPrimaryToast, showInformationToast } from "@/src/types/utils/toast.util";
+import { postExpense } from "./postExpense";
 
 export default function PageLayout() {
   const inputFile1Ref = useRef<HTMLInputElement>(null);
   const inputFile2Ref = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
+
+  const [expenseDate] = useRecoilState(expenseDateState);
   const [expenseDetail] = useRecoilState(expenseDetailState);
   const [expensePrice] = useRecoilState(expensePriceState);
   const [expenseCategory] = useRecoilState(expenseCategoryState);
@@ -70,6 +79,24 @@ export default function PageLayout() {
     }
   };
 
+  const handleRegExpense = async () => {
+    const responseStatus = await postExpense({
+      amount: Number(expensePrice),
+      categoryId: expenseCategory.categoryId,
+      content: expenseDetail,
+      memo: memoValue,
+      date: expenseDate.date,
+      dailyExpenseId: expenseDate.dailyExpenseId
+    });
+
+    if (responseStatus === 200) {
+      showPrimaryToast(`${expenseDetail} 지출이 등록되었어요`, true);
+      router.replace("/main");
+    } else {
+      showInformationToast("지출 등록에 실패했어요! 다시 시도해주세요!");
+    }
+  };
+
   return (
     <main className="py-3.5 px-4">
       <NavigationBar title="지출 등록" isBackButton onClickBackButton={() => router.back()} />
@@ -86,6 +113,7 @@ export default function PageLayout() {
         categoryType={expenseCategory.customCategoryImage}
         text={expenseCategory.name}
         isOpen={expenseCategory.status}
+        onClick={() => router.replace("/plus/category")}
       />
 
       <div className="flex w-full gap-2.5">
@@ -165,7 +193,7 @@ export default function PageLayout() {
           disabled={!isButtonActive}
           color={isButtonActive ? "default" : "disabled"}
           className="w-full h-[46px]"
-          onClick={() => {}}
+          onClick={handleRegExpense}
         >
           등록하기
         </PrimaryButton>
