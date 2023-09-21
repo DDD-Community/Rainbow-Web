@@ -5,6 +5,11 @@ export const contractAgreedState = atom<boolean>({
   default: false
 });
 
+export const memberIdState = atom<number>({
+  key: "memberIdState",
+  default: 0
+});
+
 export const kaKaoIdState = atom<number>({
   key: "kakaoIdState",
   default: 0
