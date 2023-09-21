@@ -9,7 +9,7 @@ import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { SelectEmail } from "@/src/components/Common/Select/SelectEmail";
 import { EMAIL } from "@/src/constant/select.constant";
-import { authInstance } from "@/src/api/auth/client";
+import { instance } from "@/src/api/auth/apis";
 import { emailState } from "@/src/recoil/user.atoms";
 
 export default function Email() {
@@ -26,7 +26,7 @@ export default function Email() {
           setIsEmailDuplicated(false);
         } else if (/^[A-Za-z0-9+_.-]+@(.+)$/.test(email)) {
           try {
-            const response = authInstance.get(
+            const response = instance.get(
               `/members/email/check?email=${encodeURIComponent(email)}`
             );
             const data = await response;

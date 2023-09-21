@@ -17,7 +17,7 @@ import {
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { Information } from "@/src/components/Information/Information";
-import { authInstance } from "@/src/api/auth/client";
+import { instance } from "@/src/api/auth/apis";
 
 export default function Checking() {
   const email = useRecoilValue(emailState);
@@ -52,7 +52,7 @@ export default function Checking() {
     console.log("제출 폼 데이터:", formData);
     setUserForm(formData);
 
-    const fetchAuth = () => authInstance.post(`/members/signUp`, formData);
+    const fetchAuth = () => instance.post(`/members/signUp`, formData);
     fetchAuth().then(response => {
       const JWT = response.data.accessToken;
       if (JWT) {

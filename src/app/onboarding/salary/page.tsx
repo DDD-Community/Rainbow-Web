@@ -6,7 +6,7 @@ import Link from "next/link";
 import { nickNameState, salaryState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
-import { authInstance } from "@/src/api/auth/client";
+import { instance } from "@/src/api/auth/apis";
 import { SelectSalary } from "@/src/components/Common/Select/SelectSalary";
 import { Information } from "@/src/components/Information/Information";
 
@@ -29,7 +29,7 @@ export default function Salary() {
   useEffect(() => {
     // 서버에서 데이터를 받아올 API 요청 예시 (실제로는 서버에서 데이터를 가져와야 함)
 
-    const fetchAuth = () => authInstance.get(`/members/salary`);
+    const fetchAuth = () => instance.get(`/members/salary`);
     fetchAuth().then(response => {
       const serverData: ApiResponse[] = response.data.data;
 
