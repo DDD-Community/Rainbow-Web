@@ -1,21 +1,19 @@
 import React from "react";
 import { authInstance } from "@/src/api/auth/apis";
 import { RoundedButton } from "../Common/Button/Rounded/Sub/RoundedButton";
-// import { useRecoilValue } from "recoil";
 
-export const deleteMember = (memberId: string): Promise<void> =>
-  authInstance.delete(`/members/${memberId}/delete`).then(response => {
+export const deleteMember = () =>
+  authInstance.delete(`/members/delete`).then(response => {
     console.log("삭제 성공:", response);
   });
 
-function Logout() {
-  // const memberId = useRecoilValue(memberIdState);
+function SignOut() {
   const handleSignOut = () => {
     if (localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
       localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
     }
 
-    // deleteMember(memberId);
+    deleteMember();
     console.log("회원탈퇴 버튼이 눌렸습니다");
   };
 
@@ -28,4 +26,4 @@ function Logout() {
   );
 }
 
-export default Logout;
+export default SignOut;

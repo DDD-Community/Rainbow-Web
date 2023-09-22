@@ -4,7 +4,7 @@ import { user } from "./querykeys";
 
 const postTokenReIssue = async (refreshToken: string) =>
   post(
-    "auth/refresh",
+    "members/accessToken",
     {},
     {
       headers: {
