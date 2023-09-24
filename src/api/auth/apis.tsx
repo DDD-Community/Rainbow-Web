@@ -7,7 +7,7 @@ const apiBaseUrl = "http://apis.buybye.kr:8080";
 
 const getAccessTokenLocalStorage = () => {
   const accessToken = localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN");
-  return accessToken ? `Bearer ${accessToken}` : "";
+  return accessToken;
 };
 
 export const instance = axios.create({
@@ -22,7 +22,7 @@ export const authInstance = axios.create({
   baseURL: apiBaseUrl,
   withCredentials: true,
   headers: {
-    Authorization: `${getAccessTokenLocalStorage()}`
+    Authorization: `Bearer ${getAccessTokenLocalStorage()}`
   }
 });
 
@@ -37,8 +37,8 @@ authInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const newAccessToken = await usePostTokenReIssue();
-        authInstance.defaults.headers.Authorization = `Bearer ${newAccessToken}`;
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        authInstance.defaults.headers.Authorization = `${newAccessToken}`;
+        originalRequest.headers.Authorization = `${newAccessToken}`;
         return axios(originalRequest);
       } catch (refreshError) {
         // 토큰 갱신에 실패한 경우 로그아웃 등의 처리를 수행
@@ -53,7 +53,7 @@ authInstance.interceptors.response.use(
 
 const getRefreshTokenLocalStorage = () => {
   const refreshToken = localStorage.getItem("EXIT_LOGIN_REFRESH_TOKEN");
-  return refreshToken ? `Bearer ${refreshToken}` : "";
+  return refreshToken ? `${refreshToken}` : "";
 };
 
 const postTokenReIssue = axios.create({
@@ -75,7 +75,7 @@ export const usePostTokenReIssue = async () => {
     localStorage.setItem("EXIT_LOGIN_REFRESH_TOKEN", newRefreshToken);
 
     // authInstance의 헤더를 업데이트하여 새로운 accessToken을 사용
-    authInstance.defaults.headers.Authorization = `Bearer ${newAccessToken}`;
+    authInstance.defaults.headers.Authorization = `${newAccessToken}`;
 
     return newAccessToken;
   } catch (error) {

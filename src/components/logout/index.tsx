@@ -9,10 +9,10 @@ export const logoutApi = () =>
 
 function Logout() {
   const handleLogout = () => {
+    logoutApi();
     if (localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
       localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
     }
-    logoutApi();
     console.log("로그아웃 버튼이 눌렸습니다");
   };
 

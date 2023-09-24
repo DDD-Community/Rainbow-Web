@@ -11,6 +11,7 @@ function SignOut() {
   const handleSignOut = () => {
     if (localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
       localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
+      localStorage.removeItem("EXIT_LOGIN_REFRESH_TOKEN");
     }
 
     deleteMember();
