@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 import { authInstance } from "@/src/api/auth/apis";
 import { RoundedButton } from "../Common/Button/Rounded/Sub/RoundedButton";
 
@@ -8,14 +9,17 @@ export const deleteMember = () =>
   });
 
 function SignOut() {
+  const router = useRouter();
   const handleSignOut = () => {
     if (localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
       localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
-      localStorage.removeItem("EXIT_LOGIN_REFRESH_TOKEN");
     }
 
     deleteMember();
     console.log("회원탈퇴 버튼이 눌렸습니다");
+    if (!localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
+      router.replace("/");
+    }
   };
 
   return (

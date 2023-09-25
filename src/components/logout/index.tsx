@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 import { authInstance } from "@/src/api/auth/apis";
 import { RoundedButton } from "../Common/Button/Rounded/Sub/RoundedButton";
 
@@ -8,12 +9,16 @@ export const logoutApi = () =>
   });
 
 function Logout() {
+  const router = useRouter();
   const handleLogout = () => {
     logoutApi();
     if (localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
       localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
     }
     console.log("로그아웃 버튼이 눌렸습니다");
+    if (!localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
+      router.replace("/");
+    }
   };
 
   return (

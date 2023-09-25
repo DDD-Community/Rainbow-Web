@@ -17,18 +17,19 @@ export const fetchAuth = (code: string): Promise<LoginResponseType> =>
 export const LoginHandler = (code: string) =>
   fetchAuth(code).then((response: LoginResponseType) => {
     const firstData = response.data.data;
-    if (firstData.email && firstData.kaKaoId) {
-      return {
-        email: firstData.email,
-        kaKaoId: firstData.kaKaoId
-      };
-    }
     if (firstData.accessToken && firstData.refreshToken) {
       return {
         accessToken: firstData.accessToken,
         refreshToken: firstData.refreshToken
       };
     }
+    if (firstData.email && firstData.kaKaoId) {
+      return {
+        email: firstData.email,
+        kaKaoId: firstData.kaKaoId
+      };
+    }
+
     return null;
   });
 
