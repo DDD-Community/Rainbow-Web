@@ -2,13 +2,10 @@ import React, { ButtonHTMLAttributes, ReactNode } from "react";
 import { twMerge } from "@/src/types/utils/tailwind.util";
 
 type ButtonColor = "hover" | "default" | "disabled";
-type ButtonSize = "large" | "small";
 
 export type SubButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  size: ButtonSize;
   color: ButtonColor;
   disabled?: boolean;
-  width?: string;
   children: ReactNode;
 };
 
@@ -18,21 +15,8 @@ const colors: Record<ButtonColor, string> = {
   disabled: "text-gray-300 bg-gray-50 border ring-gray-300"
 };
 
-const sizes: Record<ButtonSize, string> = {
-  large: "w-[75px]",
-  small: "w-[57px]"
-};
-
-export function SubButton({
-  size,
-  color,
-  disabled,
-  className,
-  children,
-  ...props
-}: SubButtonProps) {
+export function SubButton({ color, disabled, className, children, ...props }: SubButtonProps) {
   const buttonColor = colors[color];
-  const buttonSize = sizes[size];
   return (
     <button
       type="button"
@@ -40,8 +24,7 @@ export function SubButton({
       disabled={disabled}
       className={twMerge(
         buttonColor,
-        buttonSize,
-        "flex-center items-center h-[28px] rounded-[6px] ring-1 m-12-500 p-1",
+        "flex-center items-center rounded-[6px] ring-1 m-12-500 px-2.5 py-2",
         "disabled:bg-gray-50 disabled:border-gray-300 disabled:text-gray-300",
         className
       )}

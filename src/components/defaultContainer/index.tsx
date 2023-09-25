@@ -7,7 +7,9 @@ interface DefaultContainerProps {
 function DefaultContainer({ children }: DefaultContainerProps) {
   return (
     <div className="shadow-md mx-auto">
-      <div className="w-375 min-w-375 max-w-375 min-h-screen my-0 mx-auto">{children}</div>
+      <div className="flex flex-col w-375 min-w-375 max-w-375 min-h-screen max-h-screen my-0 mx-auto [&>*:first-child]:h-screen [&>*:first-child]:overflow-auto">
+        {children}
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { RecoilRoot } from "recoil";
 import "../styles/globals.css";
 import ReactQueryProvider from "@/src/queries/ReactQueryProvider";
+import BottomNavigationBar from "@/src/components/bottomNavigationBar";
 import DefaultContainer from "../components/defaultContainer";
 import LoadingScreen from "../components/loading";
 
@@ -24,10 +25,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <RecoilRoot>
       <html lang="en">
         <body className={inter.className}>
-          <DefaultContainer>
-            {isLoading ? <LoadingScreen /> : <ReactQueryProvider>{children}</ReactQueryProvider>}
-          </DefaultContainer>
-          <ToastContainer position="bottom-center" hideProgressBar />
+          <ReactQueryProvider>
+            <DefaultContainer>
+              {isLoading ? (
+                <LoadingScreen />
+              ) : (
+                <>
+                  {children}
+                  <BottomNavigationBar />
+                </>
+              )}
+            </DefaultContainer>
+            <ToastContainer position="bottom-center" hideProgressBar />
+          </ReactQueryProvider>
         </body>
       </html>
     </RecoilRoot>

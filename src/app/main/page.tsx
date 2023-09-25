@@ -6,6 +6,7 @@ import RecordPage from "@/src/components/recordPage/RecordPage";
 import { Pen } from "@/public/assets/images/icons";
 import Logout from "@/src/components/logout";
 import SignOut from "@/src/components/signout";
+import MonthlyTarget from "@/src/components/monthlyTarget";
 
 function Main() {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -28,6 +29,7 @@ function Main() {
           <div className="sb-15-600 text-gray-700 ">닉네임 </div>
           <div className="m-15-500 text-gray-600 mx-[10px]">이번달 지출</div>
         </div>
+        <MonthlyTarget target={20} spentCost={0} />
         <Calendar onDateSelect={handleDateSelect} onDaySelect={handleDaySelct} />
       </div>
       <RecordPage selectedDate={selectedDate} selectedDay={selectedDay} />
