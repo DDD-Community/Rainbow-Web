@@ -40,7 +40,7 @@ function FeedThumbnails({ imagesUrl = [] }: FeedThumbnailsProps) {
   return (
     <div className="flex gap-2.5 mt-2.5">
       {imagesUrl.slice(0, 2).map(url => (
-        <CardThumbnail imageSrc={url} />
+        <CardThumbnail key={url} imageSrc={url} />
       ))}
     </div>
   );

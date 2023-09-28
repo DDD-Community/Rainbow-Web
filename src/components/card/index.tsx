@@ -42,13 +42,30 @@ export function CardContent({ content = "" }: CardContentProps) {
   );
 }
 
+function checkUrlPrefix(url: string) {
+  // 정규식 패턴을 사용하여 "http://" 또는 "https://"를 검색
+  const pattern = /^(http:\/\/|https:\/\/)/;
+  // 정규식 테스트를 사용하여 문자열 검사
+  return pattern.test(url);
+}
+
 export interface CardThumbnailProps {
   imageSrc: string;
 }
 export function CardThumbnail({ imageSrc = "" }: CardThumbnailProps) {
+  if (checkUrlPrefix(imageSrc) === false) {
+    return <></>;
+  }
+
   return (
     <div className="rounded-[10px] w-full h-[150px] overflow-hidden cursor-pointer">
-      <Image src={imageSrc} className="w-full h-full object-cover" alt="user uploaded image" />
+      <Image
+        src={imageSrc}
+        width={150}
+        height={150}
+        className="w-full h-full object-cover"
+        alt="user uploaded image"
+      />
     </div>
   );
 }
@@ -65,10 +82,9 @@ export function CardEmojiBoard({ className = "", emojiList = [] }: CardEmojiBoar
         "flex flex-wrap gap-2 w-full min-h-[50px] px-3 py-2.5 border rounded-lg bg-[#F8F9FC]"
       )}
     >
-      {emojiList.map((emojiType: EmojiTypes, index) => (
+      {emojiList.map((emoji: any, index) => (
         <div key={index} className="w-[30px] h-[30px]">
-          {convertEmotionIcon(emojiType)}
-          {/* <Image src={convertEmotionIcon(emojiType)} alt={`emotion ${emojiType} icon`} /> */}
+          {convertEmotionIcon(emoji.emojiName)}
         </div>
       ))}
     </div>
@@ -88,6 +104,6 @@ const convertEmotionIcon = (emotionType: EmojiTypes) => {
     case "thinking":
       return <IconThinking />;
     default:
-      return <IconEmotionPlus />;
+      return <IconAngry />;
   }
 };

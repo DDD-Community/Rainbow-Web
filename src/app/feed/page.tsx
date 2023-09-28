@@ -108,8 +108,9 @@ function UserFeedUserListArea({
           // date: expanseDate,
           expenseId,
           imageList,
-          memo
+          reviewList
         } = expenseResponse;
+        const memo = expenseResponse.memo ?? "";
 
         return (
           <Fragment key={expenseId}>
@@ -119,7 +120,7 @@ function UserFeedUserListArea({
               price={amount}
               content={memo}
               imageSrcArray={imageList}
-              emojiList={[]}
+              emojiList={reviewList}
               onClickPlusButton={onClickPlusButton}
             />
 
