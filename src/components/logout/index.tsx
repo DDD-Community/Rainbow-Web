@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useRouter } from "next/navigation";
 import { authInstance } from "@/src/api/auth/apis";
@@ -12,7 +14,7 @@ function Logout() {
   const router = useRouter();
   const handleLogout = () => {
     logoutApi();
-    if (typeof localStorage !== "undefined") {
+    if (typeof window !== "undefined") {
       if (localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
         localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
       }

@@ -49,7 +49,7 @@ function Kakao() {
           router.replace("/onboarding");
         }
         if (data && data.accessToken && data.refreshToken) {
-          if (typeof localStorage !== "undefined") {
+          if (typeof window !== "undefined") {
             localStorage.setItem("EXIT_LOGIN_ACCESS_TOKEN", data.accessToken);
             localStorage.setItem("EXIT_LOGIN_REFRESH_TOKEN", data.refreshToken);
             router.replace("/main");
