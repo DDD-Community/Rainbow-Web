@@ -7,7 +7,7 @@ import { nickNameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import UserCard from "@/src/components/userCard";
-import { instance } from "@/src/api/auth/client";
+import { instance } from "@/src/api/auth/apis";
 
 export default function Following() {
   const nicknameValue = useRecoilValue(nickNameState);

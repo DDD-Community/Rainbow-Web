@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
 import { LoginDataType } from "@/src/constant/api.constant";
-import { authInstance } from "@/src/api/auth/client";
+import { instance } from "@/src/api/auth/apis";
 import { emailState, kaKaoIdState } from "@/src/recoil/user.atoms";
 
 interface LoginResponseType {
@@ -12,17 +12,24 @@ interface LoginResponseType {
 }
 
 export const fetchAuth = (code: string): Promise<LoginResponseType> =>
-  authInstance.get(`/members/login?code=${code}`);
+  instance.get(`/members/login?code=${code}`);
 
 export const LoginHandler = (code: string) =>
   fetchAuth(code).then((response: LoginResponseType) => {
     const firstData = response.data.data;
+    if (firstData.accessToken && firstData.refreshToken) {
+      return {
+        accessToken: firstData.accessToken,
+        refreshToken: firstData.refreshToken
+      };
+    }
     if (firstData.email && firstData.kaKaoId) {
       return {
         email: firstData.email,
         kaKaoId: firstData.kaKaoId
       };
     }
+
     return null;
   });
 
@@ -40,6 +47,13 @@ function Kakao() {
           setKakaoId(data.kaKaoId);
           setEmail(data.email);
           router.replace("/onboarding");
+        }
+        if (data && data.accessToken && data.refreshToken) {
+          if (typeof window !== "undefined") {
+            localStorage.setItem("EXIT_LOGIN_ACCESS_TOKEN", data.accessToken);
+            localStorage.setItem("EXIT_LOGIN_REFRESH_TOKEN", data.refreshToken);
+            router.replace("/main");
+          }
         }
       });
     }

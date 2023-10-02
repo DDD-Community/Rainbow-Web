@@ -15,6 +15,8 @@ export interface JsonWebKey {
   email: string;
   kaKaoId: number;
   message: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface LoginDataType extends Response {
