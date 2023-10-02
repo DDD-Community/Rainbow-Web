@@ -1,8 +1,9 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { PropsWithChildren, useState } from "react";
+import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from "@tanstack/react-query";
+import React, { PropsWithChildren, Suspense, useState } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import LoadingScreen from "../components/loading";
 
 export default function ReactQueryProvider({ children }: PropsWithChildren) {
   const [queryClient] = useState(
@@ -11,16 +12,22 @@ export default function ReactQueryProvider({ children }: PropsWithChildren) {
         // react-query 전역 설정
         queries: {
           refetchOnWindowFocus: false,
-          retry: false
+          retry: false,
+          suspense: true,
+          useErrorBoundary: true
         }
       }
     })
   );
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <QueryErrorResetBoundary>
+      <Suspense fallback={<LoadingScreen />}>
+        <QueryClientProvider client={queryClient}>
+          {children}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </Suspense>
+    </QueryErrorResetBoundary>
   );
 }
