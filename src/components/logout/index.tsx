@@ -12,7 +12,7 @@ function Logout() {
   const router = useRouter();
   const handleLogout = () => {
     logoutApi();
-    if (typeof window !== "undefined") {
+    if (typeof localStorage !== "undefined") {
       if (localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
         localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
       }

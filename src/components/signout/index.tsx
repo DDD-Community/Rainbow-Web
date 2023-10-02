@@ -12,7 +12,7 @@ function SignOut() {
   const router = useRouter();
   const handleSignOut = () => {
     deleteMember();
-    if (typeof window !== "undefined") {
+    if (typeof localStorage !== "undefined") {
       if (localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
         localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
       }
