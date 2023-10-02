@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 import axios from "axios";
@@ -6,8 +8,10 @@ import axios from "axios";
 const apiBaseUrl = "http://apis.buybye.kr:8080";
 
 const getAccessTokenLocalStorage = () => {
-  const accessToken = localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN");
-  return accessToken;
+  if (typeof window !== "undefined") {
+    const accessToken = localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN");
+    return accessToken;
+  }
 };
 
 export const instance = axios.create({
@@ -41,10 +45,12 @@ authInstance.interceptors.response.use(
         originalRequest.headers.Authorization = `${newAccessToken}`;
         return axios(originalRequest);
       } catch (refreshError) {
-        // 토큰 갱신에 실패한 경우 로그아웃 등의 처리를 수행
-        localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
-        localStorage.removeItem("EXIT_LOGIN_REFRESH_TOKEN");
-        console.error("Token refresh failed:", refreshError);
+        if (typeof window !== "undefined") {
+          // 토큰 갱신에 실패한 경우 로그아웃 등의 처리를 수행
+          localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
+          localStorage.removeItem("EXIT_LOGIN_REFRESH_TOKEN");
+          console.error("Token refresh failed:", refreshError);
+        }
       }
     }
     return Promise.reject(error);
@@ -52,8 +58,10 @@ authInstance.interceptors.response.use(
 );
 
 const getRefreshTokenLocalStorage = () => {
-  const refreshToken = localStorage.getItem("EXIT_LOGIN_REFRESH_TOKEN");
-  return refreshToken ? `${refreshToken}` : "";
+  if (typeof window !== "undefined") {
+    const refreshToken = localStorage.getItem("EXIT_LOGIN_REFRESH_TOKEN");
+    return refreshToken ? `${refreshToken}` : "";
+  }
 };
 
 const postTokenReIssue = axios.create({
@@ -70,14 +78,16 @@ export const usePostTokenReIssue = async () => {
     const newAccessToken = response.data.accessToken;
     const newRefreshToken = response.data.refreshToken;
 
-    // 저장된 Token을 업데이트
-    localStorage.setItem("EXIT_LOGIN_ACCESS_TOKEN", newAccessToken);
-    localStorage.setItem("EXIT_LOGIN_REFRESH_TOKEN", newRefreshToken);
+    if (typeof window !== "undefined") {
+      // 저장된 Token을 업데이트
+      localStorage.setItem("EXIT_LOGIN_ACCESS_TOKEN", newAccessToken);
+      localStorage.setItem("EXIT_LOGIN_REFRESH_TOKEN", newRefreshToken);
 
-    // authInstance의 헤더를 업데이트하여 새로운 accessToken을 사용
-    authInstance.defaults.headers.Authorization = `${newAccessToken}`;
+      // authInstance의 헤더를 업데이트하여 새로운 accessToken을 사용
+      authInstance.defaults.headers.Authorization = `${newAccessToken}`;
 
-    return newAccessToken;
+      return newAccessToken;
+    }
   } catch (error) {
     // 오류 처리 (예를 들어, refreshToken이 유효하지 않을 때)
     console.error("Failed to reissue token:", error);
