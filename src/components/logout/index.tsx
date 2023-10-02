@@ -12,12 +12,14 @@ function Logout() {
   const router = useRouter();
   const handleLogout = () => {
     logoutApi();
-    if (localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
-      localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
-    }
-    console.log("로그아웃 버튼이 눌렸습니다");
-    if (!localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
-      router.replace("/");
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
+        localStorage.removeItem("EXIT_LOGIN_ACCESS_TOKEN");
+      }
+      console.log("로그아웃 버튼이 눌렸습니다");
+      if (!localStorage.getItem("EXIT_LOGIN_ACCESS_TOKEN")) {
+        router.replace("/");
+      }
     }
   };
 

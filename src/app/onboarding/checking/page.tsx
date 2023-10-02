@@ -56,7 +56,7 @@ export default function Checking() {
     fetchAuth().then(response => {
       const JWT = response.data.accessToken;
       if (JWT) {
-        localStorage.setItem("EXIT_LOGIN_TOKEN", JWT);
+        if (typeof window !== "undefined") localStorage.setItem("EXIT_LOGIN_TOKEN", JWT);
         console.log("로그인 성공");
       }
     });
