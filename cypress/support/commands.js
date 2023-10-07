@@ -32,3 +32,21 @@ Cypress.Commands.add("setCustomWindowProperties", () => {
     // 다른 필요한 속성들...
   });
 });
+Cypress.Commands.add("login", () => {
+  cy.request({
+    method: "POST",
+    url: "http://localhost:3000/members/signUp",
+    body: {
+      formData: {
+        birthDate: "2000-01-01",
+        email: "hi@naver.com",
+        gender: "male",
+        kaKaoId: 12345,
+        nickName: "하이",
+        salary: 2
+      }
+    }
+  }).then(response => {
+    window.localStorage.setItem("EXIT_LOGIN_ACCESS_TOKEN", response.data.accessToken);
+  });
+});

@@ -11,6 +11,9 @@
 //     cy.get("h2.text-2xl").should("have.length", 4);
 //   });
 // });
+beforeEach(() => {
+  cy.login();
+});
 
 // describe("Client-Side Functionality", () => {
 //   beforeEach(() => {

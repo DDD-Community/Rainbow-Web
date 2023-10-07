@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Calendar from "@/src/components/calender";
 import RecordPage from "@/src/components/recordPage/RecordPage";
 import { Pen } from "@/public/assets/images/icons";
+import Logout from "@/src/components/logout";
+import SignOut from "@/src/components/signout";
 import MonthlyTarget from "@/src/components/monthlyTarget";
 
 function Main() {
@@ -19,6 +21,8 @@ function Main() {
     <div className="flex flex-col justify-between items-center bg-gray-100">
       <div className="flex flex-col w-343 my-[10px]">
         <div className="flex flex-col items-end">
+          <Logout />
+          <SignOut />
           <Pen />
         </div>
         <div className="flex justify-start">

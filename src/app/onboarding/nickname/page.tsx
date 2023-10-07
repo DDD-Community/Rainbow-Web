@@ -7,7 +7,7 @@ import { checkingState, nickNameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { TextInput } from "@/src/components/Common/Input";
-import { authInstance } from "@/src/api/auth/client";
+import { instance } from "@/src/api/auth/apis";
 
 export default function Nickname() {
   const [nickname, setNickname] = useRecoilState(nickNameState);
@@ -20,7 +20,7 @@ export default function Nickname() {
       if (nickname && nickname.length <= 16) {
         // 닉네임 길이 확인
         try {
-          const response = authInstance.get(
+          const response = instance.get(
             `/members/nickname/check?nickname=${encodeURIComponent(nickname)}`
           );
           const data = await response;

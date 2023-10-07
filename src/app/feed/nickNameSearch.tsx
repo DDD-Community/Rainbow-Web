@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import NoResult from "src/components/noResult";
-import { authInstance } from "@/src/api/auth/client";
 import { EmojiProfile } from "@/src/components/emojiProfile";
 import { PersonProfile } from "@/src/components/personProfile";
 import IconPlus from "public/assets/images/icons/plus";
 import IconCheck from "public/assets/images/icons/check";
+import { authInstance } from "@/src/api/auth/apis";
 
 interface NickNameSearchAreaProps {
   searchWord: string;
