@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
 import EmojiBottomSheet from "@/src/components/emojiBottomSheet";
 import { UserFeedCard } from "@/src/components/userFeedCard";
@@ -20,17 +21,33 @@ export default function FeedPage() {
 
   const [isEmojiBottomSheet, setIsEmojiBottomSheet] = useState(false);
   // const [selectedExpenseId, setSelectedExpenseId] = useState(0);
-  const [userFeedList, setUserFeedList] = useState([]);
+  const [isScrollDown, setIsScrollDown] = useState(true);
+  const [lastExpenseId, setLastExpenseId] = useState(0);
+  const [userFeedList, setUserFeedList] = useState<any>([]);
 
   useEffect(() => {
-    feedHandler().then(res => {
+    feedHandler(lastExpenseId).then(res => {
       const { data } = res;
 
       if (data.message === "ok") {
-        setUserFeedList(data.data);
+        setUserFeedList((prev: any) => [...prev, ...data.data]);
+
+        // 친구 게시물이 없고 친구 아닌 게시물이 1개만 올 경우 무한스크롤 정지
+        if (data.data.length <= 1) {
+          setIsScrollDown(false);
+        }
       }
     });
-  }, []);
+  }, [lastExpenseId]);
+
+  const handleScrollDown = () => {
+    if (isScrollDown) {
+      const lastIndex = userFeedList.length - 2;
+      const lastExpense: any = userFeedList[lastIndex];
+      const {expenseId} = lastExpense.expenseResponse;
+      setLastExpenseId(expenseId);
+    }
+  };
 
   const openEmojiBottomSheet = () => setIsEmojiBottomSheet(true);
   const closeEmojiBottomSheet = () => setIsEmojiBottomSheet(false);
@@ -61,6 +78,7 @@ export default function FeedPage() {
       ) : (
         <UserFeedUserListArea
           userFeedList={userFeedList}
+          onChangeScroll={handleScrollDown}
           onClickPlusButton={openEmojiBottomSheet}
         />
       )}
@@ -79,11 +97,21 @@ export default function FeedPage() {
 interface FeedUserListAreaProps {
   userFeedList: any;
   onClickPlusButton: () => void;
+  onChangeScroll?: () => void;
 }
 function UserFeedUserListArea({
   userFeedList = [],
-  onClickPlusButton = () => {}
+  onClickPlusButton = () => {},
+  onChangeScroll = () => {}
 }: FeedUserListAreaProps) {
+  const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      onChangeScroll();
+    }
+  }, [inView]);
+
   if (!!userFeedList.length === false) {
     return (
       <div className="mt-[44px]">
@@ -106,32 +134,47 @@ function UserFeedUserListArea({
           amount,
           content,
           // date: expanseDate,
-          expenseId,
+          // expenseId,
           imageList,
           reviewList
         } = expenseResponse;
         const memo = expenseResponse.memo ?? "";
 
-        return (
-          <Fragment key={expenseId}>
-            <UserFeedCard
-              nickName={nickName}
-              title={content}
-              price={amount}
-              content={memo}
-              imageSrcArray={imageList}
-              emojiList={reviewList}
-              onClickPlusButton={onClickPlusButton}
-            />
+        const isLast = userFeedList.length - 1 === index;
 
-            {/* 경계선 마지막 제외 */}
-            {userFeedList.length - 1 !== index && (
+        if (isLast === false) {
+          return (
+            <div key={index}>
+              <UserFeedCard
+                nickName={nickName}
+                title={content}
+                price={amount}
+                content={memo}
+                imageSrcArray={imageList}
+                emojiList={reviewList}
+                onClickPlusButton={onClickPlusButton}
+              />
+
               <div className="my-[18px]">
                 <DividerHorizon />
               </div>
-            )}
-          </Fragment>
-        );
+            </div>
+          );
+        } 
+          return (
+            <div key={index} ref={ref}>
+              <UserFeedCard
+                nickName={nickName}
+                title={content}
+                price={amount}
+                content={memo}
+                imageSrcArray={imageList}
+                emojiList={reviewList}
+                onClickPlusButton={onClickPlusButton}
+              />
+            </div>
+          );
+        
       })}
     </div>
   );

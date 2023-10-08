@@ -65,6 +65,7 @@ export function CardThumbnail({ imageSrc = "" }: CardThumbnailProps) {
         height={150}
         className="w-full h-full object-cover"
         alt="user uploaded image"
+        unoptimized
       />
     </div>
   );
