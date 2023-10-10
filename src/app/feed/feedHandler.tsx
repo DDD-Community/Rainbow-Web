@@ -12,6 +12,23 @@ export const fetchFeed = (expenseId?: number): Promise<any> =>
   });
 
 export function feedHandler(expenseId?: number) {
-  console.log(expenseId);
   return expenseId === 0 ? fetchFirstFeed() : fetchFeed(expenseId);
+}
+
+export const addMemberFollow = (memberId: number): Promise<any> =>
+  authInstance.post(`/members/following`, {
+    followingId: memberId
+  });
+
+export async function fetchMember(word: string) {
+  if (!word) {
+    return [];
+  }
+
+  const response = await authInstance.get("/members/search", {
+    params: {
+      nickname: word
+    }
+  });
+  return response.data.data;
 }

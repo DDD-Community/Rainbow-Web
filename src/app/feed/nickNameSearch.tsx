@@ -1,47 +1,50 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+
 import NoResult from "src/components/noResult";
 import { EmojiProfile } from "@/src/components/emojiProfile";
 import { PersonProfile } from "@/src/components/personProfile";
 import IconPlus from "public/assets/images/icons/plus";
 import IconCheck from "public/assets/images/icons/check";
-import { authInstance } from "@/src/api/auth/apis";
+import * as queryKeys from "@/src/queries/queryKeys";
+import { fetchMember, addMemberFollow } from "./feedHandler";
 
 interface NickNameSearchAreaProps {
   searchWord: string;
 }
 export default function NickNameSearchArea({ searchWord = "" }: NickNameSearchAreaProps) {
-  const [searchList, setSearchList] = useState([]);
+  // const [searchList, setSearchList] = useState([]);
+  const queryClient = useQueryClient(); // queryClient를 가져옵니다.
 
-  useEffect(() => {
-    if (!!searchWord === false) {
-      return;
+  const { data: searchList } = useQuery(
+    queryKeys.FEED_FETCH_MEMBER_DATA(searchWord),
+    () => fetchMember(searchWord),
+    {
+      initialData: []
     }
+  );
 
-    authInstance
-      .get("/members/search", {
-        params: {
-          nickname: searchWord
-        }
-      })
-      .then((response: any) => {
-        if (response.data.message === "ok") {
-          setSearchList(response.data.data);
-        }
-      });
-  }, [searchWord]);
+  const handleAddFriend = (memberId: number) => {
+    addMemberFollow(memberId).then(() => {
+      queryClient.invalidateQueries(queryKeys.FEED_FETCH_MEMBER_DATA(searchWord));
+    });
+  };
 
   return (
     <div className="w-full h-full">
       {searchList.length ? (
         <div className="flex flex-col gap-2">
-          {searchList.map(searchItem => {
+          {searchList.map((searchItem: any) => {
             const { memberId, isFriend, nickName } = searchItem;
             return isFriend ? (
               <FriendAccount key={memberId} nickName={nickName} />
             ) : (
-              <NotFriendAccount key={memberId} nickName={nickName} />
+              <NotFriendAccount
+                key={memberId}
+                nickName={nickName}
+                onClickAddFriend={() => handleAddFriend(memberId)}
+              />
             );
           })}
         </div>
