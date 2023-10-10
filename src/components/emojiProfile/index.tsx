@@ -12,28 +12,33 @@ type EmojiProfileTypes = "red" | "yellow" | "green" | "blue" | "purple";
 interface EmojiProfileProps {
   type?: EmojiProfileTypes;
   bottomIconType?: BottomIconTypes;
+  size?: string;
 }
-export function EmojiProfile({ type = "red", bottomIconType = "none" }: EmojiProfileProps) {
+export function EmojiProfile({
+  type = "red",
+  bottomIconType = "none",
+  size = "36"
+}: EmojiProfileProps) {
   return (
     <Profile bottomIconType={bottomIconType}>
-      <EmojiPortraitImage type={type} />
+      <EmojiPortraitImage type={type} size={size} />
     </Profile>
   );
 }
 
-function EmojiPortraitImage({ type }: { type?: EmojiProfileTypes }) {
+function EmojiPortraitImage({ type, size }: { type?: EmojiProfileTypes; size?: string }) {
   switch (type) {
     case "red":
-      return <EmojiProfileRed />;
+      return <EmojiProfileRed width={size} height={size} />;
     case "yellow":
-      return <EmojiProfileYellow />;
+      return <EmojiProfileYellow width={size} height={size} />;
     case "green":
-      return <EmojiProfileGreen />;
+      return <EmojiProfileGreen width={size} height={size} />;
     case "blue":
-      return <EmojiProfileBlue />;
+      return <EmojiProfileBlue width={size} height={size} />;
     case "purple":
-      return <EmojiProfilePurple />;
+      return <EmojiProfilePurple width={size} height={size} />;
     default:
-      return <EmojiProfileRed />;
+      return <EmojiProfileRed width={size} height={size} />;
   }
 }

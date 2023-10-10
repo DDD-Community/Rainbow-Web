@@ -44,7 +44,7 @@ export default function FeedPage() {
     if (isScrollDown) {
       const lastIndex = userFeedList.length - 2;
       const lastExpense: any = userFeedList[lastIndex];
-      const {expenseId} = lastExpense.expenseResponse;
+      const { expenseId } = lastExpense.expenseResponse;
       setLastExpenseId(expenseId);
     }
   };
@@ -125,9 +125,10 @@ function UserFeedUserListArea({
       {userFeedList.map((userFeed: any, index: number) => {
         const {
           // memberId,
+          imagePath,
           nickName,
-          expenseResponse
-          // isFriend
+          expenseResponse,
+          isFriend
         } = userFeed;
 
         const {
@@ -146,12 +147,14 @@ function UserFeedUserListArea({
           return (
             <div key={index}>
               <UserFeedCard
+                imagePath={imagePath}
                 nickName={nickName}
                 title={content}
                 price={amount}
                 content={memo}
                 imageSrcArray={imageList}
                 emojiList={reviewList}
+                isFriend={isFriend}
                 onClickPlusButton={onClickPlusButton}
               />
 
@@ -160,21 +163,20 @@ function UserFeedUserListArea({
               </div>
             </div>
           );
-        } 
-          return (
-            <div key={index} ref={ref}>
-              <UserFeedCard
-                nickName={nickName}
-                title={content}
-                price={amount}
-                content={memo}
-                imageSrcArray={imageList}
-                emojiList={reviewList}
-                onClickPlusButton={onClickPlusButton}
-              />
-            </div>
-          );
-        
+        }
+        return (
+          <div key={index} ref={ref}>
+            <UserFeedCard
+              nickName={nickName}
+              title={content}
+              price={amount}
+              content={memo}
+              imageSrcArray={imageList}
+              emojiList={reviewList}
+              onClickPlusButton={onClickPlusButton}
+            />
+          </div>
+        );
       })}
     </div>
   );
