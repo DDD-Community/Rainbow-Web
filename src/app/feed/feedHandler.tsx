@@ -1,6 +1,7 @@
 "use client";
 
 import { authInstance } from "@/src/api/auth/apis";
+import { EmojiTypes } from "types";
 
 export const fetchFirstFeed = (): Promise<any> => authInstance.get(`/feeds/friend-feeds`);
 
@@ -31,4 +32,11 @@ export async function fetchMember(word: string) {
     }
   });
   return response.data.data;
+}
+
+export async function addFeedEmoji(expenseId: number, emojiType: EmojiTypes) {
+  const response = await authInstance.post(`/expenses/${expenseId}/reviews`, {
+    reviewType: emojiType
+  });
+  return response.status;
 }

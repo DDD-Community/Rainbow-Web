@@ -10,8 +10,9 @@ import { DividerHorizon } from "@/src/components/Common/Divider";
 import useFooterNavBar from "@/src/hooks/useFooterNavBar";
 import IconBack from "@/public/assets/images/icons/back";
 import NoResultArea from "@/src/components/noResult";
+import { EmojiTypes } from "types";
 import NickNameSearchArea from "./nickNameSearch";
-import { feedHandler } from "./feedHandler";
+import { feedHandler, addFeedEmoji } from "./feedHandler";
 
 export default function FeedPage() {
   useFooterNavBar({ open: true, type: "feed" });
@@ -20,7 +21,7 @@ export default function FeedPage() {
   const [isSearchNickNameFocus, setIsSearchNickNameFocus] = useState(false);
 
   const [isEmojiBottomSheet, setIsEmojiBottomSheet] = useState(false);
-  // const [selectedExpenseId, setSelectedExpenseId] = useState(0);
+  const [selectedExpenseId, setSelectedExpenseId] = useState(0);
   const [isScrollDown, setIsScrollDown] = useState(true);
   const [lastExpenseId, setLastExpenseId] = useState(0);
   const [userFeedList, setUserFeedList] = useState<any>([]);
@@ -49,8 +50,33 @@ export default function FeedPage() {
     }
   };
 
-  const openEmojiBottomSheet = () => setIsEmojiBottomSheet(true);
+  const openEmojiBottomSheet = (expenseId: number) => {
+    setIsEmojiBottomSheet(true);
+    setSelectedExpenseId(expenseId);
+  };
   const closeEmojiBottomSheet = () => setIsEmojiBottomSheet(false);
+  const handleClickEmoji = (emojiType: EmojiTypes) => {
+    addFeedEmoji(selectedExpenseId, emojiType).then(status => {
+      if (status === 200) {
+        updateUserFeedList(selectedExpenseId, emojiType);
+        closeEmojiBottomSheet();
+      }
+    });
+  };
+
+  const updateUserFeedList = (expenseId: number, emojiType: EmojiTypes) => {
+    setUserFeedList((prevUserFeedList: any) =>
+      prevUserFeedList.map((userFeed: any) => {
+        const feedExpenseId = userFeed.expenseResponse.expenseId;
+        if (expenseId === feedExpenseId) {
+          const {reviewList} = userFeed.expenseResponse;
+          // eslint-disable-next-line
+          userFeed.expenseResponse.reviewList = [...reviewList, { emojiName: emojiType }];
+        }
+        return userFeed;
+      })
+    );
+  };
 
   const handleInputFocus = () => setIsSearchNickNameFocus(true);
   const handleInputBlur = () => setIsSearchNickNameFocus(false);
@@ -88,7 +114,7 @@ export default function FeedPage() {
       <EmojiBottomSheet
         open={isEmojiBottomSheet}
         onDismiss={closeEmojiBottomSheet}
-        onClickEmoji={openEmojiBottomSheet}
+        onClickEmoji={handleClickEmoji}
       />
     </main>
   );
@@ -96,7 +122,7 @@ export default function FeedPage() {
 
 interface FeedUserListAreaProps {
   userFeedList: any;
-  onClickPlusButton: () => void;
+  onClickPlusButton: (expenseId: number) => void;
   onChangeScroll?: () => void;
 }
 function UserFeedUserListArea({
@@ -135,7 +161,7 @@ function UserFeedUserListArea({
           amount,
           content,
           // date: expanseDate,
-          // expenseId,
+          expenseId,
           imageList,
           reviewList
         } = expenseResponse;
@@ -155,7 +181,7 @@ function UserFeedUserListArea({
                 imageSrcArray={imageList}
                 emojiList={reviewList}
                 isFriend={isFriend}
-                onClickPlusButton={onClickPlusButton}
+                onClickPlusButton={() => onClickPlusButton(expenseId)}
               />
 
               <div className="my-[18px]">
@@ -173,7 +199,7 @@ function UserFeedUserListArea({
               content={memo}
               imageSrcArray={imageList}
               emojiList={reviewList}
-              onClickPlusButton={onClickPlusButton}
+              onClickPlusButton={() => onClickPlusButton(expenseId)}
             />
           </div>
         );
