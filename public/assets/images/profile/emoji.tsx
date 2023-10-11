@@ -1,7 +1,18 @@
-export function EmojiProfileRed() {
+interface IconProps {
+  width?: string;
+  height?: string;
+}
+
+export function EmojiProfileRed({ width = "40", height = "40" }: IconProps) {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="40" height="40" rx="20" fill="#FF7C54" />
+    <svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width={width} height={height} rx="20" fill="#FF7C54" />
       <path
         d="M12.5566 18.3192C13.6282 18.3192 14.4969 17.4505 14.4969 16.3788C14.4969 15.3072 13.6282 14.4385 12.5566 14.4385C11.4849 14.4385 10.6162 15.3072 10.6162 16.3788C10.6162 17.4505 11.4849 18.3192 12.5566 18.3192Z"
         fill="#27262E"
@@ -20,10 +31,16 @@ export function EmojiProfileRed() {
   );
 }
 
-export function EmojiProfileYellow() {
+export function EmojiProfileYellow({ width = "40", height = "40" }: IconProps) {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="40" height="40" rx="20" fill="#FFEF65" />
+    <svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width={width} height={height} rx="20" fill="#FFEF65" />
       <path
         d="M12.5566 18.3192C13.6282 18.3192 14.4969 17.4505 14.4969 16.3788C14.4969 15.3072 13.6282 14.4385 12.5566 14.4385C11.4849 14.4385 10.6162 15.3072 10.6162 16.3788C10.6162 17.4505 11.4849 18.3192 12.5566 18.3192Z"
         fill="#27262E"
@@ -42,10 +59,16 @@ export function EmojiProfileYellow() {
   );
 }
 
-export function EmojiProfileGreen() {
+export function EmojiProfileGreen({ width = "40", height = "40" }: IconProps) {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="40" height="40" rx="20" fill="#D2FF98" />
+    <svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width={width} height={height} rx="20" fill="#D2FF98" />
       <path
         d="M12.5566 18.3192C13.6282 18.3192 14.4969 17.4505 14.4969 16.3788C14.4969 15.3072 13.6282 14.4385 12.5566 14.4385C11.4849 14.4385 10.6162 15.3072 10.6162 16.3788C10.6162 17.4505 11.4849 18.3192 12.5566 18.3192Z"
         fill="#27262E"
@@ -64,10 +87,16 @@ export function EmojiProfileGreen() {
   );
 }
 
-export function EmojiProfileBlue() {
+export function EmojiProfileBlue({ width = "40", height = "40" }: IconProps) {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="40" height="40" rx="20" fill="#BCDEFF" />
+    <svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width={width} height={height} rx="20" fill="#BCDEFF" />
       <path
         d="M12.5556 18.3197C13.6272 18.3197 14.496 17.451 14.496 16.3793C14.496 15.3077 13.6272 14.439 12.5556 14.439C11.484 14.439 10.6152 15.3077 10.6152 16.3793C10.6152 17.451 11.484 18.3197 12.5556 18.3197Z"
         fill="#27262E"
@@ -86,10 +115,16 @@ export function EmojiProfileBlue() {
   );
 }
 
-export function EmojiProfilePurple() {
+export function EmojiProfilePurple({ width = "40", height = "40" }: IconProps) {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="40" height="40" rx="20" fill="#F4AEFF" />
+    <svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width={width} height={height} rx="20" fill="#F4AEFF" />
       <path
         d="M12.5575 18.3197C13.6292 18.3197 14.4979 17.451 14.4979 16.3793C14.4979 15.3077 13.6292 14.439 12.5575 14.439C11.4859 14.439 10.6172 15.3077 10.6172 16.3793C10.6172 17.451 11.4859 18.3197 12.5575 18.3197Z"
         fill="#27262E"

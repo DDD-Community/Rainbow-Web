@@ -1,4 +1,7 @@
+import Image from "next/image";
 import { ReactNode, Fragment } from "react";
+import { EmojiProfile } from "@/src/components/emojiProfile";
+import PlusIcon from "@/public/assets/images/icons/plus";
 import { SubTag, SecondaryTag } from "../tag";
 import { FeedCard, FeedCardProps } from "./feedCard";
 
@@ -8,11 +11,14 @@ const POPULAR_EXPENSES_TAG_TEXT = "인기 지출";
 type UserTagsType = "popular-expenses" | "spending-buddy";
 
 export interface UserFeedCardProps extends FeedCardProps {
+  imagePath?: string;
   nickName: string;
   userTags?: UserTagsType[];
+  isFriend?: boolean;
 }
 
 export function UserFeedCard({
+  imagePath = "",
   nickName = "",
   userTags = ["spending-buddy"],
 
@@ -21,13 +27,14 @@ export function UserFeedCard({
   content = "",
   imageSrcArray = [],
   emojiList = [],
+  isFriend = false,
 
   onClickPlusButton
 }: UserFeedCardProps) {
   return (
     <UserFeedContainer>
       <UserFeedHeader>
-        <UserFeedProfile />
+        <UserFeedProfile imagePath={imagePath} isFriend={isFriend} />
         <UserFeedInfo nickName={nickName} userTags={userTags} />
       </UserFeedHeader>
 
@@ -56,10 +63,41 @@ function UserFeedContainer({ children }: { children?: ReactNode }) {
 function UserFeedHeader({ children }: { children?: ReactNode }) {
   return <>{children}</>;
 }
-function UserFeedProfile() {
+function UserFeedProfile({
+  imagePath = "",
+  isFriend = true
+}: {
+  imagePath?: string;
+  isFriend?: boolean;
+}) {
   return (
     <div className="flex items-center shrink-0">
-      <div className="w-[36px] h-[36px] bg-gray-400 rounded-[50%]" />
+      {imagePath ? (
+        <div className="relative w-[36px] h-[36px] bg-gray-400 rounded-[50%]">
+          <Image
+            src={imagePath}
+            width={36}
+            height={36}
+            className="w-full h-full object-cover"
+            alt="profile image"
+            unoptimized
+          />
+          {isFriend === false && (
+            <div className="flex items-center justify-center absolute w-3.5 h-3.5 bottom-[-5px] left-1/2 translate-x-[-50%] rounded-[50%] bg-primary-default">
+              <PlusIcon width={10} height={10} fill="#fff" />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="relative w-[36px] h-[36px] rounded-[50%]">
+          <EmojiProfile />
+          {isFriend === false && (
+            <div className="flex items-center justify-center absolute w-3.5 h-3.5 bottom-[-5px] left-1/2 translate-x-[-50%] rounded-[50%] bg-primary-default">
+              <PlusIcon width={10} height={10} fill="#fff" />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

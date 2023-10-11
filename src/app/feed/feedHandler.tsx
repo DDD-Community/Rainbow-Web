@@ -1,24 +1,42 @@
 "use client";
 
 import { authInstance } from "@/src/api/auth/apis";
+import { EmojiTypes } from "types";
 
-// import { LoginDataType } from "@/src/constant/api.constant";
+export const fetchFirstFeed = (): Promise<any> => authInstance.get(`/feeds/friend-feeds`);
 
-const KEY =
-  "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwia2FLYW9JZCI6MCwiaWF0IjoxNjk0MTgxOTk4LCJleHAiOjE2OTYzMjk0ODJ9.r4kN14fe0ChUCoSLeR6hwr2JY8YXIXIALP_c_70IJjKU_slDVmpPlh4f75Bv0siOa7StL3auZToQN58Z2cd95A";
-// import { EmojiTypes } from "@/types";
-
-// interface FeedResponseType {
-//   data: LoginDataType;
-// }
-
-export const fetchFeed = (): Promise<any> =>
+export const fetchFeed = (expenseId?: number): Promise<any> =>
   authInstance.get(`/feeds/friend-feeds`, {
-    headers: {
-      Authorization: KEY
+    params: {
+      lastId: expenseId
     }
   });
 
-export function feedHandler() {
-  return fetchFeed();
+export function feedHandler(expenseId?: number) {
+  return expenseId === 0 ? fetchFirstFeed() : fetchFeed(expenseId);
+}
+
+export const addMemberFollow = (memberId: number): Promise<any> =>
+  authInstance.post(`/members/following`, {
+    followingId: memberId
+  });
+
+export async function fetchMember(word: string) {
+  if (!word) {
+    return [];
+  }
+
+  const response = await authInstance.get("/members/search", {
+    params: {
+      nickname: word
+    }
+  });
+  return response.data.data;
+}
+
+export async function addFeedEmoji(expenseId: number, emojiType: EmojiTypes) {
+  const response = await authInstance.post(`/expenses/${expenseId}/reviews`, {
+    reviewType: emojiType
+  });
+  return response.status;
 }
