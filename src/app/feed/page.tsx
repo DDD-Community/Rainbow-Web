@@ -154,7 +154,8 @@ function UserFeedUserListArea({
           imagePath,
           nickName,
           expenseResponse,
-          isFriend
+          isFriend,
+          status
         } = userFeed;
 
         const {
@@ -181,6 +182,7 @@ function UserFeedUserListArea({
                 imageSrcArray={imageList}
                 emojiList={reviewList}
                 isFriend={isFriend}
+                status={status}
                 onClickPlusButton={() => onClickPlusButton(expenseId)}
               />
 

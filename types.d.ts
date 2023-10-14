@@ -25,3 +25,6 @@ export type ExpenseCategoryTypes = {
 
 // footer nav bar active types
 export type FooterNavBarActiveTypes = "main" | "feed" | "alarm" | "my";
+
+// Feed
+export type FeedUserCardTag = "salary" | "age" | "expense" | "normal" | "hot";

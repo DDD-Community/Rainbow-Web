@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ReactNode, Fragment } from "react";
 import { EmojiProfile } from "@/src/components/emojiProfile";
 import PlusIcon from "@/public/assets/images/icons/plus";
+import { FeedUserCardTag } from "@/types";
 import { SubTag, SecondaryTag } from "../tag";
 import { FeedCard, FeedCardProps } from "./feedCard";
 
@@ -10,19 +11,16 @@ const AGE_BUDDY_TAG_TEXT = "나이 또래 친구";
 const SALARY_BUDDY_TAG_TEXT = "연봉 또래 친구";
 const POPULAR_EXPENSES_TAG_TEXT = "인기 지출";
 
-type UserTagsType = "popular-expenses" | "expense-buddy" | "salary-buddy" | "age-buddy";
-
 export interface UserFeedCardProps extends FeedCardProps {
   imagePath?: string;
   nickName: string;
-  userTags?: UserTagsType[];
   isFriend?: boolean;
+  status?: FeedUserCardTag;
 }
 
 export function UserFeedCard({
   imagePath = "",
   nickName = "",
-  userTags = ["expense-buddy"],
 
   title = "",
   price = 0,
@@ -30,6 +28,7 @@ export function UserFeedCard({
   imageSrcArray = [],
   emojiList = [],
   isFriend = false,
+  status = "normal",
 
   onClickPlusButton
 }: UserFeedCardProps) {
@@ -37,7 +36,7 @@ export function UserFeedCard({
     <UserFeedContainer>
       <UserFeedHeader>
         <UserFeedProfile imagePath={imagePath} isFriend={isFriend} />
-        <UserFeedInfo nickName={nickName} userTags={userTags} />
+        <UserFeedInfo nickName={nickName} status={status} />
       </UserFeedHeader>
 
       <GridEmptyArea />
@@ -106,19 +105,17 @@ function UserFeedProfile({
 
 function UserFeedInfo({
   nickName = "",
-  userTags = []
+  status = "normal"
 }: {
   nickName: string;
-  userTags: UserTagsType[];
+  status: FeedUserCardTag;
 }) {
   return (
     <div className="flex items-center gap-2 pl-1">
       <div className="flex flex-col direction-row gap-0.5">
         <span className="sb-13-600 text-gray-700">{nickName}</span>
         <div className="flex gap-0.5">
-          {userTags.map(userTag => (
-            <Fragment key={userTag}>{convertTag(userTag)}</Fragment>
-          ))}
+          {convertTag(status)}
         </div>
       </div>
     </div>
@@ -139,18 +136,18 @@ function SalaryBuddyTag() {
   return <SubTag>{SALARY_BUDDY_TAG_TEXT}</SubTag>;
 }
 
-const convertTag = (userTag: UserTagsType) => {
-  switch (userTag) {
-    case "popular-expenses":
+const convertTag = (status: FeedUserCardTag) => {
+  switch (status) {
+    case "hot":
       return <PopularExpensesTag />;
-    case "expense-buddy":
+    case "expense":
       return <ExpenseBuddyTag />;
-    case "age-buddy":
+    case "age":
       return <AgeBuddyTag />;
-    case "salary-buddy":
+    case "salary":
       return <SalaryBuddyTag />;
     default:
-      return <ExpenseBuddyTag />;
+      return <></>;
   }
 };
 
