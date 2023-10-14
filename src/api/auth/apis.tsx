@@ -94,6 +94,14 @@ export const usePostTokenReIssue = async () => {
   }
 };
 
+export const setClientHeaders = (token: string) => {
+  authInstance.interceptors.request.use((config) => {
+    // eslint-disable-next-line
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
+};
+
 export function get<T>(...args: Parameters<typeof authInstance.get>) {
   return authInstance.get<T, T>(...args);
 }

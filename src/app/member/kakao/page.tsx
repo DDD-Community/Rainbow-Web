@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
 import { LoginDataType } from "@/src/constant/api.constant";
-import { instance } from "@/src/api/auth/apis";
+import { instance, setClientHeaders } from "@/src/api/auth/apis";
 import { emailState, kaKaoIdState } from "@/src/recoil/user.atoms";
 
 interface LoginResponseType {
@@ -54,8 +54,14 @@ function Kakao() {
         }
         if (data && data.accessToken && data.refreshToken) {
           if (typeof window !== "undefined") {
-            localStorage.setItem("EXIT_LOGIN_ACCESS_TOKEN", data.accessToken);
-            localStorage.setItem("EXIT_LOGIN_REFRESH_TOKEN", data.refreshToken);
+            const {accessToken} = data;
+            const {refreshToken} = data;
+
+            localStorage.setItem("EXIT_LOGIN_ACCESS_TOKEN", accessToken);
+            localStorage.setItem("EXIT_LOGIN_REFRESH_TOKEN", refreshToken);
+
+            setClientHeaders(accessToken);
+
             router.replace("/main");
           }
         }
