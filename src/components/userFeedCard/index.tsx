@@ -114,9 +114,7 @@ function UserFeedInfo({
     <div className="flex items-center gap-2 pl-1">
       <div className="flex flex-col direction-row gap-0.5">
         <span className="sb-13-600 text-gray-700">{nickName}</span>
-        <div className="flex gap-0.5">
-          {convertTag(status)}
-        </div>
+        <div className="flex gap-0.5">{convertTag(status)}</div>
       </div>
     </div>
   );

@@ -7,8 +7,11 @@ import { Pen } from "@/public/assets/images/icons";
 import Logout from "@/src/components/logout";
 import SignOut from "@/src/components/signout";
 import MonthlyTarget from "@/src/components/monthlyTarget";
+import useFooterNavBar from "@/src/hooks/useFooterNavBar";
 
 function Main() {
+  useFooterNavBar({ open: true, type: "main" });
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
   const handleDateSelect = (date: any) => {

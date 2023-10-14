@@ -6,8 +6,11 @@ import { Intro } from "@/public/assets/motions";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { KAKAO_URL } from "@/src/constant/api.constant";
 import LottieAnimation from "@/src/hooks/LottieAnimation";
+import useFooterNavBar from "@/src/hooks/useFooterNavBar";
 
 function Start() {
+  useFooterNavBar({ open: false });
+
   return (
     <div className="w-full flex flex-col justify-center items-center bg-gray-700 h-full">
       <div className="w-[343px] flex flex-col justify-center">
