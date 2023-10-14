@@ -12,7 +12,11 @@ interface LoginResponseType {
 }
 
 export const fetchAuth = (code: string): Promise<LoginResponseType> =>
-  instance.get(`/members/login?code=${code}`);
+  instance.get(`/members/login?code=${code}`, {
+    params: {
+      status: process.env.NEXT_PUBLIC_LOGIN_REDIRECT_PARAMETER
+    }
+  });
 
 export const LoginHandler = (code: string) =>
   fetchAuth(code).then((response: LoginResponseType) => {
