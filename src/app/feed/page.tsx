@@ -69,7 +69,7 @@ export default function FeedPage() {
       prevUserFeedList.map((userFeed: any) => {
         const feedExpenseId = userFeed.expenseResponse.expenseId;
         if (expenseId === feedExpenseId) {
-          const {reviewList} = userFeed.expenseResponse;
+          const { reviewList } = userFeed.expenseResponse;
           // eslint-disable-next-line
           userFeed.expenseResponse.reviewList = [...reviewList, { emojiName: emojiType }];
         }

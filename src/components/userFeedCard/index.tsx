@@ -5,10 +5,12 @@ import PlusIcon from "@/public/assets/images/icons/plus";
 import { SubTag, SecondaryTag } from "../tag";
 import { FeedCard, FeedCardProps } from "./feedCard";
 
-const SPENDING_BUDDY_TAG_TEXT = "지출 또래 친구";
+const EXPENSE_BUDDY_TAG_TEXT = "지출 또래 친구";
+const AGE_BUDDY_TAG_TEXT = "나이 또래 친구";
+const SALARY_BUDDY_TAG_TEXT = "연봉 또래 친구";
 const POPULAR_EXPENSES_TAG_TEXT = "인기 지출";
 
-type UserTagsType = "popular-expenses" | "spending-buddy";
+type UserTagsType = "popular-expenses" | "expense-buddy" | "salary-buddy" | "age-buddy";
 
 export interface UserFeedCardProps extends FeedCardProps {
   imagePath?: string;
@@ -20,7 +22,7 @@ export interface UserFeedCardProps extends FeedCardProps {
 export function UserFeedCard({
   imagePath = "",
   nickName = "",
-  userTags = ["spending-buddy"],
+  userTags = ["expense-buddy"],
 
   title = "",
   price = 0,
@@ -127,18 +129,28 @@ function PopularExpensesTag() {
   return <SecondaryTag>{POPULAR_EXPENSES_TAG_TEXT}</SecondaryTag>;
 }
 
-function SpendingBuddyTag() {
-  return <SubTag>{SPENDING_BUDDY_TAG_TEXT}</SubTag>;
+function ExpenseBuddyTag() {
+  return <SubTag>{EXPENSE_BUDDY_TAG_TEXT}</SubTag>;
+}
+function AgeBuddyTag() {
+  return <SubTag>{AGE_BUDDY_TAG_TEXT}</SubTag>;
+}
+function SalaryBuddyTag() {
+  return <SubTag>{SALARY_BUDDY_TAG_TEXT}</SubTag>;
 }
 
 const convertTag = (userTag: UserTagsType) => {
   switch (userTag) {
     case "popular-expenses":
       return <PopularExpensesTag />;
-    case "spending-buddy":
-      return <SpendingBuddyTag />;
+    case "expense-buddy":
+      return <ExpenseBuddyTag />;
+    case "age-buddy":
+      return <AgeBuddyTag />;
+    case "salary-buddy":
+      return <SalaryBuddyTag />;
     default:
-      return <SpendingBuddyTag />;
+      return <ExpenseBuddyTag />;
   }
 };
 

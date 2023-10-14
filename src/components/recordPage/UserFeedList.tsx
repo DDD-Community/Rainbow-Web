@@ -6,7 +6,7 @@ const userFeedData = [
   {
     index: 0,
     nickName: "nickName",
-    userTags: ["popular-expenses", "spending-buddy"],
+    userTags: ["popular-expenses", "expense-buddy"],
     title: "바이바이 샐러드",
     price: 42000,
     content:
@@ -28,7 +28,7 @@ function UserFeedList({ openEmojiBottomSheet }: userFeedListProps) {
             key={feed.index}
             className="h-auto w-full"
             nickName={feed.nickName}
-            userTags={["popular-expenses", "spending-buddy"]}
+            userTags={["popular-expenses", "expense-buddy"]}
             title={feed.title}
             price={feed.price}
             content={feed.content}
