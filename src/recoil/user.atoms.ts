@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { DomainTypes } from "@/types";
 
 export const contractAgreedState = atom<boolean>({
   key: "contractAgreedState",
@@ -64,4 +65,14 @@ export const userFormState = atom<FormData>({
     nickName: "",
     salary: ""
   }
+});
+
+// 구분
+export const idState = atom<string>({
+  key: "idState",
+  default: ""
+});
+export const domainState = atom<DomainTypes>({
+  key: "domainState",
+  default: ""
 });
