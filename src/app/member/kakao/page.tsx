@@ -54,8 +54,8 @@ function Kakao() {
         }
         if (data && data.accessToken && data.refreshToken) {
           if (typeof window !== "undefined") {
-            const {accessToken} = data;
-            const {refreshToken} = data;
+            const { accessToken } = data;
+            const { refreshToken } = data;
 
             localStorage.setItem("EXIT_LOGIN_ACCESS_TOKEN", accessToken);
             localStorage.setItem("EXIT_LOGIN_REFRESH_TOKEN", refreshToken);
