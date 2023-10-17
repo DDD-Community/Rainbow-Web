@@ -42,7 +42,7 @@ export default function Email() {
     }
     instance.get(`/members/email/check?email=${encodeURIComponent(email)}`).then(res => {
       const { data } = res;
-      const {isDuplicated} = data.data;
+      const { isDuplicated } = data.data;
       if (isDuplicated) {
         setErrorMessage(ERROR_EMAIL_DUPLICATED_MESSAGE);
       } else {
@@ -62,7 +62,7 @@ export default function Email() {
       <div className="flex flex-col items-start h-full min-h-[320px] pt-20 pb-10">
         <div className="flex flex-col gap-2">
           <span className="sb-25-600">📧</span>
-          <p className="sb-25-600 text-gray-700">
+          <p className="sb-25-600 text-gray-700 leading-[130%]">
             본인 이메일이 맞다면 <br />
             아래 확인 버튼을 눌러주세요
           </p>
@@ -100,17 +100,18 @@ export default function Email() {
           {isMailSelect && (
             <div className="absolute w-full p-1.5 rounded-[10px] border border-gray-200 bg-white">
               {DOMAINS.map((domainItem: DomainTypes) => (
-                  <button
-                    type="button"
-                    className="w-full h-[46px] px-4 py-3 r-16-400 rounded-[10px] text-left hover:bg-gray-50"
-                    onClick={() => {
-                      handleSelect();
-                      handleClickDomain(domainItem);
-                    }}
-                  >
-                    {domainItem}
-                  </button>
-                ))}
+                <button
+                  key={domainItem}
+                  type="button"
+                  className="w-full h-[46px] px-4 py-3 r-16-400 rounded-[10px] text-left hover:bg-gray-50"
+                  onClick={() => {
+                    handleSelect();
+                    handleClickDomain(domainItem);
+                  }}
+                >
+                  {domainItem}
+                </button>
+              ))}
             </div>
           )}
         </div>
