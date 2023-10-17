@@ -62,7 +62,7 @@ export default function Birth() {
                 id="year"
                 value={year}
                 onChange={handleChangeYear}
-                className="w-full h-full px-4 py-[15px] border border-gray-200 rounded-[10px] r-16-400 text-gray-700"
+                className="w-full h-full px-4 py-[15px] border border-gray-200 rounded-[10px] r-16-400 text-gray-700 focus:border-primary-default focus:shadow-[0_0_0_4px_rgba(255,91,41,0.1)]"
                 maxLength={4}
                 placeholder="1995"
               />
@@ -80,7 +80,7 @@ export default function Birth() {
                 id="month"
                 value={month}
                 onChange={handleChangeMonth}
-                className="w-full h-full px-4 py-[15px] border border-gray-200 rounded-[10px] r-16-400 text-gray-700"
+                className="w-full h-full px-4 py-[15px] border border-gray-200 rounded-[10px] r-16-400 text-gray-700 focus:border-primary-default focus:shadow-[0_0_0_4px_rgba(255,91,41,0.1)]"
                 maxLength={2}
                 placeholder="2"
               />
@@ -98,7 +98,7 @@ export default function Birth() {
                 id="date"
                 value={date}
                 onChange={handleChangeDate}
-                className="w-full h-full px-4 py-[15px] border border-gray-200 rounded-[10px] r-16-400 text-gray-700"
+                className="w-full h-full px-4 py-[15px] border border-gray-200 rounded-[10px] r-16-400 text-gray-700 focus:border-primary-default focus:shadow-[0_0_0_4px_rgba(255,91,41,0.1)]"
                 maxLength={2}
                 placeholder="20"
               />
