@@ -95,7 +95,10 @@ export default function Contract() {
 
         <div className="flex flex-col w-full gap-1.5">
           {checkboxData.map(checkbox => (
-            <div className="flex justify-between grid grid-cols-[1fr_auto] pr-4 pl-[13px]">
+            <div
+              key={checkbox.id}
+              className="flex justify-between grid grid-cols-[1fr_auto] pr-4 pl-[13px]"
+            >
               <div className="min-w-full">
                 <Checkbox
                   size="s"
@@ -107,7 +110,8 @@ export default function Contract() {
               <a
                 target="_blank"
                 href={checkbox.link}
-                className="w-[25px] shrink-0 m-14-500 text-gray-500" rel="noreferrer"
+                className="w-[25px] shrink-0 m-14-500 text-gray-500"
+                rel="noreferrer"
               >
                 보기
               </a>

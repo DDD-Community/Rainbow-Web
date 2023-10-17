@@ -19,7 +19,7 @@ import {
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { Information } from "@/src/components/Information/Information";
-import { instance } from "@/src/api/auth/apis";
+import { instance, setClientHeaders } from "@/src/api/auth/apis";
 
 export default function Checking() {
   // const email = useRecoilValue(emailState);
@@ -63,15 +63,19 @@ export default function Checking() {
       nickName,
       salary
     };
-    console.log("제출 폼 데이터:", formData);
     setUserForm(formData);
 
     const fetchAuth = () => instance.post(`/members/signUp`, formData);
     fetchAuth().then(response => {
-      const JWT = response.data.accessToken;
-      if (JWT) {
-        if (typeof window !== "undefined") localStorage.setItem("EXIT_LOGIN_TOKEN", JWT);
-        console.log("로그인 성공");
+      const { accessToken, refreshToken } = response.data.data;
+
+      if (accessToken) {
+        if (typeof window !== "undefined") {
+          localStorage.setItem("EXIT_LOGIN_ACCESS_TOKEN", accessToken);
+          localStorage.setItem("EXIT_LOGIN_REFRESH_TOKEN", refreshToken);
+
+          setClientHeaders(accessToken);
+        }
       }
     });
   };
