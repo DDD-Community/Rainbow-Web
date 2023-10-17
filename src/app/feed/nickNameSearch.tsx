@@ -14,15 +14,12 @@ interface NickNameSearchAreaProps {
   searchWord: string;
 }
 export default function NickNameSearchArea({ searchWord = "" }: NickNameSearchAreaProps) {
-  // const [searchList, setSearchList] = useState([]);
-  const queryClient = useQueryClient(); // queryClient를 가져옵니다.
+  const queryClient = useQueryClient();
 
   const { data: searchList } = useQuery(
     queryKeys.FEED_FETCH_MEMBER_DATA(searchWord),
     () => fetchMember(searchWord),
-    {
-      initialData: []
-    }
+    { initialData: [] }
   );
 
   const handleAddFriend = (memberId: number) => {
