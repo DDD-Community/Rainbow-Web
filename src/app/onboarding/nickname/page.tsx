@@ -26,9 +26,6 @@ export default function Nickname() {
 
   const handleNextButton = () => {
     const isNicknameValidate = nicknameRegex.test(nickname);
-
-    console.log(isNicknameValidate);
-
     if (isNicknameValidate === false) {
       setErrorMessage(ERROR_NICKNAME_DEFAULT_MESSAGE);
       return;
