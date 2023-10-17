@@ -35,9 +35,19 @@ export default function Checking() {
 
   const data = [
     { id: uuidv4(), label: "닉네임", value: nickName, link: "/onboarding/nickname" },
-    { id: uuidv4(), label: "성별", value: gender, link: "/onboarding/gender" },
-    { id: uuidv4(), label: "생일", value: birthDate, link: "/onboarding/birth" },
-    { id: uuidv4(), label: "연봉", value: salary, link: "/onboarding/salary" }
+    {
+      id: uuidv4(),
+      label: "성별",
+      value: gender === "female" ? "여" : "남",
+      link: "/onboarding/gender"
+    },
+    {
+      id: uuidv4(),
+      label: "생일",
+      value: birthDate.split("-").join(". "),
+      link: "/onboarding/birth"
+    },
+    { id: uuidv4(), label: "연봉", value: `${salary} 만원`, link: "/onboarding/salary" }
   ];
 
   const handleNext = () => {

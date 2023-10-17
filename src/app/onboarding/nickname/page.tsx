@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useRecoilState } from "recoil";
-import { nickNameState } from "@/src/recoil/user.atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { nickNameState, checkingState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
 import { twMerge } from "@/src/types/utils/tailwind.util";
@@ -19,6 +19,7 @@ export default function Nickname() {
   const router = useRouter();
   const [nickname, setNickname] = useRecoilState(nickNameState);
   const [errorMessage, setErrorMessage] = useState("");
+  const checkingValue = useRecoilValue(checkingState);
 
   const handleChangeNickName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
@@ -37,7 +38,7 @@ export default function Nickname() {
         setErrorMessage(ERROR_NICKNAME_DUPLICATED_MESSAGE);
       } else {
         setErrorMessage("");
-        router.push("/onboarding/gender");
+        router.push(`/onboarding/${checkingValue ? "checking" : "gender"}`);
       }
     });
   };

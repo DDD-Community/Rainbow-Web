@@ -1,7 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useRecoilState, useRecoilValue } from "recoil";
-import Link from "next/link";
 import { checkingState, genderState, nickNameState } from "@/src/recoil/user.atoms";
 import { PrimaryButton } from "@/src/components/Common/Button";
 import { ButtonField } from "@/src/components/Common/Button/ButtonField";
@@ -13,6 +13,8 @@ import {
 } from "@/public/assets/images/icons/gender";
 
 export default function Gender() {
+  const router = useRouter();
+
   const [gender, setGender] = useRecoilState(genderState);
   const nicknameValue = useRecoilValue(nickNameState);
 
@@ -23,10 +25,8 @@ export default function Gender() {
   };
 
   const handleNext = () => {
-    setGender(gender);
+    router.push(`/onboarding/${checkingValue ? "checking" : "birth"}`);
   };
-
-  const canActiveNextButton = Boolean(!gender);
 
   return (
     <div className="w-full h-full flex flex-col p-4">
@@ -58,19 +58,9 @@ export default function Gender() {
       </div>
 
       <ButtonField className="py-0">
-        <Link
-          href={checkingValue ? "/onboarding/checking" : "/onboarding/birth"}
-          className="w-full flex justify-end"
-        >
-          <PrimaryButton
-            color="default"
-            size="small"
-            disabled={canActiveNextButton}
-            onClick={handleNext}
-          >
-            확인
-          </PrimaryButton>
-        </Link>
+        <PrimaryButton color="default" size="small" disabled={!gender} onClick={handleNext}>
+          확인
+        </PrimaryButton>
       </ButtonField>
     </div>
   );
