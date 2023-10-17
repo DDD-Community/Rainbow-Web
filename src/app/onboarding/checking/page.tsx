@@ -5,7 +5,9 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 import {
-  emailState,
+  // emailState,
+  idState,
+  domainState,
   nickNameState,
   genderState,
   birthDateState,
@@ -20,7 +22,9 @@ import { Information } from "@/src/components/Information/Information";
 import { instance } from "@/src/api/auth/apis";
 
 export default function Checking() {
-  const email = useRecoilValue(emailState);
+  // const email = useRecoilValue(emailState);
+  const id = useRecoilValue(idState);
+  const domain = useRecoilValue(domainState);
   const nickName = useRecoilValue(nickNameState);
   const gender = useRecoilValue(genderState);
   const birthDate = useRecoilValue(birthDateState);
@@ -53,7 +57,7 @@ export default function Checking() {
   const handleNext = () => {
     const formData = {
       birthDate,
-      email,
+      email: `${id}@${domain}`,
       gender,
       kaKaoId,
       nickName,
