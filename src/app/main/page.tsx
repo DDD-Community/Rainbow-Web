@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "@/src/components/calender";
 import RecordPage from "@/src/components/recordPage/RecordPage";
 import { Pen } from "@/public/assets/images/icons";
@@ -10,7 +10,9 @@ import MonthlyTarget from "@/src/components/monthlyTarget";
 import useFooterNavBar from "@/src/hooks/useFooterNavBar";
 
 function Main() {
-  useFooterNavBar({ open: true, type: "main" });
+  const { unmountClose } = useFooterNavBar({ open: true, type: "main" });
+
+  useEffect(() => () => unmountClose(), []);
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
