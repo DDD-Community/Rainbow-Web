@@ -48,18 +48,23 @@ export default function Salary() {
   const canActiveNextButton = Boolean(!selectedValue);
 
   return (
-    <div className="w-343 flex flex-col justify-center">
-      <div className="flex flex-col items-start pt-20 pb-10">
-        <div>🤫</div>
-        <div className="sb-25-600 text-gray-700">
-          쉿! {nicknameValue}님의 <br />
-          연봉은 참고만 할게요
+    <div className="w-full h-full flex flex-col p-4">
+      <div className="flex flex-col items-start h-full min-h-[320px] pt-20 pb-10">
+        <div className="flex flex-col gap-2">
+          <span className="sb-25-600">🤫</span>
+          <p className="sb-25-600 text-gray-700 leading-[130%]">
+            쉿! {nicknameValue}님의 <br />
+            연봉은 참고만 할게요
+          </p>
         </div>
-      </div>
-      <SelectSalary options={options} text="만원" onChange={handleSelectChange} />
-      <Information className="py-3">비슷한 연봉을 받는 또래 친구들을 찾아줄게요</Information>
 
-      <ButtonField>
+        <div className="w-full mt-[44px] mb-[14px]">
+          <SelectSalary options={options} onChange={handleSelectChange} />
+        </div>
+        <Information>비슷한 연봉을 받는 또래 친구들을 찾아줄게요</Information>
+      </div>
+
+      <ButtonField className="py-0">
         <Link href="/onboarding/checking" className="w-full flex justify-end">
           <PrimaryButton color="default" size="small" disabled={canActiveNextButton}>
             확인
