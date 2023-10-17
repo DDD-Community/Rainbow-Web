@@ -63,28 +63,41 @@ export default function Checking() {
   };
 
   return (
-    <div className="w-343 flex flex-col justify-center">
-      <div className="flex flex-col items-start pt-20 pb-10">
-        <div>👀</div>
-        <div className="sb-25-600 text-gray-700">
-          입력한 정보를 <br />
-          한번 더 확인해주세요
+    <div className="w-full h-full flex flex-col p-4">
+      <div className="flex flex-col items-start h-full min-h-[490px] pt-20 pb-10">
+        <div className="flex flex-col gap-2">
+          <span className="sb-25-600">👀</span>
+          <p className="sb-25-600 text-gray-700 leading-[130%]">
+            입력한 정보를 <br />
+            한번 더 확인해주세요
+          </p>
         </div>
+
+        <div className="flex flex-col gap-[14px] w-full mb-[20px] mt-[44px]">
+          {data.map(item => (
+            <div
+              className="grid grid-cols-[auto_1fr_auto] flex items-center gap-1 w-full"
+              key={item.id}
+            >
+              <div className="w-[60px] shrink-0">
+                <span className="text-primary-default m-13-500 p-2">{item.label}</span>
+              </div>
+              <div className="w-full min-w-full h-full">
+                <span className="text-gray-700 r-14-400">{item.value}</span>
+              </div>
+              <div className="w-[25px] shrink-0">
+                <Link href={item.link} className="r-14-400 text-gray-500">
+                  수정
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+        <Information>내 정보는 내 프로필에서 다시 수정할 수 있어요</Information>
       </div>
-      <div className="flex flex-col">
-        {data.map(item => (
-          <div className="flex justify-between " key={item.id}>
-            <div className="text-primary-default r-14-400 p-2">{item.label}</div>
-            <div className="text-gray-700 r-14-400 p-2">{item.value}</div>
-            <Link href={item.link} className="text-gray-500 p-2">
-              수정
-            </Link>
-          </div>
-        ))}
-      </div>
-      <Information className="py-3">내 정보는 내 프로필에서 다시 수정할 수 있어요</Information>
-      <ButtonField>
-        <Link href="/onboarding/contract" className="w-full">
+
+      <ButtonField className="py-0">
+        <Link href="/onboarding/contract">
           <PrimaryButton color="default" size="small" onClick={handleNext}>
             확인
           </PrimaryButton>
