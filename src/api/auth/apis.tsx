@@ -95,7 +95,7 @@ export const usePostTokenReIssue = async () => {
 };
 
 export const setClientHeaders = (token: string) => {
-  authInstance.interceptors.request.use((config) => {
+  authInstance.interceptors.request.use(config => {
     // eslint-disable-next-line
     config.headers.Authorization = `Bearer ${token}`;
     return config;

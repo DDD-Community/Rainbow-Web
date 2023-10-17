@@ -28,3 +28,5 @@ export type FooterNavBarActiveTypes = "main" | "feed" | "alarm" | "my";
 
 // Feed
 export type FeedUserCardTag = "salary" | "age" | "expense" | "normal" | "hot";
+
+export type DomainTypes = "" | "naver.com" | "daum.net" | "google.com";

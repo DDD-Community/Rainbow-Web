@@ -5,7 +5,13 @@ import { useSetRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
 import { LoginDataType } from "@/src/constant/api.constant";
 import { instance, setClientHeaders } from "@/src/api/auth/apis";
-import { emailState, kaKaoIdState } from "@/src/recoil/user.atoms";
+import {
+  idState,
+  domainState,
+  // emailState,
+  kaKaoIdState
+} from "@/src/recoil/user.atoms";
+import { DomainTypes } from "types.d";
 
 interface LoginResponseType {
   data: LoginDataType;
@@ -42,20 +48,26 @@ function Kakao() {
   const url = typeof window !== "undefined" ? new URL(window.location.href) : null;
   const code: string | null = url ? url.searchParams.get("code") : null;
   const setKakaoId = useSetRecoilState(kaKaoIdState);
-  const setEmail = useSetRecoilState(emailState);
+  // const setEmail = useSetRecoilState(emailState);
+
+  const setId = useSetRecoilState(idState);
+  const setDomain = useSetRecoilState(domainState);
 
   useEffect(() => {
     if (code !== null) {
       LoginHandler(code).then(data => {
         if (data && data.kaKaoId && data.email) {
           setKakaoId(data.kaKaoId);
-          setEmail(data.email);
+          const [id, domain] = data.email.split("@");
+          setId(id);
+          setDomain(domain as DomainTypes);
+          // setEmail(data.email);
           router.replace("/onboarding");
         }
         if (data && data.accessToken && data.refreshToken) {
           if (typeof window !== "undefined") {
-            const {accessToken} = data;
-            const {refreshToken} = data;
+            const { accessToken } = data;
+            const { refreshToken } = data;
 
             localStorage.setItem("EXIT_LOGIN_ACCESS_TOKEN", accessToken);
             localStorage.setItem("EXIT_LOGIN_REFRESH_TOKEN", refreshToken);

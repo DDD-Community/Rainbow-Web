@@ -18,4 +18,12 @@ export default function useFooterNavBar({ open = false, type = "main" }: useFoot
     setIsOpen(open);
     setActiveType(type);
   }, []);
+
+  const unmountClose = () => {
+    setIsOpen(false);
+  };
+
+  return {
+    unmountClose
+  };
 }
