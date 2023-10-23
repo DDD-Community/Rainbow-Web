@@ -1,174 +1,121 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/jsx-no-useless-fragment */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-
+/* eslint-disable */
 "use client";
 
-import { useState, useRef } from "react";
+// import { useState, useRef } from "react";
 import { IconChecked } from "@/public/assets/images/icons";
+import IconSearch from "@/public/assets/images/icons/search";
 
-const daysOfWeek = ["월", "화", "수", "목", "금", "토", "일"];
+import { useState, useRef, useMemo } from "react";
+// import { Header } from "./Header";
+import { WeekHeader } from "./WeekHeader";
+import { eachMonthOfInterval, format, parse, startOfToday, sub } from "date-fns";
+// import { RenderCalendar } from "./RenderCalendar";
+import { SlideItem } from "./slideItem";
+import Swiper from "react-id-swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import SwiperCore, { Navigation } from "swiper";
+SwiperCore.use([Navigation]);
+
 interface calendarProps {
   onDateSelect: (date: string) => void;
   onDaySelect: any;
 }
 
-function Calendar({ onDateSelect, onDaySelect }: calendarProps) {
-  const currentDate = new Date();
-  const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
-  const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
-  const [selectedDay, setSelectedDay] = useState<number | null>(currentDate.getDate());
+export default function CalendarContainer() {
+  const today = startOfToday();
+  const [selectedDay, setSelectedDay] = useState(today);
+  const currentMonth = useMemo(() => format(today, "MMM-yyyy"), [today]);
+  const swiperRef = useRef<any>(null);
+  let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
 
-  const calendarRef = useRef(null);
-  const startXRef = useRef(null);
+  const yearOfMonths = useMemo(() => {
+    return eachMonthOfInterval({
+      start: sub(firstDayCurrentMonth, { years: 1, months: -1 }),
+      end: firstDayCurrentMonth
+    });
+  }, [firstDayCurrentMonth]);
 
-  const handleMouseDown = (event: any) => {
-    startXRef.current = event.clientX;
-  };
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(
+    yearOfMonths.indexOf(yearOfMonths[yearOfMonths.length - 1])
+  );
 
-  const handleMouseUp = (event: any) => {
-    if (startXRef.current === null) {
-      return;
+  function previousMonth() {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
     }
-    const endX = event.clientX;
-    const diffX = endX - startXRef.current;
+  }
 
-    if (diffX > 50) {
-      handlePrevMonth();
-    } else if (diffX < -50) {
-      handleNextMonth();
+  function nextMonth() {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
     }
+  }
 
-    startXRef.current = null;
-  };
-
-  const handleTouchStart = (event: any) => {
-    startXRef.current = event.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (event: any) => {
-    if (startXRef.current === null) {
-      return;
-    }
-    const endX = event.changedTouches[0].clientX;
-    const diffX = endX - startXRef.current;
-
-    if (diffX > 50) {
-      handlePrevMonth();
-    } else if (diffX < -50) {
-      handleNextMonth();
+  const params = {
+    slidesPerView: 1,
+    loop: false,
+    centeredSlides: true,
+    initialSlide: currentSlideIndex, // 현재 달부터 시작
+    on: {
+      realIndexChange: (swiper: any) => {
+        setCurrentSlideIndex(swiper.realIndex);
+      }
     }
   };
 
-  const handlePrevMonth = () => {
-    if (currentMonth === 0) {
-      setCurrentMonth(11);
-      setCurrentYear(currentYear - 1);
-    } else {
-      setCurrentMonth(currentMonth - 1);
-    }
-  };
-
-  const handleNextMonth = () => {
-    if (currentMonth === 11) {
-      setCurrentMonth(0);
-      setCurrentYear(currentYear + 1);
-    } else {
-      setCurrentMonth(currentMonth + 1);
-    }
-  };
-
-  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-
-  const handleDateClick = (dayNumber: any) => {
-    const clickedDate = new Date(currentYear, currentMonth, dayNumber);
-    const formattedDate = `${clickedDate.getFullYear()}-${(clickedDate.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}-${clickedDate.getDate().toString().padStart(2, "0")}`;
-
-    const dayOfWeek = daysOfWeek[clickedDate.getDay()];
-    onDateSelect(formattedDate);
-    onDaySelect(dayOfWeek);
-    setSelectedDay(dayNumber);
-    console.log(`Clicked on ${currentYear}-${currentMonth + 1}-${dayNumber}`);
-  };
   return (
-    <div>
-      <button
-        type="button"
-        className="container mx-auto mt-5"
-        ref={calendarRef}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="flex m-14-500 text-gray-700">
-          {currentYear}년 {currentMonth + 1}월
+    <div className="App">
+      <div className="calendar-container">
+        {/* <Header
+          currentMonth={yearOfMonths[currentSlideIndex]}
+          prevMonth={previousMonth}
+          nextMonth={nextMonth}
+        /> */}
+
+        <div className="flex justify-between items-center w-full">
+          <h2>{`2023년 8월`}</h2>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              className="w-12 h-9 rounded-[30px] m-12-500 border border-black[0.04] bg-white"
+            >{`한 달`}</button>
+            <button type="button">
+              <IconSearch width={22} height={22} />
+            </button>
+          </div>
         </div>
-        <div className="mt-5 grid grid-cols-7 gap-4 m-12-500">
-          {daysOfWeek.map(day => (
-            <div key={day} className="text-center p-2">
-              {day}
-            </div>
-          ))}
-          {Array.from({ length: firstDayOfMonth }, (_, index) => (
-            <div key={`empty-${index}`} className="p-2" />
-          ))}
-          {Array.from({ length: daysInMonth }, (_, index) => {
-            const dayNumber = index + 1;
-            const isToday =
-              currentYear === currentDate.getFullYear() &&
-              currentMonth === currentDate.getMonth() &&
-              dayNumber === currentDate.getDate();
-            return (
-              <div
-                key={`day-${index}`}
-                className={`flex-center p-1 ${
-                  dayNumber > 0 && dayNumber <= daysInMonth
-                    ? `bg-gray-200 cursor-pointer rounded-lg ring-1 ring-gray-300 w-8 h-8 ${
-                        dayNumber === selectedDay ? "bg-gray-700" : ""
-                      }`
-                    : ""
-                }`}
-              >
-                {dayNumber > 0 && dayNumber <= daysInMonth && (
-                  <>
-                    {dayNumber === selectedDay ? (
-                      <div
-                        className="w-full h-full flex justify-center items-center mb-[5px]"
-                        onClick={() => {
-                          handleDateClick(dayNumber);
-                        }}
-                      >
-                        <div className="flex-center sb-10-600 text-white">
-                          {isToday ? dayNumber : <IconChecked fill="white" />}
-                        </div>
-                      </div>
-                    ) : (
-                      <button
-                        type="button"
-                        className="w-full h-full"
-                        onClick={() => {
-                          handleDateClick(dayNumber);
-                        }}
+
+        <div className="body-container">
+          <WeekHeader />
+          {yearOfMonths && yearOfMonths.length > 0 && (
+            // @ts-ignore
+            <div className="overflow-hidden">
+              <Swiper ref={swiperRef} {...params}>
+                {yearOfMonths.map((month, idx) => {
+                  return (
+                    <div key={idx}>
+                      <SlideItem
+                        month={month}
+                        selectedDay={selectedDay}
+                        setSelectedDay={setSelectedDay}
+                        // data={filterData}
                       />
-                    )}
-                    <div className="flex-center sb-10-600 text-gray-800">
-                      {isToday ? "오늘" : dayNumber}
                     </div>
-                  </>
-                )}
-              </div>
-            );
-          })}
+                  );
+                })}
+              </Swiper>
+            </div>
+          )}
         </div>
-      </button>
+      </div>
+      {/* <h2 className="font-semibold text-gray-900">
+        Schedule for{" "}
+        <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
+          {format(selectedDay, "MMM dd, yyy")}
+        </time>
+      </h2> */}
     </div>
   );
 }
-
-export default Calendar;

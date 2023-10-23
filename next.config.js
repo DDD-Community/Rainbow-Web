@@ -4,6 +4,9 @@ const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   reactStrictMode: false,
   swcMinify: true,
+  experimental: {
+    esmExternals: "loose"
+  },
   async rewrites() {
     return [
       {
