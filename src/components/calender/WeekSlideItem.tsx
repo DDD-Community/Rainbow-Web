@@ -1,19 +1,19 @@
 import { memo } from "react";
-import { RenderCalendar } from "./RenderCalendar";
+import { WeekRenderCalendar } from "./WeekRenderCalendar";
 
 interface SlideItemProps {
-  month: any;
+  week: any;
   selectedDay: any;
   setSelectedDay: any;
 }
-const SlideItem = memo(({ month, selectedDay, setSelectedDay }: SlideItemProps) => (
+const WeekSlideItem = memo(({ week, selectedDay, setSelectedDay }: SlideItemProps) => (
     <div className="swiper-slide">
-      <RenderCalendar
-        currentMonth={month}
+      <WeekRenderCalendar
+        currentWeek={week}
         selectedDay={selectedDay}
         setSelectedDay={setSelectedDay}
       />
     </div>
   ));
 
-export { SlideItem };
+export { WeekSlideItem };

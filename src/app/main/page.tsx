@@ -1,34 +1,27 @@
 "use client";
 
 import React, { useEffect } from "react";
+// import { useQuery } from "@tanstack/react-query";
 // import React, { useState, useEffect } from "react";
 import CalendarContainer from "@/src/components/calender";
-// import RecordPage from "@/src/components/recordPage/RecordPage";
 import { Pen } from "@/public/assets/images/icons";
 // import Logout from "@/src/components/logout";
 // import SignOut from "@/src/components/signout";
 // import MonthlyTarget from "@/src/components/monthlyTarget";
 import useFooterNavBar from "@/src/hooks/useFooterNavBar";
+import ExpenseBottomSheet from "./expenseBottomSheet";
+// import * as queryKeys from "@/src/queries/queryKeys";
+// import { userInfoHandler } from "./mainHandler"
 
 function Main() {
   const { unmountClose } = useFooterNavBar({ open: true, type: "main" });
-
   useEffect(() => () => unmountClose(), []);
-
-  // const [selectedDate, setSelectedDate] = useState(null);
-  // const [selectedDay, setSelectedDay] = useState(null);
-  // const handleDateSelect = (date: any) => {
-  //   setSelectedDate(date);
-  // };
-  // const handleDaySelct = (day: any) => {
-  //   setSelectedDay(day);
-  // };
 
   const handleSetExpenseGoal = () => {};
 
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-col bg-gray-100 py-3.5 px-4">
+    <div className="flex flex-col bg-gray-100">
+      <div className="flex flex-col py-3.5 px-4">
         <SetExpenseGoal onClickSet={handleSetExpenseGoal} />
 
         <ExpenseThisMonth nickName="닉닉" expensePrice={2000} />
@@ -36,12 +29,11 @@ function Main() {
         <MonthlyGoal goalPrice={200} currentExpensePrice={100} />
 
         <div className="mt-4">
-          <CalendarContainer
-          // onDateSelect={handleDateSelect}
-          // onDaySelect={handleDaySelct}
-          />
+          <CalendarContainer />
         </div>
       </div>
+
+      <ExpenseBottomSheet />
 
       {/* <RecordPage selectedDate={selectedDate} selectedDay={selectedDay} /> */}
     </div>
@@ -101,7 +93,7 @@ function MonthlyGoalProgressBar({ goalPrice = 0, currentExpensePrice = 0 }: Mont
     <div className="w-full h-[9px] rounded-lg border border-black/[0.03] overflow-hidden">
       <div
         className={`w-[${percentage}%] h-full rounded-lg bg-gradient-to-r from-[#FF5B29]/[0.28] to-[#FF5B29]/[1]`}
-       />
+      />
     </div>
   );
 }
